@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
   # publish.yml runs the same verification before it publishes what it built.
   workflow_call:
 
