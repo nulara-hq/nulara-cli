@@ -1,0 +1,68 @@
+name: Publish
+
+# PyPI trusts this file by name (Trusted Publishing: nulara-hq/nulara-cli,
+# workflow publish.yml, environment pypi). Renaming it breaks publishing.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify
+    uses: ./.github/workflows/ci.yml
+
+  # Trusted Publishing cannot run inside a reusable workflow, and only this job
+  # holds the OIDC token (pypa/gh-action-pypi-publish README).
+  publish:
+    name: Publish to PyPI
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/p/nulara
+    permissions:
+      id-token: write # Trusted Publishing; the attestations sign with the same identity.
+    steps:
+      - name: Download verified distributions
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: distributions
+          path: dist
+
+      - name: Verify release tag matches package version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: test -f "dist/nulara-${TAG#v}-py3-none-any.whl"
+
+      - name: Publish distributions with attestations
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+
+  attach:
+    name: Attach verification evidence
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write # Upload the evidence to this release.
+    steps:
+      - name: Download distributions and evidence
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          path: assets
+          merge-multiple: true
+
+      - name: Verify manifest and upload release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          (cd assets && shasum -a 256 --check SHA256SUMS)
+          gh release upload "$TAG" assets/* --repo "$GITHUB_REPOSITORY"

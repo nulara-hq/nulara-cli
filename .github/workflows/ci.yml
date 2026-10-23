@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # publish.yml runs the same verification before it publishes what it built.
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.15"
+          enable-cache: false
+
+      - name: Sync locked environment
+        run: uv sync --locked --all-groups
+
+      - name: Verify source
+        run: |
+          uv run --frozen ruff check .
+          uv run --frozen ruff format --check .
+          uv run --frozen pyright
+          uv run --frozen pytest --cov=nulara --cov-report=term-missing
+
+      - name: Audit locked dependency graph
+        run: uv audit --preview-features audit --locked
+
+      # The requirements carry the locked, hashed runtime dependencies; the
+      # wheel itself only records ranges.
+      - name: Build distributions and their evidence
+        run: |
+          version="$(uv version --short)"
+          uv build --no-sources --out-dir dist
+          mkdir evidence
+          uv export --quiet --frozen --no-dev --no-emit-project \
+            --no-header --no-annotate \
+            --output-file "evidence/nulara-${version}-requirements.txt"
+          uv export --quiet --preview-features sbom-export --frozen --no-dev \
+            --no-emit-project --format cyclonedx1.5 \
+            --output-file "evidence/nulara-${version}-sbom.cdx.json"
+          (cd dist && shasum -a 256 nulara-* > ../evidence/SHA256SUMS)
+
+      - name: Smoke the wheel installed offline from verified hashes
+        env:
+          UV_CACHE_DIR: ${{ runner.temp }}/install-cache
+          UV_TOOL_DIR: ${{ runner.temp }}/tools
+          UV_TOOL_BIN_DIR: ${{ runner.temp }}/bin
+        run: |
+          uv pip install --require-hashes --only-binary :all: \
+            --python 3.14 \
+            --target "$RUNNER_TEMP/dependency-verification" \
+            --requirements evidence/nulara-*-requirements.txt
+          uv tool install --python 3.14 --offline --no-build \
+            --with-requirements evidence/nulara-*-requirements.txt \
+            dist/nulara-*.whl
+          test "$("$UV_TOOL_BIN_DIR/nulara" --version)" = "$(uv version --short)"
+          "$UV_TOOL_BIN_DIR/nulara" --help
+
+      - name: Upload distributions
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: distributions
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload release evidence
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-evidence
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 14
