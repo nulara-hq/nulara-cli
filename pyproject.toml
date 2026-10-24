@@ -1,6 +1,6 @@
 [project]
 name = "nulara"
-version = "0.1.0"
+version = "0.1.1"
 description = "Nulara command-line access"
 readme = "README.md"
 license = "Apache-2.0"
@@ -23,6 +23,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://nulara.de"
+Documentation = "https://nulara.de/cli"
 Source = "https://github.com/nulara-hq/nulara-cli"
 Issues = "https://github.com/nulara-hq/nulara-cli/issues"
 
