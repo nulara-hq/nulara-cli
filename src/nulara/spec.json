@@ -40992,6 +40992,53 @@
         {
           "body": null,
           "dangerous": false,
+          "description": "Download files the thread's calls made as one ZIP.\n\n`tool_ids` names the calls whose files go in, as the client lists them:\nevery file of the thread, or those of one answer.",
+          "method": "GET",
+          "name": "download-files",
+          "operation_id": "download_thread_files",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "tool_ids",
+              "description": null,
+              "location": "query",
+              "name": "tool_ids",
+              "option": "tool-ids",
+              "required": true,
+              "schema": {
+                "items": {
+                  "format": null,
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 100,
+                "minItems": 1,
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/files/download",
+          "response_content_types": [
+            "application/zip"
+          ],
+          "summary": "Download Thread Files"
+        },
+        {
+          "body": null,
+          "dangerous": false,
           "description": "Get thread details.",
           "method": "GET",
           "name": "get",
@@ -41152,7 +41199,7 @@
         {
           "body": null,
           "dangerous": false,
-          "description": "List the user's active-workspace threads, filtered and ordered.",
+          "description": "List the user's active-workspace threads, filtered and ordered.\n\n`pinned=true` returns only pinned threads, newest pin first whatever\n`sort` says; `pinned=false` leaves them out, so the two lists never\nshow a thread twice.",
           "method": "GET",
           "name": "list",
           "operation_id": "list_threads",
@@ -41251,6 +41298,19 @@
                 "minimum": 1,
                 "nullable": true
               }
+            },
+            {
+              "argument": "pinned",
+              "description": null,
+              "location": "query",
+              "name": "pinned",
+              "option": "pinned",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "boolean",
+                "nullable": true
+              }
             }
           ],
           "path": "/threads",
@@ -41258,6 +41318,34 @@
             "application/json"
           ],
           "summary": "List Threads"
+        },
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Pin a thread to the top of the list; an archived one is refused.",
+          "method": "PATCH",
+          "name": "pin",
+          "operation_id": "pin_thread",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/pin",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Pin Thread"
         },
         {
           "body": {
@@ -41386,6 +41474,34 @@
             "application/json"
           ],
           "summary": "Unarchive Thread"
+        },
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Return a pinned thread to the regular list.",
+          "method": "PATCH",
+          "name": "unpin",
+          "operation_id": "unpin_thread",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/unpin",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Unpin Thread"
         },
         {
           "body": {
@@ -46620,8 +46736,8 @@
       ]
     }
   ],
-  "openapi_sha256": "25bd831f4ed728786578da2089497cd9ada76b991d46f63f62a0d776c5247d31",
-  "operation_count": 515,
+  "openapi_sha256": "fd0e9848faa7ed89f6bb55fdd4e43c9b683625bd59ac5a00dce7c7fca232171e",
+  "operation_count": 518,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
