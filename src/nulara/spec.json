@@ -7093,7 +7093,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -7155,7 +7156,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -11376,7 +11378,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -11428,7 +11431,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12052,7 +12056,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12155,7 +12160,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12481,7 +12487,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12505,7 +12512,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12721,7 +12729,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -12745,7 +12754,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 }
@@ -27712,7 +27722,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -27809,7 +27820,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -28977,7 +28989,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -29071,7 +29084,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -44046,7 +44060,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -44153,7 +44168,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -44868,7 +44884,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
@@ -44905,7 +44922,8 @@
                     "application/json",
                     "image/jpeg",
                     "image/png",
-                    "image/webp"
+                    "image/webp",
+                    "image/gif"
                   ],
                   "x-maxSizeBytes": 52428800
                 },
