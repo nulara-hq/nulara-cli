@@ -92,7 +92,7 @@ def test_agent_completion_output(app, monkeypatch, capsys, json_output, text):
 
 
 @pytest.mark.parametrize(
-    "events", [[], [{"type": "RUN_ERROR", "message": "synthetic error"}]]
+    "events", [[], [{"type": "STREAM_ERROR", "detail": "EXECUTION_ERROR"}]]
 )
 def test_agent_incomplete_or_error_is_failure(app, monkeypatch, events):
     install_transport(monkeypatch, [events])
@@ -211,7 +211,7 @@ def test_thread_harness_writes_redacted_artifacts(
             "--require-tool",
             "list_locations",
             "--forbid-event",
-            "RUN_ERROR",
+            "STREAM_ERROR",
             *(["--json"] if json_output else []),
         ],
     )

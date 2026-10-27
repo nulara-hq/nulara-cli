@@ -7,14 +7,13 @@ from typing import Any
 
 from nulara.core.errors import ThreadExpectationError, ThreadProtocolError
 
-ERROR_TYPES = frozenset({"RUN_ERROR", "STREAM_ERROR"})
+ERROR_TYPES = frozenset({"STREAM_ERROR"})
 TERMINAL_TYPES = frozenset(
     {
         "CANCELLED",
         "COMPLETE",
         "RUN_FINISHED",
         "RUN_INTERRUPTED",
-        "RUN_ERROR",
         "STREAM_ERROR",
     }
 )

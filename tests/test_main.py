@@ -491,7 +491,7 @@ def test_agent_run_rejects_an_interrupt_without_a_thread_id(cli_mocks) -> None:
 @pytest.mark.parametrize(
     ("events", "status"),
     [
-        ([{"type": "RUN_ERROR", "thread_id": "thread-1"}], "error"),
+        ([{"type": "STREAM_ERROR", "detail": "EXECUTION_ERROR"}], "error"),
         ([{"type": "MESSAGE_DELTA", "delta": "partial"}], "incomplete"),
     ],
 )
@@ -555,7 +555,7 @@ def test_thread_run_writes_evidence_and_supports_all_assertions(
         "--require-event",
         "COMPLETE",
         "--forbid-event",
-        "RUN_ERROR",
+        "STREAM_ERROR",
         "--json",
     )
     assert FakeApiClient.last_stream_payload is not None

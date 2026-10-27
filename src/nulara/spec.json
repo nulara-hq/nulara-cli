@@ -19273,6 +19273,7 @@
                 "items": {
                   "format": null,
                   "kind": "string",
+                  "maxLength": 40,
                   "nullable": false
                 },
                 "kind": "array",
@@ -41053,6 +41054,34 @@
         {
           "body": null,
           "dangerous": false,
+          "description": "Read a thread shared with the current workspace, as of its snapshot.\n\nOnly members of the thread's workspace can read it, and only while its\nowner is one; anything else is `THREAD_SHARE_NOT_FOUND`.",
+          "method": "GET",
+          "name": "get-shared",
+          "operation_id": "get_shared_thread",
+          "parameters": [
+            {
+              "argument": "share_id",
+              "description": null,
+              "location": "path",
+              "name": "share_id",
+              "option": "share-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/shared-threads/{share_id}",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Get Shared Thread"
+        },
+        {
+          "body": null,
+          "dangerous": false,
           "description": "Get thread details.",
           "method": "GET",
           "name": "get",
@@ -41105,6 +41134,34 @@
             "application/json"
           ],
           "summary": "Get Thread Interactions"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "Get the thread's link for its workspace, or null when it is not shared.",
+          "method": "GET",
+          "name": "get-share",
+          "operation_id": "get_thread_share",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/share",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Get Thread Share"
         },
         {
           "body": null,
@@ -41460,6 +41517,60 @@
             "application/json"
           ],
           "summary": "Select Version"
+        },
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Share the thread with its workspace as it stands now.\n\nThe link shows the messages up to now; later ones stay private until the\nthread is shared again, which moves the snapshot and keeps the link. A\nthread without messages is refused with `THREAD_EMPTY`.",
+          "method": "PUT",
+          "name": "share",
+          "operation_id": "share_thread",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/share",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Share Thread"
+        },
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Turn the thread's link off for everyone; a later share gets a new one.",
+          "method": "DELETE",
+          "name": "stop-sharing",
+          "operation_id": "stop_sharing_thread",
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/share",
+          "response_content_types": [],
+          "summary": "Stop Sharing Thread"
         },
         {
           "body": null,
@@ -46754,8 +46865,8 @@
       ]
     }
   ],
-  "openapi_sha256": "d917623190f3ba6e0a1a20df226ea21a5467a7a1b6a29b4c9cc14558546e62cd",
-  "operation_count": 518,
+  "openapi_sha256": "2b22df088e54e2c0c6dd2e49f4d1875b7f1e44a2da497a1a6baada0a40250d16",
+  "operation_count": 522,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
