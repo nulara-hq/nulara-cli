@@ -3,6 +3,8 @@
 Command-line access to Nulara: sign in, call the product modules and the API,
 and run the workspace agent.
 
+Documentation: <https://nulara.de/cli>
+
 ## Install
 
 ```console
