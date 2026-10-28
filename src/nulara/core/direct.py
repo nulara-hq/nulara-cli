@@ -18,7 +18,7 @@ from rich.prompt import Confirm
 
 from nulara.core.client import ApiClient, ApiDownloadResult, ApiResult
 from nulara.core.config import Product, Surface
-from nulara.core.errors import CliError, ConfigurationError
+from nulara.core.errors import CliError, ConfigurationError, UsageError
 from nulara.core.openapi import MANIFEST_VERSION
 from nulara.core.render import render_json, render_rows
 from nulara.core.tokens import get_token
@@ -405,6 +405,38 @@ def _command_signature(
             ),
         ]
     )
+    if operation.get("pagination"):
+        parameters.extend(
+            [
+                inspect.Parameter(
+                    "all_pages",
+                    inspect.Parameter.KEYWORD_ONLY,
+                    annotation=Annotated[
+                        bool,
+                        Parameter(
+                            name="--all",
+                            negative=(),
+                            help=(
+                                "Fetch every page and print one object {items, total}."
+                            ),
+                        ),
+                    ],
+                    default=False,
+                ),
+                inspect.Parameter(
+                    "max_items",
+                    inspect.Parameter.KEYWORD_ONLY,
+                    annotation=Annotated[
+                        int | None,
+                        Parameter(
+                            name="--max-items",
+                            help="Stop --all after this many items.",
+                        ),
+                    ],
+                    default=None,
+                ),
+            ]
+        )
     if operation["dangerous"]:
         parameters.append(
             inspect.Parameter(
@@ -553,6 +585,14 @@ def _run_operation(
             body_spec.get("schema", {}) if isinstance(body_spec, dict) else {},
         ),
     }
+    all_pages = values.get("all_pages", False)
+    max_items = values.get("max_items")
+    if max_items is not None and not all_pages:
+        raise UsageError("--max-items only applies together with --all")
+    if max_items is not None and max_items < 1:
+        raise UsageError("--max-items must be at least 1")
+    if all_pages and values.get("output") is not None:
+        raise UsageError("--all prints JSON and cannot be combined with --output")
     if values.get("dry_run", False):
         render_json(preview)
         return
@@ -582,23 +622,87 @@ def _run_operation(
                     body_spec.get("schema", {}) if isinstance(body_spec, dict) else {},
                 ),
             }
-            output = values["output"]
-            if output is not None:
+            if all_pages:
+                collected = _collect_pages(
+                    client,
+                    operation,
+                    path,
+                    query,
+                    request_arguments,
+                    max_items=max_items,
+                )
+            elif values["output"] is not None:
                 download = client.request_to_file(
                     operation["method"],
                     path,
-                    output,
+                    values["output"],
                     overwrite=values["overwrite"],
                     **request_arguments,
                 )
                 _render_download(download, json_output=values["json_output"])
                 return
-            result = client.request_result(
-                operation["method"], path, **request_arguments
-            )
+            else:
+                result = client.request_result(
+                    operation["method"], path, **request_arguments
+                )
+    if all_pages:
+        render_json(collected) if values["json_output"] else render_rows(collected)
+        return
     render_api_result(
         result, json_output=values["json_output"], output=None, overwrite=False
     )
+
+
+def _collect_pages(
+    client: ApiClient,
+    operation: dict[str, Any],
+    path: str,
+    query: list[tuple[str, Any]],
+    request_arguments: dict[str, Any],
+    *,
+    max_items: int | None,
+) -> dict[str, Any]:
+    """Follow `has_more` from the requested offset and merge the pages.
+
+    Without `--limit` each page is as large as the API allows, so a long list
+    costs as few requests as possible.
+    """
+    items_key = operation["pagination"]["items"]
+    page_size = next(
+        parameter["schema"].get("maximum")
+        for parameter in operation["parameters"]
+        if parameter["name"] == "limit"
+    )
+    base = [(key, value) for key, value in query if key not in {"limit", "offset"}]
+    given = {key: value for key, value in query if key in {"limit", "offset"}}
+    limit = given.get("limit") or page_size
+    offset = int(given.get("offset") or 0)
+    items: list[Any] = []
+    total: Any = None
+    while True:
+        page_query = [
+            *base,
+            *([("limit", limit)] if limit is not None else []),
+            ("offset", str(offset)),
+        ]
+        payload = client.request_result(
+            operation["method"],
+            path,
+            **{**request_arguments, "params": page_query},
+        ).payload()
+        page = payload.get(items_key) if isinstance(payload, dict) else None
+        if not isinstance(page, list) or not isinstance(payload.get("has_more"), bool):
+            raise CliError(
+                f"{operation['operation_id']} did not answer with a page of "
+                f"`{items_key}` and `has_more`"
+            )
+        items.extend(page)
+        total = payload.get("total", total)
+        if max_items is not None and len(items) >= max_items:
+            return {"items": items[:max_items], "total": total}
+        if not payload["has_more"] or not page:
+            return {"items": items, "total": total}
+        offset += len(page)
 
 
 def _field_annotation(

@@ -67,6 +67,7 @@ def build_command_manifest(document: dict[str, Any], *, product: str) -> dict[st
                     "body": body,
                     "response_content_types": response_content_types,
                     "dangerous": method not in {"get", "head"},
+                    "pagination": _pagination(method, parameters, operation, schemas),
                 }
             )
 
@@ -495,6 +496,38 @@ def _response_content_types(operation: dict[str, Any]) -> list[str]:
         if isinstance(content, dict):
             content_types.update(content)
     return sorted(content_types)
+
+
+def _pagination(
+    method: str,
+    parameters: list[dict[str, Any]],
+    operation: dict[str, Any],
+    schemas: dict[str, Any],
+) -> dict[str, str] | None:
+    """Name the list a `--all` run collects, or None when it cannot page.
+
+    A list pages when it takes `limit` and `offset` and answers with nothing
+    but one array, `has_more` and an optional `total`; a page with further
+    fields (a default id, per-currency sums) would lose them when merged.
+    """
+    query = {item["name"] for item in parameters if item["location"] == "query"}
+    if method != "get" or not {"limit", "offset"} <= query:
+        return None
+    response = operation.get("responses", {}).get("200", {})
+    content = response.get("content", {}) if isinstance(response, dict) else {}
+    media = content.get("application/json") if isinstance(content, dict) else None
+    schema = _resolve(media.get("schema"), schemas) if isinstance(media, dict) else None
+    properties = schema.get("properties") if isinstance(schema, dict) else None
+    if not isinstance(properties, dict) or "has_more" not in properties:
+        return None
+    arrays = [
+        name
+        for name, value in properties.items()
+        if isinstance(value, dict) and _resolve(value, schemas).get("type") == "array"
+    ]
+    if len(arrays) != 1 or set(properties) - {arrays[0], "has_more", "total"}:
+        return None
+    return {"items": arrays[0]}
 
 
 def _option_name(name: str, module: str) -> str:

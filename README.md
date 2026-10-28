@@ -76,7 +76,9 @@ request may take 15 seconds; `--request-timeout` or `NULARA_TIMEOUT` changes
 that.
 
 A command that changes data asks for confirmation; in a script pass `--yes`,
-and `--dry-run` prints the request without sending it.
+and `--dry-run` prints the request without sending it. A list that pages takes
+`--all`, which follows every page and prints one object `{"items": […],
+"total": n}`; `--max-items` stops it early.
 
 ## Layout
 
