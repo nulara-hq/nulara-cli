@@ -39,19 +39,19 @@ user signed in to; `--workspace <name>` overrides it for one command.
 
 ## Exit codes
 
-| Exit | `error`                    | What to do                                      |
-| ---- | -------------------------- | ----------------------------------------------- |
-| 0    |                            | Success                                         |
-| 1    | `runtime_error`            | Read `message`; often a missing `--yes`         |
-| 2    | `configuration_error`      | Configuration or workspace selection is wrong   |
-| 3    | `authentication_error`     | Ask the user to run `nulara login`              |
-| 4    | `authorization_error`      | The user or key lacks the right; tell the user  |
-| 5    | `api_error`                | The API refused; `code` names why, `detail` has the fields |
-| 6    | `operation_error`          | The operation catalog is unusable               |
-| 7, 8 | `thread_*`                 | The workspace agent's stream failed             |
-| 9    | `usage_error`              | The command line was wrong; check `describe`    |
-| 10   | `network_error`            | The API was unreachable; retry later            |
-| 11   | `rate_limit_error`         | Wait `retry_after` seconds, then retry          |
+| Exit | `error`                | What to do                                                 |
+| ---- | ---------------------- | ---------------------------------------------------------- |
+| 0    |                        | Success                                                    |
+| 1    | `runtime_error`        | Read `message`; often a missing `--yes`                    |
+| 2    | `configuration_error`  | Configuration or workspace selection is wrong              |
+| 3    | `authentication_error` | Ask the user to run `nulara login`                         |
+| 4    | `authorization_error`  | The user or key lacks the right; tell the user             |
+| 5    | `api_error`            | The API refused; `code` names why, `detail` has the fields |
+| 6    | `operation_error`      | The operation catalog is unusable                          |
+| 7, 8 | `thread_*`             | The workspace agent's stream failed                        |
+| 9    | `usage_error`          | The command line was wrong; check `describe`               |
+| 10   | `network_error`        | The API was unreachable; retry later                       |
+| 11   | `rate_limit_error`     | Wait `retry_after` seconds, then retry                     |
 
 Reads are retried on network errors and server errors already, and every
 request on a rate limit, so do not wrap commands in your own retry loop.

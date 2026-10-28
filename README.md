@@ -57,9 +57,14 @@ document to stdout. A failure writes one JSON object to stderr instead and
 exits with a code that names the kind of failure:
 
 ```json
-{"error": "api_error", "exit_code": 5, "status_code": 404,
- "code": "PASSPORT_PUBLICATION_NOT_FOUND", "detail": "PASSPORT_PUBLICATION_NOT_FOUND",
- "message": "API request failed (404: PASSPORT_PUBLICATION_NOT_FOUND)"}
+{
+  "error": "api_error",
+  "exit_code": 5,
+  "status_code": 404,
+  "code": "PASSPORT_PUBLICATION_NOT_FOUND",
+  "detail": "PASSPORT_PUBLICATION_NOT_FOUND",
+  "message": "API request failed (404: PASSPORT_PUBLICATION_NOT_FOUND)"
+}
 ```
 
 `code` is the server's error code when it sent one, `detail` the server's
