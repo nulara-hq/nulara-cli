@@ -40,6 +40,7 @@
           "method": "POST",
           "name": "approve",
           "operation_id": "approve_absence",
+          "pagination": null,
           "parameters": [
             {
               "argument": "absence_id",
@@ -139,6 +140,7 @@
           "method": "POST",
           "name": "bulk-transition",
           "operation_id": "bulk_transition_absences",
+          "pagination": null,
           "parameters": [],
           "path": "/absences/bulk-transition",
           "response_content_types": [
@@ -153,6 +155,7 @@
           "method": "POST",
           "name": "cancel",
           "operation_id": "cancel_absence",
+          "pagination": null,
           "parameters": [
             {
               "argument": "absence_id",
@@ -343,6 +346,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_absence",
+          "pagination": null,
           "parameters": [],
           "path": "/absences",
           "response_content_types": [
@@ -357,6 +361,7 @@
           "method": "POST",
           "name": "decline",
           "operation_id": "decline_absence",
+          "pagination": null,
           "parameters": [
             {
               "argument": "absence_id",
@@ -385,6 +390,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_absence",
+          "pagination": null,
           "parameters": [
             {
               "argument": "absence_id",
@@ -413,6 +419,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_absences",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -749,6 +758,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_absence",
+          "pagination": null,
           "parameters": [
             {
               "argument": "absence_id",
@@ -782,6 +792,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_agent_config",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-config",
           "response_content_types": [
@@ -796,6 +807,7 @@
           "method": "GET",
           "name": "get-agent-workspace-settings",
           "operation_id": "get_agent_workspace_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-config/workspace",
           "response_content_types": [
@@ -810,6 +822,7 @@
           "method": "GET",
           "name": "get-available-tiers",
           "operation_id": "get_available_tiers",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-config/tiers",
           "response_content_types": [
@@ -931,6 +944,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_agent_config",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-config",
           "response_content_types": [
@@ -979,6 +993,7 @@
           "method": "PATCH",
           "name": "update-agent-workspace-settings",
           "operation_id": "update_agent_workspace_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-config/workspace",
           "response_content_types": [
@@ -1031,6 +1046,7 @@
           "method": "POST",
           "name": "approve-plan",
           "operation_id": "approve_agent_operation_plan",
+          "pagination": null,
           "parameters": [
             {
               "argument": "plan_id",
@@ -1059,6 +1075,7 @@
           "method": "POST",
           "name": "cancel-plan",
           "operation_id": "cancel_agent_operation_plan",
+          "pagination": null,
           "parameters": [
             {
               "argument": "plan_id",
@@ -1120,6 +1137,7 @@
           "method": "POST",
           "name": "execute-plan",
           "operation_id": "execute_agent_operation_plan",
+          "pagination": null,
           "parameters": [
             {
               "argument": "plan_id",
@@ -1148,6 +1166,7 @@
           "method": "GET",
           "name": "get-plan",
           "operation_id": "get_agent_operation_plan",
+          "pagination": null,
           "parameters": [
             {
               "argument": "plan_id",
@@ -1176,6 +1195,9 @@
           "method": "GET",
           "name": "list-plans",
           "operation_id": "list_agent_operation_plans",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -1222,6 +1244,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_agent_operations",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-operations",
           "response_content_types": [
@@ -1315,6 +1338,7 @@
           "method": "POST",
           "name": "prepare-plan",
           "operation_id": "prepare_agent_operation_plan",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-operations/plans",
           "response_content_types": [
@@ -1376,6 +1400,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_agent_triggers",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-triggers/bulk-delete",
           "response_content_types": [
@@ -1457,6 +1482,7 @@
           "method": "POST",
           "name": "bulk-transition",
           "operation_id": "bulk_transition_agent_triggers",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-triggers/bulk-transition",
           "response_content_types": [
@@ -1900,6 +1926,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_agent_trigger",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-triggers",
           "response_content_types": [
@@ -1914,6 +1941,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_agent_trigger",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -1940,6 +1968,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_agent_trigger",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -1968,6 +1997,7 @@
           "method": "GET",
           "name": "get-event-catalog",
           "operation_id": "get_agent_trigger_event_catalog",
+          "pagination": null,
           "parameters": [],
           "path": "/agent-triggers/events/catalog",
           "response_content_types": [
@@ -1982,6 +2012,7 @@
           "method": "GET",
           "name": "get-run",
           "operation_id": "get_agent_trigger_run",
+          "pagination": null,
           "parameters": [
             {
               "argument": "run_id",
@@ -2010,6 +2041,9 @@
           "method": "GET",
           "name": "list-deliveries",
           "operation_id": "list_agent_trigger_deliveries",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2069,6 +2103,9 @@
           "method": "GET",
           "name": "list-runs",
           "operation_id": "list_agent_trigger_runs",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2128,6 +2165,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_agent_triggers",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -2205,6 +2245,7 @@
           "method": "POST",
           "name": "pause",
           "operation_id": "pause_agent_trigger",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2233,6 +2274,7 @@
           "method": "POST",
           "name": "resume",
           "operation_id": "resume_agent_trigger",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2261,6 +2303,7 @@
           "method": "POST",
           "name": "rotate-webhook-secret",
           "operation_id": "rotate_agent_trigger_webhook_secret",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2289,6 +2332,7 @@
           "method": "POST",
           "name": "run-now",
           "operation_id": "run_agent_trigger_now",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2775,6 +2819,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_agent_trigger",
+          "pagination": null,
           "parameters": [
             {
               "argument": "trigger_id",
@@ -2808,6 +2853,7 @@
           "method": "POST",
           "name": "activate-version",
           "operation_id": "activate_agent_version",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -2891,6 +2937,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_agents",
+          "pagination": null,
           "parameters": [],
           "path": "/agents/bulk-delete",
           "response_content_types": [
@@ -3057,6 +3104,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_agent",
+          "pagination": null,
           "parameters": [],
           "path": "/agents",
           "response_content_types": [
@@ -3071,6 +3119,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_agent",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3126,6 +3175,7 @@
           "method": "POST",
           "name": "duplicate",
           "operation_id": "duplicate_agent",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3154,6 +3204,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_agent",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3182,6 +3233,7 @@
           "method": "GET",
           "name": "get-version",
           "operation_id": "get_agent_version",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3223,6 +3275,9 @@
           "method": "GET",
           "name": "list-versions",
           "operation_id": "list_agent_versions",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "agent_id",
@@ -3282,6 +3337,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_agents",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -3422,6 +3480,7 @@
           "method": "POST",
           "name": "publish",
           "operation_id": "publish_agent",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3632,6 +3691,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_agent",
+          "pagination": null,
           "parameters": [
             {
               "argument": "agent_id",
@@ -3701,6 +3761,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_appearance",
+          "pagination": null,
           "parameters": [],
           "path": "/appearance",
           "response_content_types": [
@@ -3720,6 +3781,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_audit_log",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -4509,6 +4573,7 @@
           "method": "POST",
           "name": "ingest",
           "operation_id": "ingest_battery_observation",
+          "pagination": null,
           "parameters": [],
           "path": "/battery-observations/ingest",
           "response_content_types": [
@@ -4523,6 +4588,7 @@
           "method": "GET",
           "name": "list-freshness-by-item",
           "operation_id": "list_battery_observation_freshness_by_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -4551,6 +4617,7 @@
           "method": "GET",
           "name": "list-by-item",
           "operation_id": "list_battery_observations_by_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -5215,6 +5282,7 @@
           "method": "POST",
           "name": "transcribe",
           "operation_id": "transcribe_battery_observation",
+          "pagination": null,
           "parameters": [],
           "path": "/battery-observations/transcribe",
           "response_content_types": [
@@ -5234,6 +5302,7 @@
           "method": "GET",
           "name": "get-overview",
           "operation_id": "get_billing_overview",
+          "pagination": null,
           "parameters": [],
           "path": "/billing",
           "response_content_types": [
@@ -5248,6 +5317,7 @@
           "method": "GET",
           "name": "get-workspace",
           "operation_id": "get_workspace_billing",
+          "pagination": null,
           "parameters": [],
           "path": "/billing/workspace",
           "response_content_types": [
@@ -5531,6 +5601,7 @@
           "method": "POST",
           "name": "create-file-metadata",
           "operation_id": "create_box_file_metadata",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5653,6 +5724,7 @@
           "method": "POST",
           "name": "create-folder",
           "operation_id": "create_box_folder",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5681,6 +5753,7 @@
           "method": "DELETE",
           "name": "delete-file",
           "operation_id": "delete_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5720,6 +5793,7 @@
           "method": "DELETE",
           "name": "delete-folder",
           "operation_id": "delete_box_folder",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5759,6 +5833,7 @@
           "method": "GET",
           "name": "download-file",
           "operation_id": "download_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5814,6 +5889,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_box",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5842,6 +5918,7 @@
           "method": "GET",
           "name": "get-children",
           "operation_id": "get_box_children",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5883,6 +5960,7 @@
           "method": "GET",
           "name": "get-file",
           "operation_id": "get_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5924,6 +6002,7 @@
           "method": "GET",
           "name": "get-file-preview",
           "operation_id": "get_box_file_preview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5965,6 +6044,7 @@
           "method": "GET",
           "name": "get-tree",
           "operation_id": "get_box_tree",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -5993,6 +6073,7 @@
           "method": "GET",
           "name": "get-upload-policy",
           "operation_id": "get_box_upload_policy",
+          "pagination": null,
           "parameters": [],
           "path": "/boxes/upload-policy",
           "response_content_types": [
@@ -6007,6 +6088,7 @@
           "method": "GET",
           "name": "list-items",
           "operation_id": "list_box_items",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6179,6 +6261,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_boxes",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -6336,6 +6421,7 @@
           "method": "PUT",
           "name": "move-tree-item",
           "operation_id": "move_box_tree_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6419,6 +6505,7 @@
           "method": "POST",
           "name": "promote-html-artifact-to-box",
           "operation_id": "promote_html_artifact_to_box",
+          "pagination": null,
           "parameters": [],
           "path": "/boxes/html-artifacts/promote",
           "response_content_types": [
@@ -6433,6 +6520,7 @@
           "method": "POST",
           "name": "reindex-file",
           "operation_id": "reindex_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6550,6 +6638,7 @@
           "method": "PUT",
           "name": "reorder-tree",
           "operation_id": "reorder_box_tree",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6665,6 +6754,7 @@
           "method": "POST",
           "name": "secure-file",
           "operation_id": "secure_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6779,6 +6869,7 @@
           "method": "POST",
           "name": "secure-folder",
           "operation_id": "secure_box_folder",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -6905,6 +6996,7 @@
           "method": "PATCH",
           "name": "update-file",
           "operation_id": "update_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -7033,6 +7125,7 @@
           "method": "PATCH",
           "name": "update-folder",
           "operation_id": "update_box_folder",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -7185,6 +7278,7 @@
           "method": "POST",
           "name": "upload-file",
           "operation_id": "upload_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -7330,6 +7424,7 @@
           "method": "POST",
           "name": "upload-encrypted-file",
           "operation_id": "upload_encrypted_box_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "box_id",
@@ -7405,6 +7500,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_calendar_events",
+          "pagination": null,
           "parameters": [],
           "path": "/calendar-events/bulk-delete",
           "response_content_types": [
@@ -7783,6 +7879,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_calendar_event",
+          "pagination": null,
           "parameters": [],
           "path": "/calendar-events",
           "response_content_types": [
@@ -7797,6 +7894,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_calendar_event",
+          "pagination": null,
           "parameters": [
             {
               "argument": "calendar_event_id",
@@ -7823,6 +7921,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_calendar_event",
+          "pagination": null,
           "parameters": [
             {
               "argument": "calendar_event_id",
@@ -7851,6 +7950,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_calendar_events",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -8391,6 +8493,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_calendar_event",
+          "pagination": null,
           "parameters": [
             {
               "argument": "calendar_event_id",
@@ -8466,6 +8569,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_categories",
+          "pagination": null,
           "parameters": [],
           "path": "/categories/bulk-delete",
           "response_content_types": [
@@ -8632,6 +8736,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_category",
+          "pagination": null,
           "parameters": [],
           "path": "/categories",
           "response_content_types": [
@@ -8646,6 +8751,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_category",
+          "pagination": null,
           "parameters": [
             {
               "argument": "category_id",
@@ -8672,6 +8778,7 @@
           "method": "GET",
           "name": "get-categories-delete-impact",
           "operation_id": "get_categories_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -8706,6 +8813,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_category",
+          "pagination": null,
           "parameters": [
             {
               "argument": "category_id",
@@ -8734,6 +8842,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_category_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "category_id",
@@ -8762,6 +8871,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_categories",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -9094,6 +9206,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_category",
+          "pagination": null,
           "parameters": [
             {
               "argument": "category_id",
@@ -9362,6 +9475,7 @@
           "method": "POST",
           "name": "complete-whatsapp-embedded-signup",
           "operation_id": "complete_whatsapp_embedded_signup",
+          "pagination": null,
           "parameters": [],
           "path": "/channels/whatsapp/embedded-signup/complete",
           "response_content_types": [
@@ -9410,6 +9524,7 @@
           "method": "POST",
           "name": "confirm-phone-verification",
           "operation_id": "confirm_phone_verification",
+          "pagination": null,
           "parameters": [],
           "path": "/channels/me/phone/verify/confirm",
           "response_content_types": [
@@ -9635,6 +9750,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_channel",
+          "pagination": null,
           "parameters": [],
           "path": "/channels",
           "response_content_types": [
@@ -9649,6 +9765,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_channel",
+          "pagination": null,
           "parameters": [
             {
               "argument": "channel_id",
@@ -9675,6 +9792,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_channel",
+          "pagination": null,
           "parameters": [
             {
               "argument": "channel_id",
@@ -9703,6 +9821,7 @@
           "method": "GET",
           "name": "get-setup-instructions",
           "operation_id": "get_channel_setup_instructions",
+          "pagination": null,
           "parameters": [
             {
               "argument": "channel_id",
@@ -9731,6 +9850,7 @@
           "method": "GET",
           "name": "get-my-settings",
           "operation_id": "get_my_channel_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/channels/me",
           "response_content_types": [
@@ -9745,6 +9865,7 @@
           "method": "GET",
           "name": "get-whatsapp-embedded-signup-config",
           "operation_id": "get_whatsapp_embedded_signup_config",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scope",
@@ -9777,6 +9898,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_channels",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -9893,6 +10017,7 @@
           "method": "POST",
           "name": "request-phone-verification",
           "operation_id": "request_phone_verification",
+          "pagination": null,
           "parameters": [],
           "path": "/channels/me/phone/verify",
           "response_content_types": [
@@ -10122,6 +10247,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_channel",
+          "pagination": null,
           "parameters": [
             {
               "argument": "channel_id",
@@ -10209,6 +10335,7 @@
           "method": "PATCH",
           "name": "update-my-settings",
           "operation_id": "update_my_channel_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/channels/me",
           "response_content_types": [
@@ -10552,6 +10679,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_circularity_scorecard",
+          "pagination": null,
           "parameters": [],
           "path": "/circularity-scorecards",
           "response_content_types": [
@@ -10566,6 +10694,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_circularity_scorecard",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scorecard_id",
@@ -10592,6 +10721,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_circularity_scorecard",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scorecard_id",
@@ -10620,6 +10750,7 @@
           "method": "GET",
           "name": "get-by-product",
           "operation_id": "get_circularity_scorecard_by_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -10648,6 +10779,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_circularity_scorecards",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -10998,6 +11132,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_circularity_scorecard",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scorecard_id",
@@ -11031,6 +11166,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_countries",
+          "pagination": null,
           "parameters": [],
           "path": "/countries",
           "response_content_types": [
@@ -11092,6 +11228,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_due_diligence_declarations",
+          "pagination": null,
           "parameters": [],
           "path": "/due-diligence-declarations/bulk-delete",
           "response_content_types": [
@@ -11243,6 +11380,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_due_diligence_declaration",
+          "pagination": null,
           "parameters": [],
           "path": "/due-diligence-declarations",
           "response_content_types": [
@@ -11472,6 +11610,7 @@
           "method": "POST",
           "name": "create-with-documents",
           "operation_id": "create_due_diligence_declaration_with_documents",
+          "pagination": null,
           "parameters": [],
           "path": "/due-diligence-declarations/with-documents",
           "response_content_types": [
@@ -11486,6 +11625,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_due_diligence_declaration",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -11512,6 +11652,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_due_diligence_declaration",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -11540,6 +11681,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_due_diligence_declaration_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -11568,6 +11710,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_due_diligence_declarations",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -11894,6 +12039,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_due_diligence_declaration",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -11927,6 +12073,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_due_diligence_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -11953,6 +12100,7 @@
           "method": "GET",
           "name": "download",
           "operation_id": "download_due_diligence_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -11981,6 +12129,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_due_diligence_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -12009,6 +12158,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_due_diligence_documents",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -12185,6 +12335,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_due_diligence_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "declaration_id",
@@ -12307,6 +12458,7 @@
           "method": "POST",
           "name": "attach-file",
           "operation_id": "attach_file",
+          "pagination": null,
           "parameters": [],
           "path": "/file-attachments",
           "response_content_types": [
@@ -12321,6 +12473,7 @@
           "method": "DELETE",
           "name": "detach-file",
           "operation_id": "detach_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12373,6 +12526,7 @@
           "method": "GET",
           "name": "download-attachment",
           "operation_id": "download_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12401,6 +12555,7 @@
           "method": "GET",
           "name": "list-entity-files",
           "operation_id": "list_entity_files",
+          "pagination": null,
           "parameters": [
             {
               "argument": "reference_type",
@@ -12539,6 +12694,7 @@
           "method": "POST",
           "name": "upload-and-attach-file",
           "operation_id": "upload_and_attach_file",
+          "pagination": null,
           "parameters": [],
           "path": "/file-attachments/upload",
           "response_content_types": [
@@ -12558,6 +12714,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12584,6 +12741,7 @@
           "method": "GET",
           "name": "download",
           "operation_id": "download_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12612,6 +12770,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12640,6 +12799,7 @@
           "method": "GET",
           "name": "get-config",
           "operation_id": "get_file_config",
+          "pagination": null,
           "parameters": [],
           "path": "/files/config",
           "response_content_types": [
@@ -12654,6 +12814,7 @@
           "method": "POST",
           "name": "index",
           "operation_id": "index_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -12682,6 +12843,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_files",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -12772,6 +12934,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_file",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -12805,6 +12968,7 @@
           "method": "GET",
           "name": "autocomplete",
           "operation_id": "geocode_autocomplete",
+          "pagination": null,
           "parameters": [
             {
               "argument": "q",
@@ -12856,6 +13020,7 @@
           "method": "PATCH",
           "name": "archive-message",
           "operation_id": "archive_inbox_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -12884,6 +13049,7 @@
           "method": "DELETE",
           "name": "delete-message",
           "operation_id": "delete_inbox_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -12912,6 +13078,7 @@
           "method": "GET",
           "name": "get-unread-count",
           "operation_id": "get_inbox_unread_count",
+          "pagination": null,
           "parameters": [],
           "path": "/inbox/unread-count",
           "response_content_types": [
@@ -12926,6 +13093,9 @@
           "method": "GET",
           "name": "list-messages",
           "operation_id": "list_inbox_messages",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -13022,6 +13192,7 @@
           "method": "PATCH",
           "name": "mark-all-messages-read",
           "operation_id": "mark_all_inbox_messages_read",
+          "pagination": null,
           "parameters": [],
           "path": "/inbox/mark-all-read",
           "response_content_types": [
@@ -13036,6 +13207,7 @@
           "method": "PATCH",
           "name": "mark-message-read",
           "operation_id": "mark_inbox_message_read",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -13064,6 +13236,7 @@
           "method": "PATCH",
           "name": "mark-message-unread",
           "operation_id": "mark_inbox_message_unread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -13092,6 +13265,7 @@
           "method": "PATCH",
           "name": "unarchive-message",
           "operation_id": "unarchive_inbox_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -13125,6 +13299,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_issuer_keys",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -13185,6 +13362,7 @@
           "method": "POST",
           "name": "revoke",
           "operation_id": "revoke_issuer_key",
+          "pagination": null,
           "parameters": [
             {
               "argument": "key_id",
@@ -13213,6 +13391,7 @@
           "method": "POST",
           "name": "rotate",
           "operation_id": "rotate_issuer_key",
+          "pagination": null,
           "parameters": [],
           "path": "/issuer-keys/rotate",
           "response_content_types": [
@@ -13232,6 +13411,7 @@
           "method": "POST",
           "name": "archive",
           "operation_id": "archive_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13319,6 +13499,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_items",
+          "pagination": null,
           "parameters": [],
           "path": "/items/bulk-delete",
           "response_content_types": [
@@ -13375,6 +13556,7 @@
           "method": "POST",
           "name": "bulk-restore",
           "operation_id": "bulk_restore_items",
+          "pagination": null,
           "parameters": [],
           "path": "/items/bulk-restore",
           "response_content_types": [
@@ -13389,6 +13571,7 @@
           "method": "DELETE",
           "name": "clear-storage-bin",
           "operation_id": "clear_item_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13576,6 +13759,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_item",
+          "pagination": null,
           "parameters": [],
           "path": "/items",
           "response_content_types": [
@@ -13590,6 +13774,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13616,6 +13801,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13692,6 +13878,7 @@
           "method": "GET",
           "name": "export-items",
           "operation_id": "export_items",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -13766,6 +13953,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13794,6 +13982,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_item_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -13822,6 +14011,7 @@
           "method": "GET",
           "name": "get-stats",
           "operation_id": "get_item_stats",
+          "pagination": null,
           "parameters": [
             {
               "argument": "range_days",
@@ -13851,6 +14041,7 @@
           "method": "GET",
           "name": "get-items-delete-impact",
           "operation_id": "get_items_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -13885,6 +14076,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_items",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "item_ids",
@@ -14202,6 +14396,7 @@
           "method": "POST",
           "name": "recall",
           "operation_id": "recall_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14269,6 +14464,7 @@
           "method": "POST",
           "name": "reinstate",
           "operation_id": "reinstate_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14297,6 +14493,7 @@
           "method": "POST",
           "name": "restore",
           "operation_id": "restore_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14412,6 +14609,7 @@
           "method": "POST",
           "name": "sell",
           "operation_id": "sell_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14472,6 +14670,7 @@
           "method": "PUT",
           "name": "set-storage-bin",
           "operation_id": "set_item_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14645,6 +14844,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -14678,6 +14878,7 @@
           "method": "GET",
           "name": "get-stats",
           "operation_id": "get_llm_usage_stats",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scope",
@@ -14799,6 +15000,7 @@
           "method": "GET",
           "name": "get-summary",
           "operation_id": "get_llm_usage_summary",
+          "pagination": null,
           "parameters": [
             {
               "argument": "scope",
@@ -14920,6 +15122,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_llm_usage",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "scope",
@@ -15077,6 +15282,7 @@
           "method": "POST",
           "name": "archive",
           "operation_id": "archive_location",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -15164,6 +15370,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_locations",
+          "pagination": null,
           "parameters": [],
           "path": "/locations/bulk-delete",
           "response_content_types": [
@@ -15220,6 +15427,7 @@
           "method": "POST",
           "name": "bulk-restore",
           "operation_id": "bulk_restore_locations",
+          "pagination": null,
           "parameters": [],
           "path": "/locations/bulk-restore",
           "response_content_types": [
@@ -15713,6 +15921,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_location",
+          "pagination": null,
           "parameters": [],
           "path": "/locations",
           "response_content_types": [
@@ -15727,6 +15936,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_location",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -15753,6 +15963,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_location",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -15781,6 +15992,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_location_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -15809,6 +16021,7 @@
           "method": "GET",
           "name": "get-stats",
           "operation_id": "get_location_stats",
+          "pagination": null,
           "parameters": [],
           "path": "/locations/stats",
           "response_content_types": [
@@ -15823,6 +16036,7 @@
           "method": "GET",
           "name": "get-timeline",
           "operation_id": "get_location_timeline",
+          "pagination": null,
           "parameters": [
             {
               "argument": "range_days",
@@ -15852,6 +16066,7 @@
           "method": "GET",
           "name": "get-locations-delete-impact",
           "operation_id": "get_locations_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -15886,6 +16101,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_locations",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -16131,6 +16349,7 @@
           "method": "POST",
           "name": "restore",
           "operation_id": "restore_location",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -16638,6 +16857,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_location",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -16703,6 +16923,7 @@
           "method": "POST",
           "name": "add-draft-attachment",
           "operation_id": "add_mail_draft_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -17076,6 +17297,7 @@
           "method": "POST",
           "name": "create-draft",
           "operation_id": "create_mail_draft",
+          "pagination": null,
           "parameters": [],
           "path": "/mail/drafts",
           "response_content_types": [
@@ -17212,6 +17434,7 @@
           "method": "POST",
           "name": "create-template",
           "operation_id": "create_mail_template",
+          "pagination": null,
           "parameters": [],
           "path": "/mail/templates",
           "response_content_types": [
@@ -17226,6 +17449,7 @@
           "method": "DELETE",
           "name": "delete-draft-attachment",
           "operation_id": "delete_mail_draft_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -17281,6 +17505,7 @@
           "method": "DELETE",
           "name": "delete-template",
           "operation_id": "delete_mail_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -17307,6 +17532,7 @@
           "method": "DELETE",
           "name": "discard-draft",
           "operation_id": "discard_mail_draft",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -17333,6 +17559,7 @@
           "method": "GET",
           "name": "download-draft-attachment",
           "operation_id": "download_mail_draft_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -17374,6 +17601,7 @@
           "method": "GET",
           "name": "download-message-attachment",
           "operation_id": "download_mail_message_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -17415,6 +17643,7 @@
           "method": "GET",
           "name": "download-source-attachment",
           "operation_id": "download_mail_source_attachment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -17458,6 +17687,7 @@
           "method": "GET",
           "name": "get-draft",
           "operation_id": "get_mail_draft",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -17486,6 +17716,7 @@
           "method": "GET",
           "name": "get-message",
           "operation_id": "get_mail_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -17514,6 +17745,7 @@
           "method": "GET",
           "name": "get-template",
           "operation_id": "get_mail_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -17542,6 +17774,7 @@
           "method": "GET",
           "name": "get-thread",
           "operation_id": "get_mail_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -17570,6 +17803,9 @@
           "method": "GET",
           "name": "list-drafts",
           "operation_id": "list_mail_drafts",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -17634,6 +17870,9 @@
           "method": "GET",
           "name": "list-messages",
           "operation_id": "list_mail_messages",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -17853,6 +18092,7 @@
           "method": "GET",
           "name": "list-source-attachments",
           "operation_id": "list_mail_source_attachments",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -17881,6 +18121,9 @@
           "method": "GET",
           "name": "list-templates",
           "operation_id": "list_mail_templates",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -17942,6 +18185,9 @@
           "method": "GET",
           "name": "list-threads",
           "operation_id": "list_mail_threads",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -18049,6 +18295,7 @@
           "method": "PATCH",
           "name": "mark-message-flagged",
           "operation_id": "mark_mail_message_flagged",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -18105,6 +18352,7 @@
           "method": "PATCH",
           "name": "mark-message-seen",
           "operation_id": "mark_mail_message_seen",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -18188,6 +18436,7 @@
           "method": "POST",
           "name": "move-message",
           "operation_id": "move_mail_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "message_id",
@@ -18299,6 +18548,7 @@
           "method": "POST",
           "name": "send-draft",
           "operation_id": "send_mail_draft",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -18610,6 +18860,7 @@
           "method": "POST",
           "name": "send-message",
           "operation_id": "send_mail_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "Idempotency_Key",
@@ -18641,6 +18892,7 @@
           "method": "POST",
           "name": "undo-send-draft",
           "operation_id": "undo_send_mail_draft",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -18911,6 +19163,7 @@
           "method": "PATCH",
           "name": "update-draft",
           "operation_id": "update_mail_draft",
+          "pagination": null,
           "parameters": [
             {
               "argument": "draft_id",
@@ -19077,6 +19330,7 @@
           "method": "PATCH",
           "name": "update-template",
           "operation_id": "update_mail_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -19110,6 +19364,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_mail_account",
+          "pagination": null,
           "parameters": [
             {
               "argument": "mail_account_id",
@@ -19138,6 +19393,7 @@
           "method": "GET",
           "name": "list-folders",
           "operation_id": "list_mail_account_folders",
+          "pagination": null,
           "parameters": [
             {
               "argument": "mail_account_id",
@@ -19166,6 +19422,7 @@
           "method": "GET",
           "name": "list-grants",
           "operation_id": "list_mail_account_grants",
+          "pagination": null,
           "parameters": [
             {
               "argument": "mail_account_id",
@@ -19194,6 +19451,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_mail_accounts",
+          "pagination": null,
           "parameters": [
             {
               "argument": "limit",
@@ -19339,6 +19597,7 @@
           "method": "GET",
           "name": "list-mail-providers",
           "operation_id": "list_mail_providers",
+          "pagination": null,
           "parameters": [],
           "path": "/mail-accounts/providers",
           "response_content_types": [
@@ -19353,6 +19612,7 @@
           "method": "POST",
           "name": "sync",
           "operation_id": "sync_mail_account",
+          "pagination": null,
           "parameters": [
             {
               "argument": "mail_account_id",
@@ -19381,6 +19641,7 @@
           "method": "POST",
           "name": "verify",
           "operation_id": "verify_mail_account",
+          "pagination": null,
           "parameters": [
             {
               "argument": "mail_account_id",
@@ -19456,6 +19717,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_materials",
+          "pagination": null,
           "parameters": [],
           "path": "/materials/bulk-delete",
           "response_content_types": [
@@ -19816,6 +20078,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_material",
+          "pagination": null,
           "parameters": [],
           "path": "/materials",
           "response_content_types": [
@@ -19830,6 +20093,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_material",
+          "pagination": null,
           "parameters": [
             {
               "argument": "material_id",
@@ -19856,6 +20120,7 @@
           "method": "DELETE",
           "name": "delete-for-product",
           "operation_id": "delete_material_for_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -19895,6 +20160,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_material",
+          "pagination": null,
           "parameters": [
             {
               "argument": "material_id",
@@ -19923,6 +20189,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_material_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "material_id",
@@ -19951,6 +20218,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_materials",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -20119,6 +20389,9 @@
           "method": "GET",
           "name": "list-for-product",
           "operation_id": "list_materials_for_product",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "product_id",
@@ -20398,6 +20671,7 @@
           "method": "PUT",
           "name": "set-for-product",
           "operation_id": "set_materials_for_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -20787,6 +21061,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_material",
+          "pagination": null,
           "parameters": [
             {
               "argument": "material_id",
@@ -20982,6 +21257,7 @@
           "method": "PATCH",
           "name": "update-for-product",
           "operation_id": "update_material_for_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -21204,6 +21480,7 @@
           "method": "POST",
           "name": "upsert-for-product",
           "operation_id": "upsert_material_for_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -21237,6 +21514,7 @@
           "method": "DELETE",
           "name": "delete-my-profile-image",
           "operation_id": "delete_my_profile_image",
+          "pagination": null,
           "parameters": [],
           "path": "/me/image",
           "response_content_types": [
@@ -21251,6 +21529,7 @@
           "method": "GET",
           "name": "get-current-api-key",
           "operation_id": "get_current_api_key",
+          "pagination": null,
           "parameters": [],
           "path": "/me/api-keys/current",
           "response_content_types": [
@@ -21265,6 +21544,7 @@
           "method": "GET",
           "name": "get-user-profile-image",
           "operation_id": "get_user_profile_image",
+          "pagination": null,
           "parameters": [
             {
               "argument": "user_id",
@@ -21355,6 +21635,7 @@
           "method": "PATCH",
           "name": "update-my-locale",
           "operation_id": "update_my_locale",
+          "pagination": null,
           "parameters": [],
           "path": "/me/locale",
           "response_content_types": [
@@ -21453,6 +21734,7 @@
           "method": "PATCH",
           "name": "update-my-profile",
           "operation_id": "update_my_profile",
+          "pagination": null,
           "parameters": [],
           "path": "/me/profile",
           "response_content_types": [
@@ -21509,6 +21791,7 @@
           "method": "POST",
           "name": "update-my-profile-image",
           "operation_id": "update_my_profile_image",
+          "pagination": null,
           "parameters": [],
           "path": "/me/image",
           "response_content_types": [
@@ -21563,6 +21846,7 @@
           "method": "POST",
           "name": "accept-invitation",
           "operation_id": "accept_member_invitation",
+          "pagination": null,
           "parameters": [],
           "path": "/members/invitations/accept",
           "response_content_types": [
@@ -21619,6 +21903,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_members",
+          "pagination": null,
           "parameters": [],
           "path": "/members/bulk-delete",
           "response_content_types": [
@@ -21675,6 +21960,7 @@
           "method": "POST",
           "name": "bulk-revoke-invitations",
           "operation_id": "bulk_revoke_member_invitations",
+          "pagination": null,
           "parameters": [],
           "path": "/members/invitations/bulk-revoke",
           "response_content_types": [
@@ -21773,6 +22059,7 @@
           "method": "POST",
           "name": "create-invitation",
           "operation_id": "create_member_invitation",
+          "pagination": null,
           "parameters": [],
           "path": "/members/invitations",
           "response_content_types": [
@@ -21787,6 +22074,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_member",
+          "pagination": null,
           "parameters": [
             {
               "argument": "member_id",
@@ -21813,6 +22101,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_member",
+          "pagination": null,
           "parameters": [
             {
               "argument": "member_id",
@@ -21841,6 +22130,9 @@
           "method": "GET",
           "name": "list-invitations",
           "operation_id": "list_member_invitations",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -22000,6 +22292,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_members",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -22153,6 +22448,7 @@
           "method": "DELETE",
           "name": "revoke-invitation",
           "operation_id": "revoke_member_invitation",
+          "pagination": null,
           "parameters": [
             {
               "argument": "invitation_id",
@@ -22220,6 +22516,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_member",
+          "pagination": null,
           "parameters": [
             {
               "argument": "member_id",
@@ -22329,6 +22626,7 @@
           "method": "POST",
           "name": "create-workspace",
           "operation_id": "create_workspace_memory",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/workspace/entries",
           "response_content_types": [
@@ -22343,6 +22641,7 @@
           "method": "DELETE",
           "name": "delete-agent",
           "operation_id": "delete_agent_memory",
+          "pagination": null,
           "parameters": [
             {
               "argument": "path",
@@ -22369,6 +22668,7 @@
           "method": "DELETE",
           "name": "delete-workspace",
           "operation_id": "delete_workspace_memory",
+          "pagination": null,
           "parameters": [
             {
               "argument": "path",
@@ -22395,6 +22695,7 @@
           "method": "GET",
           "name": "get-agent-settings",
           "operation_id": "get_agent_memory_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/settings",
           "response_content_types": [
@@ -22409,6 +22710,9 @@
           "method": "GET",
           "name": "list-agent",
           "operation_id": "list_agent_memories",
+          "pagination": {
+            "items": "entries"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -22469,6 +22773,9 @@
           "method": "GET",
           "name": "list-workspace",
           "operation_id": "list_workspace_memories",
+          "pagination": {
+            "items": "entries"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -22576,6 +22883,7 @@
           "method": "PATCH",
           "name": "update-agent",
           "operation_id": "update_agent_memory",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/entries",
           "response_content_types": [
@@ -22670,6 +22978,7 @@
           "method": "PATCH",
           "name": "update-agent-user-settings",
           "operation_id": "update_agent_memory_user_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/settings/user",
           "response_content_types": [
@@ -22876,6 +23185,7 @@
           "method": "PATCH",
           "name": "update-agent-workspace-settings",
           "operation_id": "update_agent_memory_workspace_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/settings/workspace",
           "response_content_types": [
@@ -22937,6 +23247,7 @@
           "method": "PATCH",
           "name": "update-workspace",
           "operation_id": "update_workspace_memory",
+          "pagination": null,
           "parameters": [],
           "path": "/memory/workspace/entries",
           "response_content_types": [
@@ -22956,6 +23267,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_metrics",
+          "pagination": null,
           "parameters": [
             {
               "argument": "format",
@@ -22991,6 +23303,7 @@
           "method": "GET",
           "name": "get-agent-usage-overview",
           "operation_id": "get_agent_usage_overview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -23038,6 +23351,7 @@
           "method": "GET",
           "name": "get-automation-run-overview",
           "operation_id": "get_automation_run_overview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -23068,6 +23382,7 @@
           "method": "GET",
           "name": "get-passport-overview",
           "operation_id": "get_passport_overview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -23116,6 +23431,7 @@
           "method": "GET",
           "name": "get-passport-year",
           "operation_id": "get_passport_year",
+          "pagination": null,
           "parameters": [],
           "path": "/metrics/passports/year",
           "response_content_types": [
@@ -23130,6 +23446,7 @@
           "method": "GET",
           "name": "list-passport-overview-readiness",
           "operation_id": "list_passport_overview_readiness",
+          "pagination": null,
           "parameters": [
             {
               "argument": "subject_level",
@@ -23239,6 +23556,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_parties",
+          "pagination": null,
           "parameters": [],
           "path": "/parties/bulk-delete",
           "response_content_types": [
@@ -23758,6 +24076,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_party",
+          "pagination": null,
           "parameters": [],
           "path": "/parties",
           "response_content_types": [
@@ -23772,6 +24091,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_party",
+          "pagination": null,
           "parameters": [
             {
               "argument": "party_id",
@@ -23798,6 +24118,7 @@
           "method": "GET",
           "name": "get-parties-delete-impact",
           "operation_id": "get_parties_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -23832,6 +24153,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_party",
+          "pagination": null,
           "parameters": [
             {
               "argument": "party_id",
@@ -23860,6 +24182,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_party_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "party_id",
@@ -23888,6 +24211,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_parties",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -24585,6 +24911,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_party",
+          "pagination": null,
           "parameters": [
             {
               "argument": "party_id",
@@ -24838,6 +25165,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_passport_access_grant",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-access-grants",
           "response_content_types": [
@@ -24852,6 +25180,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_passport_access_grant",
+          "pagination": null,
           "parameters": [
             {
               "argument": "grant_id",
@@ -24878,6 +25207,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_passport_access_grant",
+          "pagination": null,
           "parameters": [
             {
               "argument": "grant_id",
@@ -24906,6 +25236,9 @@
           "method": "GET",
           "name": "list-reads",
           "operation_id": "list_passport_access_grant_reads",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "grant_id",
@@ -24965,6 +25298,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_passport_access_grants",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -25025,6 +25361,7 @@
           "method": "POST",
           "name": "revoke",
           "operation_id": "revoke_passport_access_grant",
+          "pagination": null,
           "parameters": [
             {
               "argument": "grant_id",
@@ -25127,6 +25464,7 @@
           "method": "POST",
           "name": "bulk-transition",
           "operation_id": "bulk_transition_passport_publications",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-publications/bulk-transition",
           "response_content_types": [
@@ -25141,6 +25479,7 @@
           "method": "GET",
           "name": "evaluate-readiness",
           "operation_id": "evaluate_passport_publication_readiness",
+          "pagination": null,
           "parameters": [
             {
               "argument": "subject_level",
@@ -25227,6 +25566,7 @@
           "method": "GET",
           "name": "get-external-passport-predecessor-import-request",
           "operation_id": "get_external_passport_predecessor_import_request",
+          "pagination": null,
           "parameters": [
             {
               "argument": "request_id",
@@ -25255,6 +25595,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_passport_publication",
+          "pagination": null,
           "parameters": [
             {
               "argument": "publication_id",
@@ -25275,6 +25616,53 @@
             "application/json"
           ],
           "summary": "Get Passport Publication"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "Download the share QR code that opens the passport's public page.\n\nThe code carries the publication's `viewer_url`, drawn like the app's share\ndialog: error correction M, a four-module quiet zone, black on white, as a\nPNG about 1024 px wide or as SVG. It is a share code, not the regulated GS1\ndata carrier.\nAnswers 404 `PASSPORT_NOT_PUBLISHED` until the current version resolves\npublicly.",
+          "method": "GET",
+          "name": "get-qr-code",
+          "operation_id": "get_passport_publication_qr_code",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "publication_id",
+              "description": null,
+              "location": "path",
+              "name": "publication_id",
+              "option": "publication-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "format",
+              "description": null,
+              "location": "query",
+              "name": "format",
+              "option": "format",
+              "required": false,
+              "schema": {
+                "default": "png",
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "png",
+                  "svg"
+                ]
+              }
+            }
+          ],
+          "path": "/passport-publications/{publication_id}/qr-code",
+          "response_content_types": [
+            "image/png",
+            "image/svg+xml"
+          ],
+          "summary": "Get Passport Publication Qr Code"
         },
         {
           "body": {
@@ -25318,6 +25706,7 @@
           "method": "POST",
           "name": "import-external-passport-predecessor",
           "operation_id": "import_external_passport_predecessor",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-publications/predecessor-import-requests",
           "response_content_types": [
@@ -25332,6 +25721,9 @@
           "method": "GET",
           "name": "list-external-passport-predecessor-imports",
           "operation_id": "list_external_passport_predecessor_imports",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "import_ids",
@@ -25410,6 +25802,9 @@
           "method": "GET",
           "name": "list-versions",
           "operation_id": "list_passport_publication_versions",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "publication_id",
@@ -25469,6 +25864,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_passport_publications",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "product_id",
@@ -25993,6 +26391,7 @@
           "method": "POST",
           "name": "publish-passport",
           "operation_id": "publish_passport",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-publications/publish",
           "response_content_types": [
@@ -26146,6 +26545,7 @@
           "method": "POST",
           "name": "submit-passport-for-review",
           "operation_id": "submit_passport_for_review",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-publications/submit-for-review",
           "response_content_types": [
@@ -26299,6 +26699,7 @@
           "method": "POST",
           "name": "unpublish-passport",
           "operation_id": "unpublish_passport",
+          "pagination": null,
           "parameters": [],
           "path": "/passport-publications/unpublish",
           "response_content_types": [
@@ -26318,6 +26719,7 @@
           "method": "DELETE",
           "name": "delete-pos-category-reference",
           "operation_id": "delete_pos_category_reference",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -26357,6 +26759,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_pos_connection",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -26383,6 +26786,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_pos_connection",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -26411,6 +26815,7 @@
           "method": "GET",
           "name": "get-pos-sales-summary",
           "operation_id": "get_pos_sales_summary",
+          "pagination": null,
           "parameters": [
             {
               "argument": "date_from",
@@ -26533,6 +26938,7 @@
           "method": "GET",
           "name": "get-pos-sales-timeline",
           "operation_id": "get_pos_sales_timeline",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -26581,6 +26987,7 @@
           "method": "GET",
           "name": "list-pos-category-references",
           "operation_id": "list_pos_category_references",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -26609,6 +27016,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_pos_connections",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -26699,6 +27109,7 @@
           "method": "GET",
           "name": "list-pos-product-groups",
           "operation_id": "list_pos_product_groups",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -26727,6 +27138,9 @@
           "method": "GET",
           "name": "list-pos-sales",
           "operation_id": "list_pos_sales",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "location_ids",
@@ -26889,6 +27303,7 @@
           "method": "GET",
           "name": "poll-pos-authorization",
           "operation_id": "poll_pos_authorization",
+          "pagination": null,
           "parameters": [
             {
               "argument": "authorization_id",
@@ -26952,6 +27367,7 @@
           "method": "PUT",
           "name": "set-pos-category-reference",
           "operation_id": "set_pos_category_reference",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -27181,6 +27597,7 @@
           "method": "POST",
           "name": "start-pos-authorization",
           "operation_id": "start_pos_authorization",
+          "pagination": null,
           "parameters": [],
           "path": "/pos-connections/authorize",
           "response_content_types": [
@@ -27195,6 +27612,7 @@
           "method": "POST",
           "name": "sync",
           "operation_id": "sync_pos_connection",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -27362,6 +27780,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_pos_connection",
+          "pagination": null,
           "parameters": [
             {
               "argument": "connection_id",
@@ -27395,6 +27814,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_product_image",
+          "pagination": null,
           "parameters": [
             {
               "argument": "image_id",
@@ -27421,6 +27841,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_product_images",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27491,6 +27912,7 @@
           "method": "PUT",
           "name": "reorder",
           "operation_id": "reorder_product_images",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27561,6 +27983,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_product_image",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27594,6 +28017,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_product_source_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -27620,6 +28044,7 @@
           "method": "GET",
           "name": "download",
           "operation_id": "download_product_source_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -27648,6 +28073,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_product_source_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -27676,6 +28102,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_product_source_documents",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27846,6 +28273,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_product_source_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27879,6 +28307,7 @@
           "method": "POST",
           "name": "archive",
           "operation_id": "archive_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -27966,6 +28395,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_products",
+          "pagination": null,
           "parameters": [],
           "path": "/products/bulk-delete",
           "response_content_types": [
@@ -28022,6 +28452,7 @@
           "method": "POST",
           "name": "bulk-restore",
           "operation_id": "bulk_restore_products",
+          "pagination": null,
           "parameters": [],
           "path": "/products/bulk-restore",
           "response_content_types": [
@@ -28322,6 +28753,7 @@
           "method": "PATCH",
           "name": "bulk-update",
           "operation_id": "bulk_update_products",
+          "pagination": null,
           "parameters": [],
           "path": "/products/bulk",
           "response_content_types": [
@@ -28728,6 +29160,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_product",
+          "pagination": null,
           "parameters": [],
           "path": "/products",
           "response_content_types": [
@@ -29206,6 +29639,7 @@
           "method": "POST",
           "name": "create-with-source-documents",
           "operation_id": "create_product_with_source_documents",
+          "pagination": null,
           "parameters": [],
           "path": "/products/with-source-documents",
           "response_content_types": [
@@ -29220,6 +29654,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -29278,6 +29713,7 @@
           "method": "POST",
           "name": "dismiss-merge-candidate",
           "operation_id": "dismiss_product_merge_candidate",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -29304,6 +29740,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_products",
+          "pagination": null,
           "parameters": [
             {
               "argument": "search",
@@ -29769,6 +30206,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -29797,6 +30235,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_product_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -29825,6 +30264,7 @@
           "method": "GET",
           "name": "get-merge-preview",
           "operation_id": "get_product_merge_preview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -29866,6 +30306,7 @@
           "method": "GET",
           "name": "get-stats",
           "operation_id": "get_product_stats",
+          "pagination": null,
           "parameters": [],
           "path": "/products/stats",
           "response_content_types": [
@@ -29880,6 +30321,7 @@
           "method": "GET",
           "name": "get-timeline",
           "operation_id": "get_product_timeline",
+          "pagination": null,
           "parameters": [
             {
               "argument": "range_days",
@@ -29909,6 +30351,7 @@
           "method": "GET",
           "name": "get-products-delete-impact",
           "operation_id": "get_products_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -29943,6 +30386,7 @@
           "method": "GET",
           "name": "list-price-label-currencies",
           "operation_id": "list_price_label_currencies",
+          "pagination": null,
           "parameters": [],
           "path": "/price-labels/currencies",
           "response_content_types": [
@@ -29957,6 +30401,7 @@
           "method": "GET",
           "name": "list-price-label-sources",
           "operation_id": "list_price_label_sources",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_ids",
@@ -29991,6 +30436,9 @@
           "method": "GET",
           "name": "list-merge-candidate-groups",
           "operation_id": "list_product_merge_candidate_groups",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -30093,6 +30541,7 @@
           "method": "GET",
           "name": "list-merge-candidates",
           "operation_id": "list_product_merge_candidates",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -30121,6 +30570,9 @@
           "method": "GET",
           "name": "list-stock",
           "operation_id": "list_product_stock",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "product_id",
@@ -30251,6 +30703,7 @@
           "method": "GET",
           "name": "list-stock-units",
           "operation_id": "list_product_stock_units",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -30279,6 +30732,9 @@
           "method": "GET",
           "name": "list-storage-bin-stock",
           "operation_id": "list_product_storage_bin_stock",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "product_id",
@@ -30338,6 +30794,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_products",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -30877,6 +31336,7 @@
           "method": "POST",
           "name": "merge-candidate-groups",
           "operation_id": "merge_product_candidate_groups",
+          "pagination": null,
           "parameters": [],
           "path": "/product-merge-candidates/merge",
           "response_content_types": [
@@ -31133,6 +31593,7 @@
           "method": "POST",
           "name": "merge",
           "operation_id": "merge_products",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31161,6 +31622,7 @@
           "method": "POST",
           "name": "restore",
           "operation_id": "restore_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31248,6 +31710,7 @@
           "method": "PUT",
           "name": "set-stock",
           "operation_id": "set_product_stock",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31333,6 +31796,7 @@
           "method": "PATCH",
           "name": "set-stock-reorder-point",
           "operation_id": "set_product_stock_reorder_point",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31476,6 +31940,7 @@
           "method": "PUT",
           "name": "set-store-listing",
           "operation_id": "set_product_store_listing",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31636,6 +32101,7 @@
           "method": "PATCH",
           "name": "set-store-listings",
           "operation_id": "set_product_store_listings",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -31991,6 +32457,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_product",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -32024,6 +32491,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_record_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -32050,6 +32518,7 @@
           "method": "GET",
           "name": "download",
           "operation_id": "download_record_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -32078,6 +32547,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_record_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -32106,6 +32576,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_record_documents",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32250,6 +32721,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_record_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32325,6 +32797,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_records",
+          "pagination": null,
           "parameters": [],
           "path": "/records/bulk-delete",
           "response_content_types": [
@@ -32451,6 +32924,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_record",
+          "pagination": null,
           "parameters": [],
           "path": "/records",
           "response_content_types": [
@@ -32631,6 +33105,7 @@
           "method": "POST",
           "name": "create-with-documents",
           "operation_id": "create_record_with_documents",
+          "pagination": null,
           "parameters": [],
           "path": "/records/with-documents",
           "response_content_types": [
@@ -32645,6 +33120,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_record",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32671,6 +33147,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_record",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32699,6 +33176,7 @@
           "method": "GET",
           "name": "export-records",
           "operation_id": "export_records",
+          "pagination": null,
           "parameters": [
             {
               "argument": "product_id",
@@ -32760,6 +33238,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_record",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32788,6 +33267,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_record_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -32816,6 +33296,7 @@
           "method": "GET",
           "name": "get-quality",
           "operation_id": "get_record_quality",
+          "pagination": null,
           "parameters": [],
           "path": "/records/stats/quality",
           "response_content_types": [
@@ -32830,6 +33311,7 @@
           "method": "GET",
           "name": "get-stats",
           "operation_id": "get_record_stats",
+          "pagination": null,
           "parameters": [
             {
               "argument": "range_days",
@@ -32859,6 +33341,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_records",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "product_id",
@@ -33131,6 +33616,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_record",
+          "pagination": null,
           "parameters": [
             {
               "argument": "record_id",
@@ -33206,6 +33692,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_schemas",
+          "pagination": null,
           "parameters": [],
           "path": "/schemas/bulk-delete",
           "response_content_types": [
@@ -33323,6 +33810,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_schema",
+          "pagination": null,
           "parameters": [],
           "path": "/schemas",
           "response_content_types": [
@@ -33337,6 +33825,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_schema",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schema_id",
@@ -33363,6 +33852,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_schema",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schema_id",
@@ -33392,6 +33882,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_schema",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schema_id",
@@ -33420,6 +33911,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_schemas",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -33709,6 +34203,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_schema",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schema_id",
@@ -33742,6 +34237,7 @@
           "method": "POST",
           "name": "accept-shift-change-request",
           "operation_id": "accept_shift_change_request",
+          "pagination": null,
           "parameters": [
             {
               "argument": "request_id",
@@ -33770,6 +34266,7 @@
           "method": "POST",
           "name": "cancel-shift-change-request",
           "operation_id": "cancel_shift_change_request",
+          "pagination": null,
           "parameters": [
             {
               "argument": "request_id",
@@ -33798,6 +34295,7 @@
           "method": "POST",
           "name": "confirm-shift-assignment",
           "operation_id": "confirm_shift_assignment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "assignment_id",
@@ -33930,6 +34428,7 @@
           "method": "POST",
           "name": "create-shift-change-request",
           "operation_id": "create_shift_change_request",
+          "pagination": null,
           "parameters": [],
           "path": "/shift-change-requests",
           "response_content_types": [
@@ -33944,6 +34443,7 @@
           "method": "POST",
           "name": "decline-shift-assignment",
           "operation_id": "decline_shift_assignment",
+          "pagination": null,
           "parameters": [
             {
               "argument": "assignment_id",
@@ -33972,6 +34472,7 @@
           "method": "POST",
           "name": "decline-shift-change-request",
           "operation_id": "decline_shift_change_request",
+          "pagination": null,
           "parameters": [
             {
               "argument": "request_id",
@@ -34000,6 +34501,9 @@
           "method": "GET",
           "name": "list-shift-change-requests",
           "operation_id": "list_shift_change_requests",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -34169,6 +34673,7 @@
           "method": "POST",
           "name": "bulk-delete-schedules",
           "operation_id": "bulk_delete_schedules",
+          "pagination": null,
           "parameters": [],
           "path": "/schedules/bulk-delete",
           "response_content_types": [
@@ -34225,6 +34730,7 @@
           "method": "POST",
           "name": "bulk-delete-scheduling-groups",
           "operation_id": "bulk_delete_scheduling_groups",
+          "pagination": null,
           "parameters": [],
           "path": "/shift-groups/bulk-delete",
           "response_content_types": [
@@ -34281,6 +34787,7 @@
           "method": "POST",
           "name": "bulk-delete-templates",
           "operation_id": "bulk_delete_shift_templates",
+          "pagination": null,
           "parameters": [],
           "path": "/shift-templates/bulk-delete",
           "response_content_types": [
@@ -34295,6 +34802,7 @@
           "method": "POST",
           "name": "cancel",
           "operation_id": "cancel_shift",
+          "pagination": null,
           "parameters": [
             {
               "argument": "shift_id",
@@ -34409,6 +34917,7 @@
           "method": "POST",
           "name": "create-schedule",
           "operation_id": "create_schedule",
+          "pagination": null,
           "parameters": [],
           "path": "/schedules",
           "response_content_types": [
@@ -34572,6 +35081,7 @@
           "method": "POST",
           "name": "create-scheduling-group",
           "operation_id": "create_scheduling_group",
+          "pagination": null,
           "parameters": [],
           "path": "/shift-groups",
           "response_content_types": [
@@ -34815,6 +35325,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_shift",
+          "pagination": null,
           "parameters": [],
           "path": "/shifts",
           "response_content_types": [
@@ -35037,6 +35548,7 @@
           "method": "POST",
           "name": "create-template",
           "operation_id": "create_shift_template",
+          "pagination": null,
           "parameters": [],
           "path": "/shift-templates",
           "response_content_types": [
@@ -35051,6 +35563,7 @@
           "method": "DELETE",
           "name": "delete-schedule",
           "operation_id": "delete_schedule",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schedule_id",
@@ -35077,6 +35590,7 @@
           "method": "DELETE",
           "name": "delete-scheduling-group",
           "operation_id": "delete_scheduling_group",
+          "pagination": null,
           "parameters": [
             {
               "argument": "group_id",
@@ -35103,6 +35617,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_shift",
+          "pagination": null,
           "parameters": [
             {
               "argument": "shift_id",
@@ -35129,6 +35644,7 @@
           "method": "DELETE",
           "name": "delete-template",
           "operation_id": "delete_shift_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -35155,6 +35671,7 @@
           "method": "GET",
           "name": "get-schedule",
           "operation_id": "get_schedule",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schedule_id",
@@ -35183,6 +35700,7 @@
           "method": "GET",
           "name": "get-schedule-delete-impact",
           "operation_id": "get_schedule_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schedule_id",
@@ -35211,6 +35729,7 @@
           "method": "GET",
           "name": "get-scheduling-group",
           "operation_id": "get_scheduling_group",
+          "pagination": null,
           "parameters": [
             {
               "argument": "group_id",
@@ -35239,6 +35758,7 @@
           "method": "GET",
           "name": "get-scheduling-group-delete-impact",
           "operation_id": "get_scheduling_group_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "group_id",
@@ -35267,6 +35787,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_shift",
+          "pagination": null,
           "parameters": [
             {
               "argument": "shift_id",
@@ -35295,6 +35816,7 @@
           "method": "GET",
           "name": "get-overview",
           "operation_id": "get_shift_overview",
+          "pagination": null,
           "parameters": [],
           "path": "/shifts/stats",
           "response_content_types": [
@@ -35309,6 +35831,7 @@
           "method": "GET",
           "name": "get-template",
           "operation_id": "get_shift_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -35337,6 +35860,7 @@
           "method": "GET",
           "name": "get-template-delete-impact",
           "operation_id": "get_shift_template_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -35365,6 +35889,9 @@
           "method": "GET",
           "name": "list-schedules",
           "operation_id": "list_schedules",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -35476,6 +36003,9 @@
           "method": "GET",
           "name": "list-scheduling-groups",
           "operation_id": "list_scheduling_groups",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "schedule_id",
@@ -35599,6 +36129,9 @@
           "method": "GET",
           "name": "list-templates",
           "operation_id": "list_shift_templates",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "schedule_id",
@@ -35723,6 +36256,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_shifts",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -35962,6 +36498,7 @@
           "method": "POST",
           "name": "publish",
           "operation_id": "publish_shifts",
+          "pagination": null,
           "parameters": [],
           "path": "/shifts/publish",
           "response_content_types": [
@@ -35976,6 +36513,7 @@
           "method": "POST",
           "name": "unpublish",
           "operation_id": "unpublish_shift",
+          "pagination": null,
           "parameters": [
             {
               "argument": "shift_id",
@@ -36084,6 +36622,7 @@
           "method": "PATCH",
           "name": "update-schedule",
           "operation_id": "update_schedule",
+          "pagination": null,
           "parameters": [
             {
               "argument": "schedule_id",
@@ -36239,6 +36778,7 @@
           "method": "PATCH",
           "name": "update-scheduling-group",
           "operation_id": "update_scheduling_group",
+          "pagination": null,
           "parameters": [
             {
               "argument": "group_id",
@@ -36471,6 +37011,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_shift",
+          "pagination": null,
           "parameters": [
             {
               "argument": "shift_id",
@@ -36682,6 +37223,7 @@
           "method": "PATCH",
           "name": "update-template",
           "operation_id": "update_shift_template",
+          "pagination": null,
           "parameters": [
             {
               "argument": "template_id",
@@ -36715,6 +37257,7 @@
           "method": "POST",
           "name": "activate-version",
           "operation_id": "activate_skill_version",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -36798,6 +37341,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_skills",
+          "pagination": null,
           "parameters": [],
           "path": "/skills/bulk-delete",
           "response_content_types": [
@@ -36967,6 +37511,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_skill",
+          "pagination": null,
           "parameters": [],
           "path": "/skills",
           "response_content_types": [
@@ -36981,6 +37526,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_skill",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37037,6 +37583,7 @@
           "method": "POST",
           "name": "duplicate",
           "operation_id": "duplicate_skill",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37065,6 +37612,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_skill",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37093,6 +37641,7 @@
           "method": "GET",
           "name": "get-version",
           "operation_id": "get_skill_version",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37134,6 +37683,9 @@
           "method": "GET",
           "name": "list-versions",
           "operation_id": "list_skill_versions",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "skill_id",
@@ -37193,6 +37745,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_skills",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -37353,6 +37908,7 @@
           "method": "POST",
           "name": "publish",
           "operation_id": "publish_skill",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37566,6 +38122,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_skill",
+          "pagination": null,
           "parameters": [
             {
               "argument": "skill_id",
@@ -37855,6 +38412,7 @@
           "method": "POST",
           "name": "create-stock-movement",
           "operation_id": "create_stock_movement",
+          "pagination": null,
           "parameters": [],
           "path": "/stock-movements",
           "response_content_types": [
@@ -38111,6 +38669,7 @@
           "method": "POST",
           "name": "create-stock-movements",
           "operation_id": "create_stock_movements",
+          "pagination": null,
           "parameters": [],
           "path": "/stock-movements/bulk-create",
           "response_content_types": [
@@ -38125,6 +38684,7 @@
           "method": "GET",
           "name": "export",
           "operation_id": "export_stock_movements",
+          "pagination": null,
           "parameters": [
             {
               "argument": "search",
@@ -38296,6 +38856,7 @@
           "method": "GET",
           "name": "get-stock-overview",
           "operation_id": "get_stock_overview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -38326,6 +38887,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_stock_movements",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -38547,6 +39111,7 @@
           "method": "POST",
           "name": "resolve-pos-leg",
           "operation_id": "resolve_stock_movement_pos_leg",
+          "pagination": null,
           "parameters": [
             {
               "argument": "movement_id",
@@ -38596,6 +39161,7 @@
           "method": "POST",
           "name": "archive",
           "operation_id": "archive_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -38667,6 +39233,7 @@
           "method": "POST",
           "name": "bulk-archive",
           "operation_id": "bulk_archive_storage_bins",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins/bulk-archive",
           "response_content_types": [
@@ -38741,6 +39308,7 @@
           "method": "POST",
           "name": "bulk-block",
           "operation_id": "bulk_block_storage_bins",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins/bulk-block",
           "response_content_types": [
@@ -38797,6 +39365,7 @@
           "method": "POST",
           "name": "bulk-clear-stock",
           "operation_id": "bulk_clear_storage_bin_stock",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -38884,6 +39453,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_storage_bins",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins/bulk-delete",
           "response_content_types": [
@@ -38941,6 +39511,7 @@
           "method": "POST",
           "name": "bulk-restore",
           "operation_id": "bulk_restore_storage_bins",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins/bulk-restore",
           "response_content_types": [
@@ -38955,6 +39526,7 @@
           "method": "DELETE",
           "name": "clear-stock",
           "operation_id": "clear_storage_bin_stock",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -39221,6 +39793,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_storage_bin",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins",
           "response_content_types": [
@@ -39235,6 +39808,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -39453,6 +40027,7 @@
           "method": "POST",
           "name": "generate",
           "operation_id": "generate_storage_bins",
+          "pagination": null,
           "parameters": [],
           "path": "/storage-bins/generate",
           "response_content_types": [
@@ -39467,6 +40042,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -39495,6 +40071,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_storage_bin_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -39523,6 +40100,7 @@
           "method": "GET",
           "name": "get-storage-bins-delete-impact",
           "operation_id": "get_storage_bins_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -39557,6 +40135,7 @@
           "method": "GET",
           "name": "get-storage-layout",
           "operation_id": "get_storage_layout",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -39758,6 +40337,7 @@
           "method": "POST",
           "name": "get-storage-layout-proposal",
           "operation_id": "get_storage_layout_proposal",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -39786,6 +40366,9 @@
           "method": "GET",
           "name": "list-stock",
           "operation_id": "list_storage_bin_stock",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -39911,6 +40494,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_storage_bins",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -40167,6 +40753,7 @@
           "method": "POST",
           "name": "restore",
           "operation_id": "restore_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -40254,6 +40841,7 @@
           "method": "PUT",
           "name": "set-stock",
           "operation_id": "set_storage_bin_stock",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -40423,6 +41011,7 @@
           "method": "PUT",
           "name": "set-storage-layout",
           "operation_id": "set_storage_layout",
+          "pagination": null,
           "parameters": [
             {
               "argument": "location_id",
@@ -40587,6 +41176,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_storage_bin",
+          "pagination": null,
           "parameters": [
             {
               "argument": "storage_bin_id",
@@ -40620,6 +41210,7 @@
           "method": "PATCH",
           "name": "archive",
           "operation_id": "archive_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -40690,6 +41281,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_threads",
+          "pagination": null,
           "parameters": [],
           "path": "/threads/bulk-delete",
           "response_content_types": [
@@ -40704,6 +41296,7 @@
           "method": "POST",
           "name": "cancel-execution",
           "operation_id": "cancel_thread_execution",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -40732,6 +41325,7 @@
           "method": "POST",
           "name": "compact",
           "operation_id": "compact_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -40874,6 +41468,7 @@
           "method": "POST",
           "name": "create-message",
           "operation_id": "create_message",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -40932,6 +41527,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_thread",
+          "pagination": null,
           "parameters": [],
           "path": "/threads",
           "response_content_types": [
@@ -40946,6 +41542,7 @@
           "method": "DELETE",
           "name": "delete-html-artifact",
           "operation_id": "delete_html_artifact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "interaction_id",
@@ -40985,6 +41582,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41011,6 +41609,7 @@
           "method": "GET",
           "name": "download-files",
           "operation_id": "download_thread_files",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41058,6 +41657,7 @@
           "method": "GET",
           "name": "get-shared",
           "operation_id": "get_shared_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "share_id",
@@ -41086,6 +41686,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41114,6 +41715,7 @@
           "method": "GET",
           "name": "get-interactions",
           "operation_id": "get_thread_interactions",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41142,6 +41744,7 @@
           "method": "GET",
           "name": "get-share",
           "operation_id": "get_thread_share",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41170,6 +41773,7 @@
           "method": "GET",
           "name": "get-usage",
           "operation_id": "get_thread_usage",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41198,6 +41802,9 @@
           "method": "GET",
           "name": "list-activity",
           "operation_id": "list_thread_activity",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -41274,6 +41881,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_threads",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -41397,6 +42007,7 @@
           "method": "PATCH",
           "name": "pin",
           "operation_id": "pin_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41456,6 +42067,7 @@
           "method": "POST",
           "name": "rewind",
           "operation_id": "rewind_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41484,6 +42096,7 @@
           "method": "POST",
           "name": "select-interaction-version",
           "operation_id": "select_thread_interaction_version",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41525,6 +42138,7 @@
           "method": "PUT",
           "name": "share",
           "operation_id": "share_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41553,6 +42167,7 @@
           "method": "DELETE",
           "name": "stop-sharing",
           "operation_id": "stop_sharing_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41579,6 +42194,7 @@
           "method": "PATCH",
           "name": "unarchive",
           "operation_id": "unarchive_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41607,6 +42223,7 @@
           "method": "PATCH",
           "name": "unpin",
           "operation_id": "unpin_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41671,6 +42288,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_thread",
+          "pagination": null,
           "parameters": [
             {
               "argument": "thread_id",
@@ -41704,6 +42322,7 @@
           "method": "GET",
           "name": "get-metadata",
           "operation_id": "get_tools_metadata",
+          "pagination": null,
           "parameters": [],
           "path": "/tools/metadata",
           "response_content_types": [
@@ -42214,6 +42833,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_traceability_event",
+          "pagination": null,
           "parameters": [],
           "path": "/traceability-events",
           "response_content_types": [
@@ -42228,6 +42848,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_traceability_event",
+          "pagination": null,
           "parameters": [
             {
               "argument": "event_id",
@@ -42256,6 +42877,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_traceability_events",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -42645,6 +43269,7 @@
           "method": "GET",
           "name": "list-by-item",
           "operation_id": "list_traceability_events_by_item",
+          "pagination": null,
           "parameters": [
             {
               "argument": "item_id",
@@ -42678,6 +43303,7 @@
           "method": "POST",
           "name": "archive-unit-of-measure",
           "operation_id": "archive_unit_of_measure",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -42765,6 +43391,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_units_of_measure",
+          "pagination": null,
           "parameters": [],
           "path": "/units-of-measure/bulk-delete",
           "response_content_types": [
@@ -42821,6 +43448,7 @@
           "method": "POST",
           "name": "bulk-restore",
           "operation_id": "bulk_restore_units_of_measure",
+          "pagination": null,
           "parameters": [],
           "path": "/units-of-measure/bulk-restore",
           "response_content_types": [
@@ -42954,6 +43582,7 @@
           "method": "POST",
           "name": "create-unit-of-measure",
           "operation_id": "create_unit_of_measure",
+          "pagination": null,
           "parameters": [],
           "path": "/units-of-measure",
           "response_content_types": [
@@ -42968,6 +43597,7 @@
           "method": "DELETE",
           "name": "delete-unit-of-measure",
           "operation_id": "delete_unit_of_measure",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -42994,6 +43624,7 @@
           "method": "GET",
           "name": "get-unit-of-measure",
           "operation_id": "get_unit_of_measure",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -43022,6 +43653,7 @@
           "method": "GET",
           "name": "get-unit-of-measure-delete-impact",
           "operation_id": "get_unit_of_measure_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -43050,6 +43682,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_units_of_measure_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "ids",
@@ -43084,6 +43717,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_units_of_measure",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -43211,6 +43847,7 @@
           "method": "POST",
           "name": "restore-unit-of-measure",
           "operation_id": "restore_unit_of_measure",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -43375,6 +44012,7 @@
           "method": "PATCH",
           "name": "update-unit-of-measure",
           "operation_id": "update_unit_of_measure",
+          "pagination": null,
           "parameters": [
             {
               "argument": "unit_of_measure_id",
@@ -43408,6 +44046,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_upload_policies",
+          "pagination": null,
           "parameters": [],
           "path": "/upload-policies",
           "response_content_types": [
@@ -43483,6 +44122,7 @@
           "method": "POST",
           "name": "create-file-key",
           "operation_id": "create_vault_file_key",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -43567,6 +44207,7 @@
           "method": "POST",
           "name": "create-folder-key",
           "operation_id": "create_vault_folder_key",
+          "pagination": null,
           "parameters": [
             {
               "argument": "folder_id",
@@ -43749,6 +44390,7 @@
           "method": "POST",
           "name": "create-key",
           "operation_id": "create_vault_key",
+          "pagination": null,
           "parameters": [],
           "path": "/vault/key",
           "response_content_types": [
@@ -43763,6 +44405,7 @@
           "method": "POST",
           "name": "create-reseal-challenge",
           "operation_id": "create_vault_reseal_challenge",
+          "pagination": null,
           "parameters": [],
           "path": "/vault/key/challenge",
           "response_content_types": [
@@ -43777,6 +44420,7 @@
           "method": "GET",
           "name": "get-file-key",
           "operation_id": "get_vault_file_key",
+          "pagination": null,
           "parameters": [
             {
               "argument": "file_id",
@@ -43805,6 +44449,7 @@
           "method": "GET",
           "name": "get-folder-key",
           "operation_id": "get_vault_folder_key",
+          "pagination": null,
           "parameters": [
             {
               "argument": "folder_id",
@@ -43833,6 +44478,7 @@
           "method": "GET",
           "name": "get-key",
           "operation_id": "get_vault_key",
+          "pagination": null,
           "parameters": [],
           "path": "/vault/key",
           "response_content_types": [
@@ -44023,6 +44669,7 @@
           "method": "PUT",
           "name": "reseal-key",
           "operation_id": "reseal_vault_key",
+          "pagination": null,
           "parameters": [],
           "path": "/vault/key",
           "response_content_types": [
@@ -44042,6 +44689,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_work_order_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -44068,6 +44716,7 @@
           "method": "GET",
           "name": "download",
           "operation_id": "download_work_order_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -44096,6 +44745,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_work_order_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "document_id",
@@ -44124,6 +44774,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_work_order_documents",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -44304,6 +44955,7 @@
           "method": "POST",
           "name": "upload",
           "operation_id": "upload_work_order_document",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -44379,6 +45031,7 @@
           "method": "POST",
           "name": "bulk-delete",
           "operation_id": "bulk_delete_work_orders",
+          "pagination": null,
           "parameters": [],
           "path": "/work-orders/bulk-delete",
           "response_content_types": [
@@ -44393,6 +45046,7 @@
           "method": "POST",
           "name": "cancel",
           "operation_id": "cancel_work_order",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -44931,6 +45585,7 @@
           "method": "POST",
           "name": "create",
           "operation_id": "create_work_order",
+          "pagination": null,
           "parameters": [],
           "path": "/work-orders",
           "response_content_types": [
@@ -45054,6 +45709,7 @@
           "method": "POST",
           "name": "create-with-documents",
           "operation_id": "create_work_order_with_documents",
+          "pagination": null,
           "parameters": [],
           "path": "/work-orders/with-documents",
           "response_content_types": [
@@ -45068,6 +45724,7 @@
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_work_order",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45094,6 +45751,7 @@
           "method": "GET",
           "name": "export-delivery-note",
           "operation_id": "export_work_order_delivery_note",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45123,6 +45781,7 @@
           "method": "GET",
           "name": "export-picking-list",
           "operation_id": "export_work_order_picking_list",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45152,6 +45811,7 @@
           "method": "GET",
           "name": "get",
           "operation_id": "get_work_order",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45180,6 +45840,7 @@
           "method": "GET",
           "name": "get-delete-impact",
           "operation_id": "get_work_order_delete_impact",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45208,6 +45869,7 @@
           "method": "GET",
           "name": "get-goods-issue-proposal",
           "operation_id": "get_work_order_goods_issue_proposal",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45236,6 +45898,7 @@
           "method": "GET",
           "name": "get-goods-receipt-proposal",
           "operation_id": "get_work_order_goods_receipt_proposal",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45264,6 +45927,7 @@
           "method": "GET",
           "name": "get-overview",
           "operation_id": "get_work_order_overview",
+          "pagination": null,
           "parameters": [
             {
               "argument": "days",
@@ -45294,6 +45958,9 @@
           "method": "GET",
           "name": "list-overdue",
           "operation_id": "list_overdue_work_orders",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -45340,6 +46007,9 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_work_orders",
+          "pagination": {
+            "items": "items"
+          },
           "parameters": [
             {
               "argument": "limit",
@@ -45792,6 +46462,7 @@
           "method": "POST",
           "name": "post-goods-issue",
           "operation_id": "post_work_order_goods_issue",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -45935,6 +46606,7 @@
           "method": "POST",
           "name": "post-goods-receipt",
           "operation_id": "post_work_order_goods_receipt",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -46473,6 +47145,7 @@
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_work_order",
+          "pagination": null,
           "parameters": [
             {
               "argument": "work_order_id",
@@ -46534,6 +47207,7 @@
           "method": "POST",
           "name": "cancel-deletion-request",
           "operation_id": "cancel_workspace_deletion_request",
+          "pagination": null,
           "parameters": [
             {
               "argument": "deletion_request_id",
@@ -46590,6 +47264,7 @@
           "method": "POST",
           "name": "create-deletion-request",
           "operation_id": "create_workspace_deletion_request",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/deletion-request",
           "response_content_types": [
@@ -46604,6 +47279,7 @@
           "method": "POST",
           "name": "create-export",
           "operation_id": "create_workspace_export",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/exports",
           "response_content_types": [
@@ -46618,6 +47294,7 @@
           "method": "GET",
           "name": "download-export",
           "operation_id": "download_workspace_export",
+          "pagination": null,
           "parameters": [
             {
               "argument": "export_id",
@@ -46646,6 +47323,7 @@
           "method": "GET",
           "name": "get-default",
           "operation_id": "get_default_workspace",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/default",
           "response_content_types": [
@@ -46660,6 +47338,7 @@
           "method": "GET",
           "name": "get-deletion-request",
           "operation_id": "get_workspace_deletion_request",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/deletion-request",
           "response_content_types": [
@@ -46674,6 +47353,7 @@
           "method": "GET",
           "name": "get-export-register",
           "operation_id": "get_workspace_export_register",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/exports/register",
           "response_content_types": [
@@ -46688,6 +47368,7 @@
           "method": "GET",
           "name": "get-settings",
           "operation_id": "get_workspace_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/settings",
           "response_content_types": [
@@ -46702,6 +47383,7 @@
           "method": "GET",
           "name": "get-storage-usage",
           "operation_id": "get_workspace_storage_usage",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/storage-usage",
           "response_content_types": [
@@ -46716,6 +47398,7 @@
           "method": "GET",
           "name": "list-exports",
           "operation_id": "list_workspace_exports",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/exports",
           "response_content_types": [
@@ -46730,6 +47413,7 @@
           "method": "GET",
           "name": "list",
           "operation_id": "list_workspaces",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace",
           "response_content_types": [
@@ -46778,6 +47462,7 @@
           "method": "PATCH",
           "name": "rename",
           "operation_id": "rename_workspace",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/default",
           "response_content_types": [
@@ -46792,6 +47477,7 @@
           "method": "PATCH",
           "name": "set-default",
           "operation_id": "set_default_workspace",
+          "pagination": null,
           "parameters": [
             {
               "argument": "workspace_id",
@@ -46855,6 +47541,7 @@
           "method": "PATCH",
           "name": "update-settings",
           "operation_id": "update_workspace_settings",
+          "pagination": null,
           "parameters": [],
           "path": "/workspace/settings",
           "response_content_types": [
@@ -46865,8 +47552,8 @@
       ]
     }
   ],
-  "openapi_sha256": "7e9ff6bda8697e546d23f6fbd8b29006545e4e057590b4b0b1ee04e123a36712",
-  "operation_count": 522,
+  "openapi_sha256": "67e16b4441e4d6a5a14c5ed0acaca278c8e5643b7472e53cfcef478694d59b50",
+  "operation_count": 523,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
