@@ -166,6 +166,39 @@ def test_client_maps_transport_and_generic_http_errors() -> None:
         client.request("GET", "/anything")
 
 
+def test_client_reports_the_server_error_code_as_its_own_field() -> None:
+    transport = httpx.MockTransport(
+        lambda _request: httpx.Response(404, json={"detail": "MAIL_ACCOUNT_NOT_FOUND"})
+    )
+    with (
+        ApiClient(CONFIG, "token", transport=transport) as client,
+        pytest.raises(ApiError) as raised,
+    ):
+        client.request("POST", "/mail/send")
+    assert raised.value.as_payload() == {
+        "error": "api_error",
+        "message": "API request failed (404: MAIL_ACCOUNT_NOT_FOUND)",
+        "exit_code": 5,
+        "status_code": 404,
+        "code": "MAIL_ACCOUNT_NOT_FOUND",
+        "detail": "MAIL_ACCOUNT_NOT_FOUND",
+    }
+
+
+def test_client_keeps_a_long_error_detail_whole() -> None:
+    message = "synthetic " * 60
+    transport = httpx.MockTransport(
+        lambda _request: httpx.Response(500, json={"detail": message})
+    )
+    with (
+        ApiClient(CONFIG, "token", transport=transport) as client,
+        pytest.raises(ApiError) as raised,
+    ):
+        client.request("GET", "/anything")
+    assert raised.value.detail == message
+    assert raised.value.code is None
+
+
 def test_client_redacts_validation_inputs_and_sensitive_error_echoes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -197,8 +230,16 @@ def test_client_redacts_validation_inputs_and_sensitive_error_echoes(
         )
     assert secret not in str(raised.value)
     assert secret not in str(raised.value.as_payload())
-    assert raised.value.detail is not None
-    assert raised.value.detail.count("<redacted>") == 2
+    # The detail stays JSON a script can index, not a Python repr.
+    assert raised.value.detail == [
+        {
+            "type": "string_too_short",
+            "loc": ["body", "token"],
+            "msg": "invalid value <redacted>",
+            "input": "<redacted>",
+        }
+    ]
+    assert raised.value.code is None
 
     monkeypatch.setattr(client_module, "MAX_ERROR_RESPONSE_BYTES", 4)
     transport = httpx.MockTransport(

@@ -199,7 +199,7 @@ def test_entrypoint_errors_have_stable_exit_and_machine_output(
         assert product is NULARA
         assert surface is Surface.CUSTOMER
 
-        def fail():
+        def fail(**_options):
             raise ConfigurationError("synthetic invalid configuration")
 
         return fail

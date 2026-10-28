@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Annotated, Any
 from uuid import uuid4
 
-from cyclopts import App, Group, Parameter
+from cyclopts import App, CycloptsError, Group, Parameter
 from rich.console import Console
 from rich.markup import escape
 from rich.prompt import Confirm
@@ -30,9 +30,14 @@ from nulara.core.config import (
     set_active_workspace,
     store_token,
 )
-from nulara.core.direct import HTTP_METHODS, register_module_commands, run_raw_api
+from nulara.core.direct import (
+    HTTP_METHODS,
+    JSON_HELP,
+    register_module_commands,
+    run_raw_api,
+)
 from nulara.core.engine import parse_catalog, select_read_operation
-from nulara.core.errors import CliError
+from nulara.core.errors import CliError, UsageError
 from nulara.core.oauth import (
     DEFAULT_LOGIN_TIMEOUT,
     browser_is_available,
@@ -51,7 +56,7 @@ from nulara.core.tokens import get_token
 
 console = Console()
 error_console = Console(stderr=True)
-JsonOption = Annotated[bool, Parameter(name="--json")]
+JsonOption = Annotated[bool, Parameter(name="--json", help=JSON_HELP)]
 YesOption = Annotated[
     bool,
     Parameter(
@@ -741,13 +746,22 @@ def run(build: Callable[[], App]) -> None:
     Building is inside the guard because it already reads the product's
     command manifest, which can fail.
     """
+    json_output = "--json" in sys.argv[1:]
     try:
-        build()()
+        try:
+            # A parse error gets its own exit code and, under --json, the same
+            # one-object stderr shape as any other failure, not a Rich panel.
+            build()(exit_on_error=False, print_error=not json_output)
+        except CycloptsError as exc:
+            raise UsageError(str(exc).strip() or type(exc).__name__) from exc
     except CliError as exc:
-        if "--json" in sys.argv[1:]:
+        if json_output:
             sys.stderr.write(
-                json.dumps(exc.as_payload(), ensure_ascii=False, sort_keys=True) + "\n"
+                json.dumps(
+                    exc.as_payload(), ensure_ascii=False, sort_keys=True, default=str
+                )
+                + "\n"
             )
-        else:
+        elif not isinstance(exc, UsageError):
             error_console.print(f"[red]{escape(str(exc))}[/red]")
         raise SystemExit(exc.exit_code) from exc

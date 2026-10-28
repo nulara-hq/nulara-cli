@@ -16,7 +16,7 @@ from cyclopts import App, Group, Parameter
 from rich.console import Console
 from rich.prompt import Confirm
 
-from nulara.core.client import ApiClient, ApiResult
+from nulara.core.client import ApiClient, ApiDownloadResult, ApiResult
 from nulara.core.config import Product, Surface
 from nulara.core.errors import CliError, ConfigurationError
 from nulara.core.openapi import MANIFEST_VERSION
@@ -27,6 +27,10 @@ console = Console()
 MODULE_GROUP = Group("Product modules", sort_key=20)
 HTTP_METHODS = Literal["DELETE", "GET", "HEAD", "PATCH", "POST", "PUT"]
 MAX_JSON_INPUT_BYTES = 10 * 1024 * 1024
+JSON_HELP = (
+    "Print the result as JSON on stdout; a failure is one JSON object on stderr "
+    "with error, code, detail and exit_code."
+)
 
 
 def register_module_commands(
@@ -186,7 +190,7 @@ def run_raw_api(
                 overwrite=overwrite,
                 **request_arguments,
             )
-            _render_download(download.bytes_written, download.output)
+            _render_download(download, json_output=json_output)
             return
         result = client.request_result(normalized_method, path, **request_arguments)
     render_api_result(result, json_output=json_output, output=None, overwrite=False)
@@ -252,7 +256,9 @@ def render_api_result(
             f"--output {suggestion}"
         )
     payload = result.payload()
-    if payload is None:
+    if payload is None and json_output:
+        render_json({"status": "completed", "status_code": result.status_code})
+    elif payload is None:
         console.print(f"[green]Completed[/green] (HTTP {result.status_code})")
     elif json_output:
         render_json(payload)
@@ -260,8 +266,22 @@ def render_api_result(
         render_rows(payload)
 
 
-def _render_download(bytes_written: int, output: Path) -> None:
-    console.print(f"[green]Saved[/green] {bytes_written} bytes to {output}")
+def _render_download(download: ApiDownloadResult, *, json_output: bool) -> None:
+    if json_output:
+        render_json(
+            {
+                "status": "saved",
+                "status_code": download.status_code,
+                "output": str(download.output.resolve()),
+                "bytes_written": download.bytes_written,
+                "content_type": download.content_type,
+                "filename": download.filename,
+            }
+        )
+        return
+    console.print(
+        f"[green]Saved[/green] {download.bytes_written} bytes to {download.output}"
+    )
 
 
 def _build_command(
@@ -421,7 +441,10 @@ def _command_signature(
             inspect.Parameter(
                 "json_output",
                 inspect.Parameter.KEYWORD_ONLY,
-                annotation=Annotated[bool, Parameter(name="--json", negative=())],
+                annotation=Annotated[
+                    bool,
+                    Parameter(name="--json", negative=(), help=JSON_HELP),
+                ],
                 default=False,
             ),
             inspect.Parameter(
@@ -568,7 +591,7 @@ def _run_operation(
                     overwrite=values["overwrite"],
                     **request_arguments,
                 )
-                _render_download(download.bytes_written, download.output)
+                _render_download(download, json_output=values["json_output"])
                 return
             result = client.request_result(
                 operation["method"], path, **request_arguments

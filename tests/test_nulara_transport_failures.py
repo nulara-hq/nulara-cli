@@ -186,7 +186,7 @@ def test_error_body_without_detail_is_still_reported(config, content):
         pytest.raises(ApiError) as raised,
     ):
         api.request("GET", "/locations")
-    assert raised.value.detail
+    assert str(raised.value) != "API request failed (502: )"
 
 
 @pytest.mark.parametrize("content_type", ["application/json", ""])

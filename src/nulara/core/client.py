@@ -1,5 +1,6 @@
 import json as json_module
 import os
+import re
 import tempfile
 from collections.abc import Iterable, Iterator, Mapping
 from contextlib import suppress
@@ -22,6 +23,8 @@ from nulara.core.thread import parse_sse
 
 MAX_BUFFERED_RESPONSE_BYTES = 10 * 1024 * 1024
 MAX_ERROR_RESPONSE_BYTES = 64 * 1024
+# The server answers a refusal with `{"detail": "MAIL_ACCOUNT_NOT_FOUND"}`.
+ERROR_CODE = re.compile(r"[A-Z][A-Z0-9_]*")
 
 
 @dataclass(frozen=True)
@@ -315,23 +318,43 @@ class ApiClient:
 
 
 def _response_detail(
-    response: httpx.Response,
     content: bytes,
     *,
     truncated: bool,
     redact_values: Iterable[str],
-) -> str:
+) -> tuple[str | None, Any]:
+    """The server's error code and its redacted `detail`, kept as JSON.
+
+    A body that is not JSON, or was cut at the error-size limit, stays text.
+    """
     try:
         payload = json_module.loads(content)
     except (UnicodeDecodeError, ValueError):
-        rendered = content.decode("utf-8", errors="replace")
-    else:
-        detail = payload.get("detail") if isinstance(payload, dict) else payload
-        rendered = str(_redact_error_inputs(detail))
-    rendered = _redact_text(rendered, redact_values)[:200]
-    if truncated:
-        rendered = f"{rendered}…"
-    return rendered or response.reason_phrase
+        rendered = _redact_text(
+            content.decode("utf-8", errors="replace"), redact_values
+        )
+        return None, f"{rendered}…" if truncated else rendered or None
+    detail = payload.get("detail") if isinstance(payload, dict) else payload
+    detail = _redact_strings(_redact_error_inputs(detail), redact_values)
+    code = detail if isinstance(detail, str) and ERROR_CODE.fullmatch(detail) else None
+    return code, detail
+
+
+def _redact_strings(value: Any, redact_values: Iterable[str]) -> Any:
+    candidates = list(redact_values)
+    if isinstance(value, str):
+        return _redact_text(value, candidates)
+    if isinstance(value, list):
+        return [_redact_strings(item, candidates) for item in value]
+    if isinstance(value, dict):
+        return {key: _redact_strings(item, candidates) for key, item in value.items()}
+    return value
+
+
+def _summary(detail: Any) -> str | None:
+    if detail is None or isinstance(detail, str):
+        return detail or None
+    return json_module.dumps(detail, ensure_ascii=False, default=str)
 
 
 def _redact_error_inputs(value: Any) -> Any:
@@ -375,30 +398,27 @@ def _raise_for_response(
     response: httpx.Response, *, redact_values: Iterable[str] = ()
 ) -> None:
     content, truncated = _read_error_content(response)
-    detail = _response_detail(
-        response,
+    code, detail = _response_detail(
         content,
         truncated=truncated,
         redact_values=redact_values,
     )
+    summary = f"{response.status_code}: {_summary(detail) or response.reason_phrase}"
+    error_fields: dict[str, Any] = {
+        "status_code": response.status_code,
+        "code": code,
+        "detail": detail,
+    }
     if response.status_code == 401:
         raise AuthenticationError(
-            f"API rejected authentication ({response.status_code}: {detail})",
-            status_code=response.status_code,
-            detail=detail,
+            f"API rejected authentication ({summary})", **error_fields
         )
     if response.status_code == 403:
         raise AuthorizationError(
-            f"API denied this operation ({response.status_code}: {detail})",
-            status_code=response.status_code,
-            detail=detail,
+            f"API denied this operation ({summary})", **error_fields
         )
     if response.is_error:
-        raise ApiError(
-            f"API request failed ({response.status_code}: {detail})",
-            status_code=response.status_code,
-            detail=detail,
-        )
+        raise ApiError(f"API request failed ({summary})", **error_fields)
 
 
 def _content_type(response: httpx.Response) -> str:

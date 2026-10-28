@@ -1,4 +1,14 @@
+from typing import Any
+
+
 class CliError(Exception):
+    """A failure the CLI reports instead of a traceback.
+
+    `code` is the server's error code (`MAIL_ACCOUNT_NOT_FOUND`), `detail` the
+    server's redacted `detail` as JSON, so a script branches on either without
+    parsing the message.
+    """
+
     error_type = "runtime_error"
     exit_code = 1
 
@@ -7,10 +17,12 @@ class CliError(Exception):
         message: str,
         *,
         status_code: int | None = None,
-        detail: str | None = None,
+        code: str | None = None,
+        detail: Any = None,
     ) -> None:
         super().__init__(message)
         self.status_code = status_code
+        self.code = code
         self.detail = detail
 
     def as_payload(self) -> dict[str, object]:
@@ -21,6 +33,8 @@ class CliError(Exception):
         }
         if self.status_code is not None:
             payload["status_code"] = self.status_code
+        if self.code is not None:
+            payload["code"] = self.code
         if self.detail is not None:
             payload["detail"] = self.detail
         return payload
@@ -59,3 +73,10 @@ class ThreadProtocolError(CliError):
 class ThreadExpectationError(CliError):
     error_type = "thread_expectation_error"
     exit_code = 8
+
+
+class UsageError(CliError):
+    """The command line itself did not parse: unknown option, missing argument."""
+
+    error_type = "usage_error"
+    exit_code = 9

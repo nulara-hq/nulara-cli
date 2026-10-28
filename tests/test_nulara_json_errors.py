@@ -73,3 +73,25 @@ def test_json_configuration_error_preserves_long_unicode_path(tmp_path: Path) ->
     assert str(missing) in payload["message"]
     assert result.stdout == ""
     assert len(result.stderr.splitlines()) == 1
+
+
+@pytest.mark.parametrize("json_output", [True, False])
+def test_a_parse_error_has_its_own_exit_code(tmp_path: Path, json_output: bool) -> None:
+    result = invoke(
+        tmp_path,
+        80,
+        "locations",
+        "list",
+        "--no-such-option",
+        *(["--json"] if json_output else []),
+    )
+    assert result.returncode == 9
+    assert result.stdout == ""
+    if json_output:
+        payload = json.loads(result.stderr)
+        assert payload["error"] == "usage_error"
+        assert payload["exit_code"] == 9
+        assert "--no-such-option" in payload["message"]
+        assert len(result.stderr.splitlines()) == 1
+    else:
+        assert "--no-such-option" in result.stderr

@@ -12,7 +12,7 @@ from support import NULARA
 
 from nulara.core import direct as direct_module
 from nulara.core import main as main_module
-from nulara.core.client import ApiResult
+from nulara.core.client import ApiDownloadResult, ApiResult
 from nulara.core.config import Product, ProductConfig, Surface
 from nulara.core.direct import (
     _check_bound,
@@ -76,11 +76,15 @@ class FakeApiClient:
         path: str,
         output: Path,
         **kwargs: Any,
-    ) -> SimpleNamespace:
+    ) -> ApiDownloadResult:
         type(self).calls.append((method, path, kwargs))
         output.write_bytes(type(self).result.content)
-        return SimpleNamespace(
-            bytes_written=len(type(self).result.content), output=output
+        return ApiDownloadResult(
+            status_code=200,
+            content_type=type(self).result.content_type,
+            headers=type(self).result.headers,
+            bytes_written=len(type(self).result.content),
+            output=output,
         )
 
 
@@ -604,6 +608,19 @@ def test_raw_and_typed_api_stream_outputs_to_files(
     assert typed_output.read_bytes() == b'{"id":"location-1"}'
     assert len(direct_mocks.printed) == 2
 
+    # A script that asked for JSON gets the saved file as JSON too.
+    json_output = tmp_path / "typed-json.json"
+    invoke("locations", "list", "--output", str(json_output), "--json")
+    assert direct_mocks.rendered_json[-1] == {
+        "status": "saved",
+        "status_code": 200,
+        "output": str(json_output.resolve()),
+        "bytes_written": 19,
+        "content_type": "application/json",
+        "filename": None,
+    }
+    assert len(direct_mocks.printed) == 2
+
 
 def test_raw_api_rejects_unsafe_or_invalid_input(tmp_path: Path) -> None:
     base = {
@@ -695,6 +712,17 @@ def test_render_api_result_handles_json_text_empty_binary_and_files(
         overwrite=False,
     )
     assert "HTTP 204" in direct_mocks.printed[-1]
+
+    render_api_result(
+        ApiResult(204, "", b"", {}),
+        json_output=True,
+        output=None,
+        overwrite=False,
+    )
+    assert direct_mocks.rendered_json[-1] == {
+        "status": "completed",
+        "status_code": 204,
+    }
 
     binary = ApiResult(
         200,
