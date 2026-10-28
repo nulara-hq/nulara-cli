@@ -60,6 +60,25 @@ class ApiError(CliError):
     exit_code = 5
 
 
+class RateLimitError(ApiError):
+    """A 429 that outlasted the retries; `retry_after` is the server's pause."""
+
+    error_type = "rate_limit_error"
+    exit_code = 11
+
+    def __init__(
+        self, message: str, *, retry_after: float | None = None, **fields: Any
+    ) -> None:
+        super().__init__(message, **fields)
+        self.retry_after = retry_after
+
+    def as_payload(self) -> dict[str, object]:
+        payload = super().as_payload()
+        if self.retry_after is not None:
+            payload["retry_after"] = self.retry_after
+        return payload
+
+
 class OperationError(CliError):
     error_type = "operation_error"
     exit_code = 6
@@ -80,3 +99,10 @@ class UsageError(CliError):
 
     error_type = "usage_error"
     exit_code = 9
+
+
+class NetworkError(CliError):
+    """The API could not be reached or the connection broke off."""
+
+    error_type = "network_error"
+    exit_code = 10

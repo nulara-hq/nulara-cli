@@ -19,3 +19,11 @@ def isolate_cli_state(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     for product in ("NULARA",):
         monkeypatch.delenv(f"{product}_WORKSPACE", raising=False)
     return config_home
+
+
+@pytest.fixture(autouse=True)
+def retry_pauses(monkeypatch: pytest.MonkeyPatch) -> list[float]:
+    """Record the client's retry pauses instead of sleeping through them."""
+    pauses: list[float] = []
+    monkeypatch.setattr("nulara.core.client._pause", pauses.append)
+    return pauses

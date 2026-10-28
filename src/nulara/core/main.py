@@ -105,6 +105,17 @@ class ConnectionOptions:
             ),
         ),
     ] = None
+    timeout: Annotated[
+        float | None,
+        Parameter(
+            # Not --timeout: `login --timeout` already bounds the consent wait.
+            name="--request-timeout",
+            help=(
+                "Seconds to wait for each API request (default 15, or the "
+                "product's TIMEOUT environment variable, e.g. NULARA_TIMEOUT)."
+            ),
+        ),
+    ] = None
 
     def resolve(self, product: Product, surface: Surface) -> ProductConfig:
         return product_config(
@@ -113,6 +124,7 @@ class ConnectionOptions:
             api_url=self.api_url,
             config_file=self.config_file,
             workspace=self.workspace,
+            timeout=self.timeout,
         )
 
 

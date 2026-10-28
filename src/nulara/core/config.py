@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import tomllib
 from dataclasses import dataclass
@@ -20,6 +21,9 @@ from nulara.core.errors import AuthenticationError, ConfigurationError
 # enumerated portably, so `auth status` could otherwise not list what is stored.
 STATE_FILENAME = "state.json"
 STATE_VERSION = 1
+# Seconds an API request may take; --request-timeout or <PRODUCT>_TIMEOUT
+# override it.
+DEFAULT_TIMEOUT = 15.0
 
 
 @dataclass(frozen=True)
@@ -84,6 +88,7 @@ class ProductConfig:
     # invocation only, the way `gh --repo` or `aws --profile` do.
     workspace: str | None = None
     workspace_source: str = "active workspace"
+    timeout: float = DEFAULT_TIMEOUT
 
     @property
     def entrypoint(self) -> str:
@@ -109,10 +114,12 @@ def product_config(
     config_file: Path | None = None,
     start_dir: Path | None = None,
     workspace: str | None = None,
+    timeout: float | None = None,
 ) -> ProductConfig:
     env_prefix = product.env_prefix
     api_url_env = f"{env_prefix}_API_URL"
     workspace_env = f"{env_prefix}_WORKSPACE"
+    timeout_env = f"{env_prefix}_TIMEOUT"
     resolved_file = _resolve_config_file(product, config_file, start_dir=start_dir)
     file_url = _read_api_url(resolved_file)
     if api_url is not None:
@@ -140,7 +147,24 @@ def product_config(
         config_file=resolved_file,
         workspace=selector,
         workspace_source=workspace_source,
+        timeout=_resolve_timeout(timeout, timeout_env),
     )
+
+
+def _resolve_timeout(explicit: float | None, env_name: str) -> float:
+    if explicit is not None:
+        value, source = explicit, "--request-timeout"
+    elif raw := os.getenv(env_name):
+        try:
+            value = float(raw)
+        except ValueError as exc:
+            raise ConfigurationError(f"{env_name} must be a number of seconds") from exc
+        source = env_name
+    else:
+        return DEFAULT_TIMEOUT
+    if not math.isfinite(value) or value <= 0:
+        raise ConfigurationError(f"{source} must be a positive number of seconds")
+    return value
 
 
 def validate_api_url(url: str) -> str:

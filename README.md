@@ -65,6 +65,15 @@ the values of sensitive fields replaced by `<redacted>`.
 | 7    | `thread_protocol_error`    | The agent stream broke its protocol             |
 | 8    | `thread_expectation_error` | An agent run missed an expectation              |
 | 9    | `usage_error`              | The command line did not parse                  |
+| 10   | `network_error`            | The API could not be reached                    |
+| 11   | `rate_limit_error`         | Still rate limited after the retries (429)      |
+
+A GET or HEAD is retried up to three times on a dropped connection or a 500,
+502, 503 or 504; any request is retried on a 429, waiting as long as its
+`Retry-After` asks for up to a minute. A longer pause ends the command with
+exit 11 and `retry_after` in the error. Nothing else is sent twice. Each
+request may take 15 seconds; `--request-timeout` or `NULARA_TIMEOUT` changes
+that.
 
 A command that changes data asks for confirmation; in a script pass `--yes`,
 and `--dry-run` prints the request without sending it.

@@ -1,11 +1,15 @@
 import json as json_module
 import os
+import random
 import re
 import tempfile
+import time
 from collections.abc import Iterable, Iterator, Mapping
-from contextlib import suppress
+from contextlib import ExitStack, contextmanager, suppress
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from email.message import Message
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +21,8 @@ from nulara.core.errors import (
     AuthenticationError,
     AuthorizationError,
     CliError,
+    NetworkError,
+    RateLimitError,
     ThreadProtocolError,
 )
 from nulara.core.thread import parse_sse
@@ -25,6 +31,17 @@ MAX_BUFFERED_RESPONSE_BYTES = 10 * 1024 * 1024
 MAX_ERROR_RESPONSE_BYTES = 64 * 1024
 # The server answers a refusal with `{"detail": "MAIL_ACCOUNT_NOT_FOUND"}`.
 ERROR_CODE = re.compile(r"[A-Z][A-Z0-9_]*")
+# Retries after the first attempt. A GET or HEAD is retried on a dropped
+# connection or a transient 5xx; any method on a 429, which the rate limiter
+# answers before the route runs. Nothing else is retried, so a POST that may
+# have reached the server is never sent twice.
+MAX_RETRIES = 3
+RETRY_BASE_SECONDS = 0.5
+RETRY_MAX_SECONDS = 8.0
+# A server asking for a longer pause than this is reported, not waited out.
+MAX_RETRY_AFTER_SECONDS = 60.0
+IDEMPOTENT_METHODS = frozenset({"GET", "HEAD"})
+TRANSIENT_SERVER_STATUSES = frozenset({500, 502, 503, 504})
 
 
 @dataclass(frozen=True)
@@ -89,7 +106,7 @@ class ApiClient:
                 "Accept": "application/json",
                 "User-Agent": config.user_agent,
             },
-            timeout=httpx.Timeout(15.0, connect=5.0),
+            timeout=httpx.Timeout(config.timeout, connect=min(5.0, config.timeout)),
             transport=transport,
         )
 
@@ -139,7 +156,7 @@ class ApiClient:
         redact_values: Iterable[str] = (),
     ) -> ApiResult:
         try:
-            with self._client.stream(
+            with self._send(
                 method,
                 path,
                 params=params,
@@ -148,9 +165,8 @@ class ApiClient:
                 files=files,
                 headers=headers,
                 content=content,
+                redact_values=redact_values,
             ) as response:
-                if response.is_error:
-                    _raise_for_response(response, redact_values=redact_values)
                 content_type = _content_type(response)
                 response_headers = dict(response.headers)
                 if _is_binary_content_type(content_type):
@@ -175,7 +191,7 @@ class ApiClient:
                     headers=response_headers,
                 )
         except httpx.RequestError as exc:
-            raise CliError(f"Request failed: {exc}") from exc
+            raise NetworkError(f"Request failed: {exc}") from exc
 
     def request_to_file(
         self,
@@ -194,7 +210,7 @@ class ApiClient:
     ) -> ApiDownloadResult:
         temporary: Path | None = None
         try:
-            with self._client.stream(
+            with self._send(
                 method,
                 path,
                 params=params,
@@ -203,9 +219,8 @@ class ApiClient:
                 files=files,
                 headers=headers,
                 content=content,
+                redact_values=redact_values,
             ) as response:
-                if response.is_error:
-                    _raise_for_response(response, redact_values=redact_values)
                 descriptor, temporary_name = tempfile.mkstemp(
                     prefix=f".{output.name}.",
                     suffix=".part",
@@ -237,7 +252,7 @@ class ApiClient:
                 f"Output file already exists: {output}; pass --overwrite to replace it"
             ) from exc
         except httpx.RequestError as exc:
-            raise CliError(f"Request failed: {exc}") from exc
+            raise NetworkError(f"Request failed: {exc}") from exc
         except OSError as exc:
             raise CliError(f"Could not write output file {output}: {exc}") from exc
         finally:
@@ -286,15 +301,13 @@ class ApiClient:
     ) -> Iterator[dict[str, Any]]:
         stream_headers = {"Accept": "text/event-stream", **(headers or {})}
         try:
-            with self._client.stream(
+            with self._send(
                 "POST",
                 path,
                 json=payload,
                 headers=stream_headers,
                 timeout=httpx.Timeout(300.0, connect=5.0),
             ) as response:
-                if response.is_error:
-                    _raise_for_response(response)
                 content_type = response.headers.get("content-type", "")
                 if content_type.split(";", 1)[0].strip().lower() != "text/event-stream":
                     raise ThreadProtocolError(
@@ -302,7 +315,56 @@ class ApiClient:
                     )
                 yield from parse_sse(response.iter_lines())
         except httpx.RequestError as exc:
-            raise CliError(f"Request failed: {exc}") from exc
+            raise NetworkError(f"Request failed: {exc}") from exc
+
+    @contextmanager
+    def _send(
+        self,
+        method: str,
+        path: str,
+        *,
+        files: Mapping[str, Any] | list[tuple[str, Any]] | None = None,
+        content: bytes | Iterable[bytes] | None = None,
+        redact_values: Iterable[str] = (),
+        **arguments: Any,
+    ) -> Iterator[httpx.Response]:
+        """Open a successful response, retrying what is safe to send again.
+
+        A streamed `content` body cannot be replayed, so it is sent once.
+        """
+        replayable = (content is None or isinstance(content, bytes)) and _rewindable(
+            files
+        )
+        attempt = 0
+        while True:
+            _rewind(files)
+            with ExitStack() as stack:
+                try:
+                    response = stack.enter_context(
+                        self._client.stream(
+                            method, path, files=files, content=content, **arguments
+                        )
+                    )
+                except httpx.TransportError:
+                    if not (
+                        replayable
+                        and method in IDEMPOTENT_METHODS
+                        and attempt < MAX_RETRIES
+                    ):
+                        raise
+                    _pause(_backoff(attempt))
+                    attempt += 1
+                    continue
+                delay = _retry_delay(method, response, attempt) if replayable else None
+                if delay is not None:
+                    stack.close()
+                    _pause(delay)
+                    attempt += 1
+                    continue
+                if response.is_error:
+                    _raise_for_response(response, redact_values=redact_values)
+                yield response
+                return
 
     def thread_interactions(self, thread_id: str) -> dict[str, Any]:
         result = self.request("GET", f"/threads/{thread_id}/interactions")
@@ -315,6 +377,69 @@ class ApiClient:
         if not isinstance(result, dict):
             raise CliError("Unexpected operation catalog response")
         return result
+
+
+def _rewindable(files: Mapping[str, Any] | list[tuple[str, Any]] | None) -> bool:
+    return all(
+        _file_handle(entry) is None or _file_handle(entry).seekable()
+        for entry in _file_entries(files)
+    )
+
+
+def _rewind(files: Mapping[str, Any] | list[tuple[str, Any]] | None) -> None:
+    for entry in _file_entries(files):
+        handle = _file_handle(entry)
+        if handle is not None:
+            handle.seek(0)
+
+
+def _file_entries(files: Mapping[str, Any] | list[tuple[str, Any]] | None) -> list:
+    if files is None:
+        return []
+    return list(
+        files.values() if isinstance(files, Mapping) else (v for _k, v in files)
+    )
+
+
+def _file_handle(entry: Any) -> Any:
+    handle = entry[1] if isinstance(entry, tuple) else entry
+    return handle if hasattr(handle, "seek") and hasattr(handle, "seekable") else None
+
+
+def _pause(seconds: float) -> None:
+    time.sleep(seconds)
+
+
+def _backoff(attempt: int) -> float:
+    """Full jitter: a random pause up to the doubled base, capped."""
+    return random.uniform(0, min(RETRY_MAX_SECONDS, RETRY_BASE_SECONDS * 2**attempt))
+
+
+def _retry_delay(method: str, response: httpx.Response, attempt: int) -> float | None:
+    status = response.status_code
+    transient = status in TRANSIENT_SERVER_STATUSES and method in IDEMPOTENT_METHODS
+    if attempt >= MAX_RETRIES or not (status == 429 or transient):
+        return None
+    retry_after = _retry_after_seconds(response.headers)
+    if retry_after is None:
+        return _backoff(attempt)
+    return retry_after if retry_after <= MAX_RETRY_AFTER_SECONDS else None
+
+
+def _retry_after_seconds(headers: Mapping[str, str]) -> float | None:
+    """`Retry-After` as seconds: delay-seconds or an HTTP-date (RFC 9110 10.2.3)."""
+    value = headers.get("retry-after", "").strip()
+    if not value:
+        return None
+    if value.isdigit():
+        return float(value)
+    try:
+        moment = parsedate_to_datetime(value)
+    except (TypeError, ValueError):
+        return None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=UTC)
+    return max(0.0, (moment - datetime.now(UTC)).total_seconds())
 
 
 def _response_detail(
@@ -347,7 +472,11 @@ def _redact_strings(value: Any, redact_values: Iterable[str]) -> Any:
     if isinstance(value, list):
         return [_redact_strings(item, candidates) for item in value]
     if isinstance(value, dict):
-        return {key: _redact_strings(item, candidates) for key, item in value.items()}
+        # Keys too: a validation error can echo a submitted value as a key.
+        return {
+            _redact_text(str(key), candidates): _redact_strings(item, candidates)
+            for key, item in value.items()
+        }
     return value
 
 
@@ -416,6 +545,12 @@ def _raise_for_response(
     if response.status_code == 403:
         raise AuthorizationError(
             f"API denied this operation ({summary})", **error_fields
+        )
+    if response.status_code == 429:
+        raise RateLimitError(
+            f"API rate limit reached ({summary})",
+            retry_after=_retry_after_seconds(response.headers),
+            **error_fields,
         )
     if response.is_error:
         raise ApiError(f"API request failed ({summary})", **error_fields)
