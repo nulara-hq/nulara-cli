@@ -45,6 +45,9 @@ class Product:
     # The generated command manifest (`openapi.write_command_manifest`).
     manifest: Traversable
     version: str
+    # A Claude Code skill shipped with the entrypoint; `claude-code install`
+    # copies it into a skills directory. None registers no such command.
+    skill: Traversable | None = None
 
     @property
     def env_prefix(self) -> str:

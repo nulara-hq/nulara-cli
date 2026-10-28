@@ -11,6 +11,7 @@ PRODUCT = Product(
     oauth_client_id="nulara-cli",
     manifest=files(__name__).joinpath("spec.json"),
     version=version("nulara"),
+    skill=files(__name__).joinpath("skill/SKILL.md"),
 )
 
 

@@ -37,6 +37,19 @@ personal access token from the app's API key settings instead. Which workspace
 a command acts as is kept in `~/.config/nulara/state.json`
 (`$XDG_CONFIG_HOME/nulara/` when that is set); the file holds no secrets.
 
+## Claude Code
+
+```console
+nulara claude-code install
+```
+
+installs a skill that teaches Claude Code the CLI: signing in, `--json`,
+`--dry-run` and `--yes`, the exit codes, `--all`, `describe`, and how to
+publish a digital product passport and download its QR code. It goes to
+`~/.claude/skills/nulara/`; `--project` puts it into `.claude/skills/` of the
+current directory instead, to commit for a team. `nulara claude-code show`
+prints it for other agents.
+
 ## Scripts and agents
 
 Every command that prints data takes `--json` and then writes exactly one JSON

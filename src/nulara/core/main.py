@@ -46,6 +46,7 @@ from nulara.core.oauth import (
     run_device_login,
 )
 from nulara.core.render import render_json, render_rows
+from nulara.core.skill import register_skill_commands
 from nulara.core.thread import (
     assert_expectations,
     assistant_text,
@@ -148,6 +149,7 @@ def build_app(product: Product, surface: Surface) -> App:
     )
     _register_workspace_selection(app, module_apps, product, surface)
     register_describe_command(app, product)
+    register_skill_commands(app, product)
     return app
 
 
