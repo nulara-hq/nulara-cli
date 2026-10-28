@@ -95,3 +95,9 @@ def test_a_parse_error_has_its_own_exit_code(tmp_path: Path, json_output: bool) 
         assert len(result.stderr.splitlines()) == 1
     else:
         assert "--no-such-option" in result.stderr
+
+
+def test_a_usage_error_raised_by_a_command_is_printed(tmp_path: Path) -> None:
+    result = invoke(tmp_path, 80, "describe", "no-such-module")
+    assert result.returncode == 9
+    assert "Unknown module `no-such-module`" in result.stderr

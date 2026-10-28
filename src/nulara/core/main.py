@@ -30,6 +30,7 @@ from nulara.core.config import (
     set_active_workspace,
     store_token,
 )
+from nulara.core.describe import register_describe_command
 from nulara.core.direct import (
     HTTP_METHODS,
     JSON_HELP,
@@ -146,6 +147,7 @@ def build_app(product: Product, surface: Surface) -> App:
         default_connection=DEFAULT_CONNECTION_OPTIONS,
     )
     _register_workspace_selection(app, module_apps, product, surface)
+    register_describe_command(app, product)
     return app
 
 
@@ -760,20 +762,24 @@ def run(build: Callable[[], App]) -> None:
     """
     json_output = "--json" in sys.argv[1:]
     try:
-        try:
-            # A parse error gets its own exit code and, under --json, the same
-            # one-object stderr shape as any other failure, not a Rich panel.
-            build()(exit_on_error=False, print_error=not json_output)
-        except CycloptsError as exc:
-            raise UsageError(str(exc).strip() or type(exc).__name__) from exc
+        # A parse error gets its own exit code and, under --json, the same
+        # one-object stderr shape as any other failure, not a Rich panel.
+        build()(exit_on_error=False, print_error=not json_output)
+    except CycloptsError as exc:
+        error = UsageError(str(exc).strip() or type(exc).__name__)
+        if json_output:
+            _write_json_error(error)
+        raise SystemExit(error.exit_code) from exc
     except CliError as exc:
         if json_output:
-            sys.stderr.write(
-                json.dumps(
-                    exc.as_payload(), ensure_ascii=False, sort_keys=True, default=str
-                )
-                + "\n"
-            )
-        elif not isinstance(exc, UsageError):
+            _write_json_error(exc)
+        else:
             error_console.print(f"[red]{escape(str(exc))}[/red]")
         raise SystemExit(exc.exit_code) from exc
+
+
+def _write_json_error(error: CliError) -> None:
+    sys.stderr.write(
+        json.dumps(error.as_payload(), ensure_ascii=False, sort_keys=True, default=str)
+        + "\n"
+    )

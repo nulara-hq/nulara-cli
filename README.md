@@ -80,6 +80,11 @@ and `--dry-run` prints the request without sending it. A list that pages takes
 `--all`, which follows every page and prints one object `{"items": […],
 "total": n}`; `--max-items` stops it early.
 
+`nulara describe products create` prints a command's arguments, options,
+request schema and an example command line as JSON, from the manifest shipped
+with the CLI and without signing in; `nulara describe` lists the modules and
+`nulara describe products` their commands.
+
 ## Layout
 
 `nulara.core` holds everything that does not depend on the product: an
