@@ -3,12 +3,11 @@ from typing import Annotated, Any
 
 from cyclopts import App, Parameter
 
+from nulara.core.client import is_binary_content_type
 from nulara.core.config import Product
 from nulara.core.direct import load_manifest
 from nulara.core.errors import UsageError
 from nulara.core.render import render_json
-
-BINARY_PREFIXES = ("image/", "application/pdf", "application/octet-stream")
 
 
 def register_describe_command(app: App, product: Product) -> None:
@@ -172,7 +171,7 @@ def _example(product: Product, module: str, operation: dict[str, Any]) -> str:
     if operation["dangerous"]:
         parts.append("--yes")
     binary = any(
-        content_type.startswith(BINARY_PREFIXES)
+        is_binary_content_type(content_type)
         for content_type in operation["response_content_types"]
     )
     parts.append("--output <file> --json" if binary else "--json")

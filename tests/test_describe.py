@@ -122,6 +122,12 @@ def test_the_example_covers_paths_flags_files_and_sensitive_bodies() -> None:
     assert described["example"] == (
         "nulara records download <record-id> --inline --output <file> --json"
     )
+    # Any type the client refuses to print needs --output, not only images.
+    archive = operation(parameters=[], response_content_types=["application/zip"])
+    assert (
+        describe_operation(NULARA, "records", archive)["example"]
+        == "nulara records download --output <file> --json"
+    )
 
     secret_body = {
         "content_type": "application/json",

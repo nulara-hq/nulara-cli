@@ -67,11 +67,7 @@ class ApiResult:
 
     @property
     def is_binary(self) -> bool:
-        return bool(self.content_type) and not (
-            self.content_type == "application/json"
-            or self.content_type.endswith("+json")
-            or self.content_type.startswith("text/")
-        )
+        return is_binary_content_type(self.content_type)
 
     @property
     def filename(self) -> str | None:
@@ -169,7 +165,7 @@ class ApiClient:
             ) as response:
                 content_type = _content_type(response)
                 response_headers = dict(response.headers)
-                if _is_binary_content_type(content_type):
+                if is_binary_content_type(content_type):
                     return ApiResult(
                         status_code=response.status_code,
                         content_type=content_type,
@@ -560,7 +556,7 @@ def _content_type(response: httpx.Response) -> str:
     return response.headers.get("content-type", "").split(";", 1)[0].strip().lower()
 
 
-def _is_binary_content_type(content_type: str) -> bool:
+def is_binary_content_type(content_type: str) -> bool:
     return bool(content_type) and not (
         content_type == "application/json"
         or content_type.endswith("+json")
