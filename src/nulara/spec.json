@@ -22556,6 +22556,105 @@
                 "schema": {
                   "format": null,
                   "kind": "string",
+                  "maxLength": 2000,
+                  "minLength": 1,
+                  "nullable": false
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "title",
+                "description": null,
+                "name": "title",
+                "option": "title",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "string",
+                  "maxLength": 120,
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "category",
+                "description": null,
+                "name": "category",
+                "option": "category",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "string",
+                  "maxLength": 64,
+                  "nullable": true
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "properties": {
+                "category": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "content": {
+                  "maxLength": 2000,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "title": {
+                  "anyOf": [
+                    {
+                      "maxLength": 120,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "content"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Save a personal memory for the current user, as a suggestion's card does.\n\nSaving the same title and content again returns the memory already saved.",
+          "method": "POST",
+          "name": "create-agent",
+          "operation_id": "create_agent_memory",
+          "pagination": null,
+          "parameters": [],
+          "path": "/memory/entries",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Create Agent Memory"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "content",
+                "description": null,
+                "name": "content",
+                "option": "content",
+                "required": true,
+                "schema": {
+                  "format": null,
+                  "kind": "string",
                   "nullable": false
                 },
                 "sensitive": false
@@ -47552,8 +47651,8 @@
       ]
     }
   ],
-  "openapi_sha256": "7e33216694b2b486fcd022937cf773b42883d799e0230ec64a4c42b4c6cc3e79",
-  "operation_count": 523,
+  "openapi_sha256": "86e499b89442a1d9c14424fd191badf11b4e1e79a7440b8a4e31388ca66904ea",
+  "operation_count": 524,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
