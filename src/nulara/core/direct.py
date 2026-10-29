@@ -255,15 +255,16 @@ def render_api_result(
             f"API returned {result.content_type or 'binary data'}; pass "
             f"--output {suggestion}"
         )
-    payload = result.payload()
-    if payload is None and json_output:
+    # An empty body is an answer of its own; a JSON `null` (no running timer,
+    # say) is data and is printed as such.
+    if not result.content and json_output:
         render_json({"status": "completed", "status_code": result.status_code})
-    elif payload is None:
+    elif not result.content:
         console.print(f"[green]Completed[/green] (HTTP {result.status_code})")
     elif json_output:
-        render_json(payload)
+        render_json(result.payload())
     else:
-        render_rows(payload)
+        render_rows(result.payload())
 
 
 def _render_download(download: ApiDownloadResult, *, json_output: bool) -> None:

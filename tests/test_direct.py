@@ -724,6 +724,23 @@ def test_render_api_result_handles_json_text_empty_binary_and_files(
         "status_code": 204,
     }
 
+    # A JSON null is the answer, not an empty body: the route said "nothing".
+    render_api_result(
+        ApiResult(200, "application/json", b"null", {}),
+        json_output=True,
+        output=None,
+        overwrite=False,
+    )
+    assert direct_mocks.rendered_json[-1] is None
+
+    render_api_result(
+        ApiResult(200, "application/json", b"null", {}),
+        json_output=False,
+        output=None,
+        overwrite=False,
+    )
+    assert direct_mocks.rendered_rows[-1] is None
+
     binary = ApiResult(
         200,
         "application/pdf",
