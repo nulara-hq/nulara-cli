@@ -17866,7 +17866,7 @@
         {
           "body": null,
           "dangerous": false,
-          "description": "List mail messages from mailboxes the user may read.",
+          "description": "List mail messages from mailboxes the user may read.\n\n`send_idempotency_keys` finds the messages released under those keys —\nhow a client that sent with its own key learns the outcome after a reload.",
           "method": "GET",
           "name": "list-messages",
           "operation_id": "list_mail_messages",
@@ -17953,6 +17953,24 @@
                 },
                 "kind": "array",
                 "maxItems": 50,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "send_idempotency_keys",
+              "description": null,
+              "location": "query",
+              "name": "send_idempotency_keys",
+              "option": "send-idempotency-keys",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": null,
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 10,
                 "nullable": true
               }
             },
@@ -42102,6 +42120,35 @@
         {
           "body": null,
           "dangerous": true,
+          "description": "Mark the thread's answers as seen, so the list stops showing it unread.\n\nA write of its own rather than a side effect of the interactions GET,\nwhich stays safe to repeat and is limited as a read. A thread with\nnothing unread is not written.",
+          "method": "PATCH",
+          "name": "mark-read",
+          "operation_id": "mark_thread_read",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "thread_id",
+              "description": null,
+              "location": "path",
+              "name": "thread_id",
+              "option": "thread-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/threads/{thread_id}/read",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Mark Thread Read"
+        },
+        {
+          "body": null,
+          "dangerous": true,
           "description": "Pin a thread to the top of the list; an archived one is refused.",
           "method": "PATCH",
           "name": "pin",
@@ -47651,8 +47698,8 @@
       ]
     }
   ],
-  "openapi_sha256": "989dd0260313884bd3525b1374a75ea05cff1004a9ad7b5ae08ef2e343948790",
-  "operation_count": 524,
+  "openapi_sha256": "d0c8d07a8366c8157abc4178ef35e2f1308a1fbfad29f9d41e3c653eed4aceee",
+  "operation_count": 525,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
