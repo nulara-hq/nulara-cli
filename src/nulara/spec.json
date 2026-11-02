@@ -3043,11 +3043,101 @@
                   "nullable": true
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "avatar",
+                "description": null,
+                "name": "avatar",
+                "option": "avatar",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    "owl",
+                    "raccoon",
+                    "axolotl",
+                    "bumblebee",
+                    "hedgehog",
+                    "dragon",
+                    "fox",
+                    "frog",
+                    "penguin",
+                    "panda",
+                    "cat",
+                    "rabbit",
+                    "octopus",
+                    "jellyfish",
+                    "mushroom",
+                    "ghost",
+                    "snail",
+                    "whale",
+                    "crab",
+                    "koala",
+                    "sheep",
+                    "lion",
+                    "bat",
+                    "parrot",
+                    "turtle",
+                    "unicorn",
+                    "chick",
+                    "kingfisher",
+                    "monkey",
+                    "pig",
+                    "cactus",
+                    "butterfly"
+                  ]
+                },
+                "sensitive": false
               }
             ],
             "required": true,
             "schema": {
               "properties": {
+                "avatar": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "owl",
+                        "raccoon",
+                        "axolotl",
+                        "bumblebee",
+                        "hedgehog",
+                        "dragon",
+                        "fox",
+                        "frog",
+                        "penguin",
+                        "panda",
+                        "cat",
+                        "rabbit",
+                        "octopus",
+                        "jellyfish",
+                        "mushroom",
+                        "ghost",
+                        "snail",
+                        "whale",
+                        "crab",
+                        "koala",
+                        "sheep",
+                        "lion",
+                        "bat",
+                        "parrot",
+                        "turtle",
+                        "unicorn",
+                        "chick",
+                        "kingfisher",
+                        "monkey",
+                        "pig",
+                        "cactus",
+                        "butterfly"
+                      ],
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
                 "description": {
                   "maxLength": 1024,
                   "minLength": 1,
@@ -3600,11 +3690,101 @@
                   "nullable": true
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "avatar",
+                "description": null,
+                "name": "avatar",
+                "option": "avatar",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    "owl",
+                    "raccoon",
+                    "axolotl",
+                    "bumblebee",
+                    "hedgehog",
+                    "dragon",
+                    "fox",
+                    "frog",
+                    "penguin",
+                    "panda",
+                    "cat",
+                    "rabbit",
+                    "octopus",
+                    "jellyfish",
+                    "mushroom",
+                    "ghost",
+                    "snail",
+                    "whale",
+                    "crab",
+                    "koala",
+                    "sheep",
+                    "lion",
+                    "bat",
+                    "parrot",
+                    "turtle",
+                    "unicorn",
+                    "chick",
+                    "kingfisher",
+                    "monkey",
+                    "pig",
+                    "cactus",
+                    "butterfly"
+                  ]
+                },
+                "sensitive": false
               }
             ],
             "required": true,
             "schema": {
               "properties": {
+                "avatar": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "owl",
+                        "raccoon",
+                        "axolotl",
+                        "bumblebee",
+                        "hedgehog",
+                        "dragon",
+                        "fox",
+                        "frog",
+                        "penguin",
+                        "panda",
+                        "cat",
+                        "rabbit",
+                        "octopus",
+                        "jellyfish",
+                        "mushroom",
+                        "ghost",
+                        "snail",
+                        "whale",
+                        "crab",
+                        "koala",
+                        "sheep",
+                        "lion",
+                        "bat",
+                        "parrot",
+                        "turtle",
+                        "unicorn",
+                        "chick",
+                        "kingfisher",
+                        "monkey",
+                        "pig",
+                        "cactus",
+                        "butterfly"
+                      ],
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
                 "description": {
                   "anyOf": [
                     {
@@ -47698,7 +47878,7 @@
       ]
     }
   ],
-  "openapi_sha256": "d0c8d07a8366c8157abc4178ef35e2f1308a1fbfad29f9d41e3c653eed4aceee",
+  "openapi_sha256": "a791d9875e6060031aa68f6849ca1c5f83d41a573d8e658bcbc123bd55e59892",
   "operation_count": 525,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
