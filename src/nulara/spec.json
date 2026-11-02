@@ -5515,299 +5515,6 @@
             "content_type": "application/json",
             "properties": [
               {
-                "argument": "filename",
-                "description": null,
-                "name": "filename",
-                "option": "filename",
-                "required": true,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 255,
-                  "minLength": 1,
-                  "nullable": false
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "display_name",
-                "description": null,
-                "name": "display_name",
-                "option": "display-name",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 255,
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "file_type",
-                "description": null,
-                "name": "file_type",
-                "option": "file-type",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 100,
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "file_size",
-                "description": null,
-                "name": "file_size",
-                "option": "file-size",
-                "required": false,
-                "schema": {
-                  "default": 0,
-                  "format": null,
-                  "kind": "integer",
-                  "minimum": 0.0,
-                  "nullable": false
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "file_hash",
-                "description": null,
-                "name": "file_hash",
-                "option": "file-hash",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 128,
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "folder_id",
-                "description": null,
-                "name": "folder_id",
-                "option": "folder-id",
-                "required": false,
-                "schema": {
-                  "format": "uuid",
-                  "kind": "string",
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "sort_order",
-                "description": null,
-                "name": "sort_order",
-                "option": "sort-order",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "integer",
-                  "minimum": 0.0,
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "source",
-                "description": "Origin of a workspace file.",
-                "name": "source",
-                "option": "source",
-                "required": false,
-                "schema": {
-                  "default": "user",
-                  "kind": "enum",
-                  "nullable": false,
-                  "values": [
-                    "user",
-                    "agent",
-                    "system",
-                    "integration"
-                  ]
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "references",
-                "description": null,
-                "name": "references",
-                "option": "references",
-                "required": false,
-                "schema": {
-                  "items": {
-                    "kind": "json",
-                    "nullable": false
-                  },
-                  "kind": "array",
-                  "maxItems": 100,
-                  "nullable": false
-                },
-                "sensitive": false
-              }
-            ],
-            "required": true,
-            "schema": {
-              "properties": {
-                "display_name": {
-                  "anyOf": [
-                    {
-                      "maxLength": 255,
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "file_hash": {
-                  "anyOf": [
-                    {
-                      "maxLength": 128,
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "file_size": {
-                  "minimum": 0.0,
-                  "type": "integer"
-                },
-                "file_type": {
-                  "anyOf": [
-                    {
-                      "maxLength": 100,
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "filename": {
-                  "maxLength": 255,
-                  "minLength": 1,
-                  "type": "string"
-                },
-                "folder_id": {
-                  "anyOf": [
-                    {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "references": {
-                  "items": {
-                    "properties": {
-                      "reference_id": {
-                        "format": "uuid",
-                        "type": "string"
-                      },
-                      "reference_label": {
-                        "anyOf": [
-                          {
-                            "maxLength": 255,
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      },
-                      "reference_type": {
-                        "type": "string"
-                      },
-                      "relation_type": {
-                        "anyOf": [
-                          {
-                            "maxLength": 80,
-                            "type": "string"
-                          },
-                          {
-                            "type": "null"
-                          }
-                        ]
-                      }
-                    },
-                    "required": [
-                      "reference_type",
-                      "reference_id"
-                    ],
-                    "type": "object"
-                  },
-                  "maxItems": 100,
-                  "type": "array"
-                },
-                "sort_order": {
-                  "anyOf": [
-                    {
-                      "minimum": 0.0,
-                      "type": "integer"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "source": {
-                  "enum": [
-                    "user",
-                    "agent",
-                    "system",
-                    "integration"
-                  ],
-                  "type": "string"
-                }
-              },
-              "required": [
-                "filename"
-              ],
-              "type": "object"
-            },
-            "structured": true
-          },
-          "dangerous": true,
-          "description": "Create workspace file metadata and optional domain references.",
-          "method": "POST",
-          "name": "create-file-metadata",
-          "operation_id": "create_box_file_metadata",
-          "pagination": null,
-          "parameters": [
-            {
-              "argument": "box_id",
-              "description": null,
-              "location": "path",
-              "name": "box_id",
-              "option": "box-id",
-              "required": true,
-              "schema": {
-                "format": "uuid",
-                "kind": "string",
-                "nullable": false
-              }
-            }
-          ],
-          "path": "/boxes/{box_id}/files/metadata",
-          "response_content_types": [
-            "application/json"
-          ],
-          "summary": "Create Workspace File Metadata"
-        },
-        {
-          "body": {
-            "content_type": "application/json",
-            "properties": [
-              {
                 "argument": "name",
                 "description": null,
                 "name": "name",
@@ -6495,6 +6202,69 @@
             "application/json"
           ],
           "summary": "List File Workspaces"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "Search the workspace's box files a chat message may reference with \"@\".",
+          "method": "GET",
+          "name": "list-referenceable-files",
+          "operation_id": "list_referenceable_box_files",
+          "pagination": {
+            "items": "items"
+          },
+          "parameters": [
+            {
+              "argument": "limit",
+              "description": null,
+              "location": "query",
+              "name": "limit",
+              "option": "limit",
+              "required": false,
+              "schema": {
+                "default": 20,
+                "format": null,
+                "kind": "integer",
+                "maximum": 20,
+                "minimum": 1,
+                "nullable": false
+              }
+            },
+            {
+              "argument": "offset",
+              "description": null,
+              "location": "query",
+              "name": "offset",
+              "option": "offset",
+              "required": false,
+              "schema": {
+                "default": 0,
+                "format": null,
+                "kind": "integer",
+                "minimum": 0,
+                "nullable": false
+              }
+            },
+            {
+              "argument": "search",
+              "description": null,
+              "location": "query",
+              "name": "search",
+              "option": "search",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "string",
+                "minLength": 1,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/boxes/files",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "List Files a Chat Message Can Reference"
         },
         {
           "body": {
@@ -19922,6 +19692,77 @@
             "application/json"
           ],
           "summary": "Bulk Delete Materials"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "ids",
+                "description": null,
+                "name": "ids",
+                "option": "ids",
+                "required": true,
+                "schema": {
+                  "items": {
+                    "format": "uuid",
+                    "kind": "string",
+                    "nullable": false
+                  },
+                  "kind": "array",
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "nullable": false
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "properties": {
+                "ids": {
+                  "items": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "ids"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Remove several material assignments from one product.\n\n`ids` are material ids; materials the product no longer lists are skipped.",
+          "method": "POST",
+          "name": "bulk-delete-for-product",
+          "operation_id": "bulk_delete_materials_for_product",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "product_id",
+              "description": null,
+              "location": "path",
+              "name": "product_id",
+              "option": "product-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/materials/by-product/{product_id}/bulk-delete",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Bulk Delete Materials For Product"
         },
         {
           "body": {
@@ -41712,6 +41553,24 @@
                   "nullable": false
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "referenced_file_ids",
+                "description": null,
+                "name": "referenced_file_ids",
+                "option": "referenced-file-ids",
+                "required": false,
+                "schema": {
+                  "items": {
+                    "format": "uuid",
+                    "kind": "string",
+                    "nullable": false
+                  },
+                  "kind": "array",
+                  "maxItems": 20,
+                  "nullable": false
+                },
+                "sensitive": false
               }
             ],
             "required": true,
@@ -41746,6 +41605,14 @@
                       "type": "null"
                     }
                   ]
+                },
+                "referenced_file_ids": {
+                  "items": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "maxItems": 20,
+                  "type": "array"
                 },
                 "target_agent_ids": {
                   "items": {
@@ -47878,8 +47745,8 @@
       ]
     }
   ],
-  "openapi_sha256": "a791d9875e6060031aa68f6849ca1c5f83d41a573d8e658bcbc123bd55e59892",
-  "operation_count": 525,
+  "openapi_sha256": "e6b04742a9d1c961d99bdb60455395bda2e3d0d4b01a5d8d47600e937ab350a1",
+  "operation_count": 526,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
