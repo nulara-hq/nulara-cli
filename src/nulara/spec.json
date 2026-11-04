@@ -1582,17 +1582,17 @@
               },
               {
                 "argument": "approval_mode",
-                "description": null,
+                "description": "The composer's approval switch, stored per automation.\n\n`manual` runs with `hitl_auto_approve` off, `auto` with it on; writes that\nalways need approval stop either way.",
                 "name": "approval_mode",
                 "option": "approval-mode",
                 "required": false,
                 "schema": {
-                  "default": "always_ask",
+                  "default": "manual",
                   "kind": "enum",
                   "nullable": false,
                   "values": [
-                    "always_ask",
-                    "risk_based"
+                    "manual",
+                    "auto"
                   ]
                 },
                 "sensitive": false
@@ -1615,8 +1615,8 @@
                 },
                 "approval_mode": {
                   "enum": [
-                    "always_ask",
-                    "risk_based"
+                    "manual",
+                    "auto"
                   ],
                   "type": "string"
                 },
@@ -2454,8 +2454,8 @@
                   "kind": "enum",
                   "nullable": true,
                   "values": [
-                    "always_ask",
-                    "risk_based"
+                    "manual",
+                    "auto"
                   ]
                 },
                 "sensitive": false
@@ -2480,8 +2480,8 @@
                   "anyOf": [
                     {
                       "enum": [
-                        "always_ask",
-                        "risk_based"
+                        "manual",
+                        "auto"
                       ],
                       "type": "string"
                     },
@@ -47882,7 +47882,7 @@
       ]
     }
   ],
-  "openapi_sha256": "bcb45decdb5d9582ff6b38b42c10f00a6aaf183afba735b58bae22483cd602a3",
+  "openapi_sha256": "888f6610b66d7e7a04d0245b7120b6b1a8edb144dcfb20d3adedb0d394bd0225",
   "operation_count": 529,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
