@@ -79,11 +79,6 @@ class RateLimitError(ApiError):
         return payload
 
 
-class OperationError(CliError):
-    error_type = "operation_error"
-    exit_code = 6
-
-
 class ThreadProtocolError(CliError):
     error_type = "thread_protocol_error"
     exit_code = 7

@@ -368,12 +368,6 @@ class ApiClient:
             raise CliError("Unexpected thread interactions response")
         return result
 
-    def operation_catalog(self) -> dict[str, Any]:
-        result = self.request("GET", "/agent-operations")
-        if not isinstance(result, dict):
-            raise CliError("Unexpected operation catalog response")
-        return result
-
 
 def _rewindable(files: Mapping[str, Any] | list[tuple[str, Any]] | None) -> bool:
     return all(

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any, cast
+from typing import cast
 from unittest.mock import Mock
 
 import pytest
@@ -24,28 +24,13 @@ from nulara.core.config import (
     remember_workspace,
 )
 from nulara.core.errors import AuthenticationError, CliError, ConfigurationError
-from nulara.core.main import _parse_params, _resource_params, build_app
+from nulara.core.main import build_app
 from nulara.core.oauth import LoginResult
 
 DEV = Surface.DEVELOPMENT
 WORKSPACE_A = "01a061db-5513-70f1-8f7e-000000000001"
 WORKSPACE_B = "01a061db-5513-70f1-8f7e-000000000002"
 
-CATALOG = {
-    "operations": [
-        {
-            "operation_id": "list_tasks",
-            "method": "get",
-            "path": "/tasks",
-            "summary": "List tasks",
-            "metadata": {
-                "resource": "tasks",
-                "mode": "read",
-                "approval": "none",
-            },
-        }
-    ]
-}
 METADATA = {
     "token_prefix": "nulara_sk_test",
     "expires_at": "2030-01-01T00:00:00Z",
@@ -61,7 +46,6 @@ WORKSPACES = [
 class FakeApiClient:
     stream_error: CliError | None = None
     interaction_error: CliError | None = None
-    last_request: tuple[str, str, object] | None = None
     last_stream_payload: dict[str, object] | None = None
     agent_events: list[list[dict[str, object]]] = []
     resume_payloads: list[tuple[str, dict[str, object]]] = []
@@ -81,15 +65,6 @@ class FakeApiClient:
 
     def list_workspaces(self) -> list[dict[str, object]]:
         return [dict(workspace) for workspace in WORKSPACES]
-
-    def operation_catalog(self) -> dict[str, Any]:
-        return CATALOG
-
-    def request(
-        self, method: str, path: str, *, params: object
-    ) -> list[dict[str, int]]:
-        type(self).last_request = (method, path, params)
-        return [{"id": 1}]
 
     def stream_thread(self, payload: dict[str, object], *, test_run_id: str):
         type(self).last_stream_payload = payload
@@ -121,7 +96,6 @@ class FakeApiClient:
 def reset_fakes() -> None:
     FakeApiClient.stream_error = None
     FakeApiClient.interaction_error = None
-    FakeApiClient.last_request = None
     FakeApiClient.last_stream_payload = None
     FakeApiClient.agent_events = []
     FakeApiClient.resume_payloads = []
@@ -130,7 +104,6 @@ def reset_fakes() -> None:
 @pytest.fixture
 def cli_mocks(monkeypatch):
     rendered_json: list[object] = []
-    rendered_rows: list[object] = []
     printed: list[str] = []
     stored: list[tuple[ProductConfig, str, str]] = []
     stored_logins: list[dict[str, object]] = []
@@ -145,7 +118,6 @@ def cli_mocks(monkeypatch):
         ),
     )
     monkeypatch.setattr(main_module, "render_json", rendered_json.append)
-    monkeypatch.setattr(main_module, "render_rows", rendered_rows.append)
     monkeypatch.setattr(
         main_module.console,
         "print",
@@ -153,7 +125,6 @@ def cli_mocks(monkeypatch):
     )
     return SimpleNamespace(
         rendered_json=rendered_json,
-        rendered_rows=rendered_rows,
         printed=printed,
         stored=stored,
         stored_logins=stored_logins,
@@ -169,21 +140,6 @@ def invoke(
         if exc.code != 0:
             raise
         return None
-
-
-def test_parameter_parsing_and_default_limit() -> None:
-    assert _parse_params(["active=true", "label=plain", "count=2"]) == [
-        ("active", True),
-        ("label", "plain"),
-        ("count", 2),
-    ]
-    with pytest.raises(CliError, match="expected key=value"):
-        _parse_params(["invalid"])
-    assert _resource_params([]) == [("limit", 100)]
-    assert _resource_params(["limit=20", "status=open"]) == [
-        ("limit", 20),
-        ("status", "open"),
-    ]
 
 
 def test_pasted_pat_login(cli_mocks, monkeypatch) -> None:
@@ -373,19 +329,6 @@ def test_status_logout_and_operation_rendering(cli_mocks, monkeypatch) -> None:
     assert known_workspaces(config) == []
     invoke("auth", "logout")
     assert "No saved" in cli_mocks.printed[-1]
-
-    invoke("operations", "list", "--json")
-    assert cli_mocks.rendered_json[-1][0]["operation_id"] == "list_tasks"
-    invoke("operations", "list")
-    assert cli_mocks.rendered_rows[-1][0]["operation_id"] == "list_tasks"
-
-
-def test_resource_read_honors_params_and_output_modes(cli_mocks) -> None:
-    invoke("resource", "list", "tasks", "--param", "limit=25", "--json")
-    assert FakeApiClient.last_request == ("GET", "/tasks", [("limit", 25)])
-    assert cli_mocks.rendered_json[-1] == [{"id": 1}]
-    invoke("resource", "list", "tasks")
-    assert cli_mocks.rendered_rows[-1] == [{"id": 1}]
 
 
 def test_customer_agent_run_streams_and_returns_json(cli_mocks) -> None:
@@ -601,7 +544,7 @@ def test_doctor_and_global_connection_options(cli_mocks, tmp_path: Path) -> None
     invoke("doctor", "--config", str(config_file), "--json")
     result = cli_mocks.rendered_json[-1]
     assert result["status"] == "ok"
-    assert result["operation_count"] == 1
+    assert "operation_count" not in result
     assert result["base_url_source"] == str(config_file)
 
     invoke("doctor", "--api-url", "https://flag.example/v1/app")
@@ -642,8 +585,6 @@ def test_customer_surface_ships_only_the_api_commands() -> None:
     for present in (
         "login",
         "auth",
-        "operations",
-        "resource",
         "agent",
         "api",
         "doctor",

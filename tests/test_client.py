@@ -61,8 +61,6 @@ def test_client_requests_and_streams_sse() -> None:
     streamed_paths: list[str] = []
 
     def handler(request: httpx.Request) -> httpx.Response:
-        if request.url.path.endswith("/agent-operations"):
-            return httpx.Response(200, json={"operations": []})
         if request.method == "POST":
             streamed_paths.append(request.url.path)
             assert request.headers["Accept"] == "text/event-stream"
@@ -78,7 +76,6 @@ def test_client_requests_and_streams_sse() -> None:
         return httpx.Response(200, json={"interactions": []})
 
     with ApiClient(CONFIG, "token", transport=httpx.MockTransport(handler)) as client:
-        assert client.operation_catalog() == {"operations": []}
         assert list(
             client.stream_thread({"message": "hi"}, test_run_id="test-run")
         ) == [{"type": "COMPLETE", "thread_id": "thread-1"}]
@@ -262,8 +259,6 @@ def test_client_handles_empty_and_unexpected_responses() -> None:
     with ApiClient(CONFIG, "token", transport=transport) as client:
         with pytest.raises(CliError, match="API key status"):
             client.current_api_key()
-        with pytest.raises(CliError, match="operation catalog"):
-            client.operation_catalog()
         with pytest.raises(CliError, match="interactions"):
             client.thread_interactions("thread")
 

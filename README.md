@@ -79,7 +79,6 @@ the values of sensitive fields replaced by `<redacted>`.
 | 3    | `authentication_error`     | No token, or the API rejected it (401)          |
 | 4    | `authorization_error`      | The token may not do this (403)                 |
 | 5    | `api_error`                | Any other API error response                    |
-| 6    | `operation_error`          | The operation catalog is unusable               |
 | 7    | `thread_protocol_error`    | The agent stream broke its protocol             |
 | 8    | `thread_expectation_error` | An agent run missed an expectation              |
 | 9    | `usage_error`              | The command line did not parse                  |

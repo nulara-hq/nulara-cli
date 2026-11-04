@@ -33,7 +33,7 @@ def client(config, handler):
 
 @pytest.mark.parametrize(
     "method",
-    ["current_api_key", "list_workspaces", "operation_catalog", "thread_interactions"],
+    ["current_api_key", "list_workspaces", "thread_interactions"],
 )
 def test_metadata_response_shape_is_checked(config, method):
     with (

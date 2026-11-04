@@ -33,8 +33,8 @@ def invoke(app, args):
 
 
 @pytest.mark.parametrize("json_output", [False, True])
-@pytest.mark.parametrize("command", ["doctor", "operations", "resource", "status"])
-def test_read_commands_use_nulara_catalog(
+@pytest.mark.parametrize("command", ["doctor", "status"])
+def test_read_commands_use_the_nulara_token(
     app, monkeypatch, capsys, command, json_output
 ):
     paths = []
@@ -44,32 +44,12 @@ def test_read_commands_use_nulara_catalog(
         "scopes": ["read"],
         "expires_at": "2030-01-01",
     }
-    catalog = {
-        "operations": [
-            {
-                "operation_id": "list_locations",
-                "metadata": {
-                    "resource": "locations",
-                    "mode": "read",
-                    "approval": "none",
-                },
-                "method": "GET",
-                "path": "/locations",
-                "description": "Locations",
-            }
-        ]
-    }
 
     def handle(request):
         paths.append(request.url.path)
         assert request.headers["authorization"] == "Bearer synthetic-nulara-token"
-        if request.url.path.endswith("/current"):
-            return httpx.Response(200, json=metadata)
-        if request.url.path.endswith("/agent-operations"):
-            return httpx.Response(200, json=catalog)
-        assert request.url.params["limit"] == "100"
-        assert request.url.params["search"] == "synthetic"
-        return httpx.Response(200, json=[{"name": "Synthetic location"}])
+        assert request.url.path.endswith("/current")
+        return httpx.Response(200, json=metadata)
 
     monkeypatch.setattr(
         main,
@@ -80,8 +60,6 @@ def test_read_commands_use_nulara_catalog(
     remember_workspace(config, WorkspaceRef("workspace-one", "Synthetic workspace"))
     args = {
         "doctor": ["doctor"],
-        "operations": ["operations", "list"],
-        "resource": ["resource", "list", "locations", "--param", "search=synthetic"],
         "status": ["auth", "status"],
     }[command]
     invoke(app, [*args, *(["--json"] if json_output else [])])
@@ -132,21 +110,6 @@ def test_login_workspace_name_falls_back_to_granted_id(workspaces):
         transport=httpx.MockTransport(lambda _: httpx.Response(200, json=workspaces)),
     ) as client:
         assert main._workspace_ref(client, "one") == WorkspaceRef("one", "one")
-
-
-@pytest.mark.parametrize("value", ["invalid", "=bad"])
-def test_resource_query_rejects_missing_keys(value):
-    with pytest.raises(CliError, match="expected key=value"):
-        main._resource_params([value])
-
-
-def test_resource_query_preserves_explicit_limit_and_repeat_keys():
-    assert main._resource_params(["limit=2", "name=a", "name=b", "active=true"]) == [
-        ("limit", 2),
-        ("name", "a"),
-        ("name", "b"),
-        ("active", True),
-    ]
 
 
 @pytest.mark.parametrize(

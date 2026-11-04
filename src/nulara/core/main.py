@@ -37,7 +37,6 @@ from nulara.core.direct import (
     register_module_commands,
     run_raw_api,
 )
-from nulara.core.engine import parse_catalog, select_read_operation
 from nulara.core.errors import CliError, UsageError
 from nulara.core.oauth import (
     DEFAULT_LOGIN_TIMEOUT,
@@ -45,7 +44,7 @@ from nulara.core.oauth import (
     run_browser_login,
     run_device_login,
 )
-from nulara.core.render import render_json, render_rows
+from nulara.core.render import render_json
 from nulara.core.skill import register_skill_commands
 from nulara.core.thread import (
     assert_expectations,
@@ -172,12 +171,6 @@ def _entrypoint_help(product: Product, surface: Surface) -> str:
 def _register_api_commands(app: App, product: Product, surface: Surface) -> None:
     """Commands that talk to the product API; shipped on both entrypoints."""
     auth = app.command(App(name="auth", help="Manage PAT authentication."))
-    operations = app.command(
-        App(name="operations", help="Inspect agent-approved operations.")
-    )
-    resource = app.command(
-        App(name="resource", help="Run agent-approved resource reads.")
-    )
     agent = app.command(
         App(name="agent", help="Run the workspace agent from the terminal.")
     )
@@ -356,43 +349,6 @@ def _register_api_commands(app: App, product: Product, surface: Surface) -> None
         else:
             console.print("No saved OS-keyring token found.")
 
-    @operations.command(name="list")
-    def list_operations(
-        *,
-        connection: ConnectionOptions = DEFAULT_CONNECTION_OPTIONS,
-        json_output: JsonOption = False,
-    ) -> None:
-        """List operations allowed by the server for this token."""
-        _config = connection.resolve(product, surface)
-        token, _source = get_token(_config)
-        with ApiClient(_config, token) as client:
-            payload = client.operation_catalog()
-        parsed = parse_catalog(payload)
-        rows = [operation.__dict__ for operation in parsed]
-        render_json(rows) if json_output else render_rows(rows)
-
-    @resource.command(name="list")
-    def list_resource(
-        resource_name: str,
-        *,
-        connection: ConnectionOptions = DEFAULT_CONNECTION_OPTIONS,
-        param: list[str] | None = None,
-        json_output: JsonOption = False,
-    ) -> None:
-        """Run the catalog-approved read operation for a resource."""
-        _config = connection.resolve(product, surface)
-        token, _source = get_token(_config)
-        with ApiClient(_config, token) as client:
-            catalog = parse_catalog(client.operation_catalog())
-            operation = select_read_operation(catalog, resource_name)
-            params = _resource_params(param or [])
-            payload = client.request(
-                operation.method,
-                operation.path,
-                params=params,
-            )
-        render_json(payload) if json_output else render_rows(payload)
-
     @app.command
     def api(
         endpoint: Annotated[
@@ -558,12 +514,11 @@ def _register_api_commands(app: App, product: Product, surface: Surface) -> None
         connection: ConnectionOptions = DEFAULT_CONNECTION_OPTIONS,
         json_output: JsonOption = False,
     ) -> None:
-        """Verify API reachability, token validity, and operation discovery."""
+        """Verify API reachability and token validity."""
         _config = connection.resolve(product, surface)
         token, credential_source = get_token(_config)
         with ApiClient(_config, token) as client:
             metadata = client.current_api_key()
-            operation_count = len(parse_catalog(client.operation_catalog()))
         result = {
             "status": "ok",
             "product": product.name,
@@ -575,7 +530,6 @@ def _register_api_commands(app: App, product: Product, surface: Surface) -> None
             "token_prefix": metadata.get("token_prefix"),
             "expires_at": metadata.get("expires_at"),
             "scopes": metadata.get("scopes", []),
-            "operation_count": operation_count,
         }
         if json_output:
             render_json(result)
@@ -583,8 +537,7 @@ def _register_api_commands(app: App, product: Product, surface: Surface) -> None
             console.print(
                 f"[green]Ready[/green] {product.name} {product.version}\n"
                 f"API: {_config.base_url} ({_config.base_url_source})\n"
-                f"Credential: {credential_source}\n"
-                f"Operations: {operation_count}"
+                f"Credential: {credential_source}"
             )
 
 
@@ -733,27 +686,6 @@ def _prompt_agent_decisions(interrupt: dict[str, Any]) -> dict[str, Any]:
     # Only the decisions: the server reads the pending requests, the stopped
     # turn's steps and its time from where the run stored them.
     return {"decisions": decisions}
-
-
-def _parse_params(values: list[str]) -> list[tuple[str, object]]:
-    parsed: list[tuple[str, object]] = []
-    for value in values:
-        key, separator, raw = value.partition("=")
-        if not separator or not key:
-            raise CliError(f"Invalid --param `{value}`; expected key=value")
-        try:
-            parsed_value = json.loads(raw)
-        except json.JSONDecodeError:
-            parsed_value = raw
-        parsed.append((key, parsed_value))
-    return parsed
-
-
-def _resource_params(values: list[str]) -> list[tuple[str, object]]:
-    parsed = _parse_params(values)
-    if not any(key == "limit" for key, _value in parsed):
-        parsed.append(("limit", 100))
-    return parsed
 
 
 def run(build: Callable[[], App]) -> None:
