@@ -28,7 +28,7 @@
     }
   ],
   "manifest_version": 2,
-  "module_count": 56,
+  "module_count": 57,
   "modules": [
     {
       "name": "absences",
@@ -7399,6 +7399,125 @@
       ]
     },
     {
+      "name": "calendar-accounts",
+      "operations": [
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Disconnect: close channels, revoke the grant, delete account and mirror.",
+          "method": "DELETE",
+          "name": "delete",
+          "operation_id": "delete_calendar_account",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "account_id",
+              "description": null,
+              "location": "path",
+              "name": "account_id",
+              "option": "account-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/calendar-accounts/{account_id}",
+          "response_content_types": [],
+          "summary": "Delete Calendar Account"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "List the caller's connected calendar accounts and their calendars.",
+          "method": "GET",
+          "name": "list",
+          "operation_id": "list_calendar_accounts",
+          "pagination": null,
+          "parameters": [],
+          "path": "/calendar-accounts",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "List Calendar Accounts"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "is_selected",
+                "description": null,
+                "name": "is_selected",
+                "option": "is-selected",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "boolean",
+                  "nullable": false
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "shares_busy",
+                "description": null,
+                "name": "shares_busy",
+                "option": "shares-busy",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "boolean",
+                  "nullable": false
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "properties": {
+                "is_selected": {
+                  "type": "boolean"
+                },
+                "shares_busy": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Mirror a calendar or stop, and share it as busy with colleagues or not.",
+          "method": "PATCH",
+          "name": "update-calendar-source",
+          "operation_id": "update_calendar_source",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "source_id",
+              "description": null,
+              "location": "path",
+              "name": "source_id",
+              "option": "source-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/calendar-accounts/calendars/{source_id}",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Update Calendar Source"
+        }
+      ]
+    },
+    {
       "name": "calendar-events",
       "operations": [
         {
@@ -8050,6 +8169,24 @@
               "schema": {
                 "format": "date-time",
                 "kind": "string",
+                "nullable": true
+              }
+            },
+            {
+              "argument": "hidden_source_ids",
+              "description": null,
+              "location": "query",
+              "name": "hidden_source_ids",
+              "option": "hidden-source-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 100,
                 "nullable": true
               }
             },
@@ -47745,8 +47882,8 @@
       ]
     }
   ],
-  "openapi_sha256": "081278fb6f39ab292da59a2f8369ce03ca73d4a381ba653f3fbebb032811a9d6",
-  "operation_count": 526,
+  "openapi_sha256": "b4a109f690c40f1635bca85b5381988f6321e97ef6ac1494757c2fe1e29c8040",
+  "operation_count": 529,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
