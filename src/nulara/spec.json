@@ -14860,7 +14860,7 @@
               },
               {
                 "argument": "location_type",
-                "description": "GS1/UNTP-aligned physical location types (the \"where\" of a product).\n\nMerges UNTP Core Vocabulary facility types (production sites), storage\nclassifications (warehouses) and retail points-of-sale into one\ndiscriminator. The location's role is given by ``location_type``.",
+                "description": "What kind of place a location is: production, storage or sale.\n\nOnly ``retail_store`` drives behaviour: a POS connection maps its stores\nto retail-store locations. The kind also travels as ``facilityType`` in\nthe passport, where a reader needs no finer split than these four.",
                 "name": "location_type",
                 "option": "type",
                 "required": true,
@@ -14869,18 +14869,7 @@
                   "nullable": false,
                   "values": [
                     "factory",
-                    "farm",
-                    "mine",
-                    "refinery",
-                    "processing_plant",
-                    "assembly_plant",
-                    "laboratory",
                     "warehouse",
-                    "distribution_center",
-                    "fulfillment_center",
-                    "cold_storage",
-                    "cross_dock",
-                    "bonded",
                     "retail_store",
                     "other"
                   ]
@@ -15209,18 +15198,7 @@
                 "location_type": {
                   "enum": [
                     "factory",
-                    "farm",
-                    "mine",
-                    "refinery",
-                    "processing_plant",
-                    "assembly_plant",
-                    "laboratory",
                     "warehouse",
-                    "distribution_center",
-                    "fulfillment_center",
-                    "cold_storage",
-                    "cross_dock",
-                    "bonded",
                     "retail_store",
                     "other"
                   ],
@@ -15597,18 +15575,7 @@
                 "nullable": true,
                 "values": [
                   "factory",
-                  "farm",
-                  "mine",
-                  "refinery",
-                  "processing_plant",
-                  "assembly_plant",
-                  "laboratory",
                   "warehouse",
-                  "distribution_center",
-                  "fulfillment_center",
-                  "cold_storage",
-                  "cross_dock",
-                  "bonded",
                   "retail_store",
                   "other"
                 ]
@@ -15627,18 +15594,7 @@
                   "nullable": false,
                   "values": [
                     "factory",
-                    "farm",
-                    "mine",
-                    "refinery",
-                    "processing_plant",
-                    "assembly_plant",
-                    "laboratory",
                     "warehouse",
-                    "distribution_center",
-                    "fulfillment_center",
-                    "cold_storage",
-                    "cross_dock",
-                    "bonded",
                     "retail_store",
                     "other"
                   ]
@@ -15796,7 +15752,7 @@
               },
               {
                 "argument": "location_type",
-                "description": "GS1/UNTP-aligned physical location types (the \"where\" of a product).\n\nMerges UNTP Core Vocabulary facility types (production sites), storage\nclassifications (warehouses) and retail points-of-sale into one\ndiscriminator. The location's role is given by ``location_type``.",
+                "description": "What kind of place a location is: production, storage or sale.\n\nOnly ``retail_store`` drives behaviour: a POS connection maps its stores\nto retail-store locations. The kind also travels as ``facilityType`` in\nthe passport, where a reader needs no finer split than these four.",
                 "name": "location_type",
                 "option": "type",
                 "required": true,
@@ -15805,18 +15761,7 @@
                   "nullable": false,
                   "values": [
                     "factory",
-                    "farm",
-                    "mine",
-                    "refinery",
-                    "processing_plant",
-                    "assembly_plant",
-                    "laboratory",
                     "warehouse",
-                    "distribution_center",
-                    "fulfillment_center",
-                    "cold_storage",
-                    "cross_dock",
-                    "bonded",
                     "retail_store",
                     "other"
                   ]
@@ -16145,18 +16090,7 @@
                 "location_type": {
                   "enum": [
                     "factory",
-                    "farm",
-                    "mine",
-                    "refinery",
-                    "processing_plant",
-                    "assembly_plant",
-                    "laboratory",
                     "warehouse",
-                    "distribution_center",
-                    "fulfillment_center",
-                    "cold_storage",
-                    "cross_dock",
-                    "bonded",
                     "retail_store",
                     "other"
                   ],
@@ -45918,7 +45852,7 @@
       ]
     }
   ],
-  "openapi_sha256": "aeb8668fc3eae49da42ccdb9c6f1115c01f70163fe90890ea8bb093ffc915e72",
+  "openapi_sha256": "d4ef13a4a560ef1afdd9667deef21a786256df5013ed90e9fdf540bd4a88890c",
   "operation_count": 497,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
