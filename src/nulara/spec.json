@@ -252,21 +252,6 @@
                 "sensitive": false
               },
               {
-                "argument": "timezone",
-                "description": null,
-                "name": "timezone",
-                "option": "timezone",
-                "required": true,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "nullable": false
-                },
-                "sensitive": false
-              },
-              {
                 "argument": "note",
                 "description": null,
                 "name": "note",
@@ -306,11 +291,6 @@
                   "format": "date-time",
                   "type": "string"
                 },
-                "timezone": {
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "type": "string"
-                },
                 "type": {
                   "enum": [
                     "vacation",
@@ -334,8 +314,7 @@
               "required": [
                 "type",
                 "start_at",
-                "end_at",
-                "timezone"
+                "end_at"
               ],
               "type": "object"
             },
@@ -681,21 +660,6 @@
                 "sensitive": false
               },
               {
-                "argument": "timezone",
-                "description": null,
-                "name": "timezone",
-                "option": "timezone",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "nullable": false
-                },
-                "sensitive": false
-              },
-              {
                 "argument": "note",
                 "description": null,
                 "name": "note",
@@ -733,11 +697,6 @@
                 },
                 "start_at": {
                   "format": "date-time",
-                  "type": "string"
-                },
-                "timezone": {
-                  "maxLength": 64,
-                  "minLength": 1,
                   "type": "string"
                 },
                 "type": {
@@ -45959,7 +45918,7 @@
       ]
     }
   ],
-  "openapi_sha256": "b939074d16e353328978441e182f18ad36fc1fe3dc31a3f60456bdee2c016919",
+  "openapi_sha256": "aeb8668fc3eae49da42ccdb9c6f1115c01f70163fe90890ea8bb093ffc915e72",
   "operation_count": 497,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"

@@ -285,23 +285,24 @@ def test_schema_manifest_exposes_and_sends_the_strict_contract(
     }
 
 
-def test_absence_manifest_exposes_timezone_update_and_id_filter() -> None:
+def test_absence_manifest_exposes_update_and_id_filter() -> None:
     manifest = load_manifest(NULARA)
     modules = {module["name"]: module for module in manifest["modules"]}
     operations = {
         operation["name"]: operation for operation in modules["absences"]["operations"]
     }
 
+    # The API files an absence in the workspace's zone; no caller names one.
     assert operations["create"]["body"]["schema"]["required"] == [
         "type",
         "start_at",
         "end_at",
-        "timezone",
     ]
     update_fields = {
         field["name"]: field for field in operations["update"]["body"]["properties"]
     }
-    assert update_fields["timezone"]["schema"]["nullable"] is False
+    assert "timezone" not in update_fields
+    assert update_fields["start_at"]["schema"]["nullable"] is False
     list_parameters = {
         parameter["name"]: parameter for parameter in operations["list"]["parameters"]
     }
