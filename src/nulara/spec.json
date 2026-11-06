@@ -24842,8 +24842,7 @@
                   "nullable": false,
                   "values": [
                     "publish",
-                    "unpublish",
-                    "submit-for-review"
+                    "unpublish"
                   ]
                 },
                 "sensitive": false
@@ -24856,8 +24855,7 @@
                 "action": {
                   "enum": [
                     "publish",
-                    "unpublish",
-                    "submit-for-review"
+                    "unpublish"
                   ],
                   "type": "string"
                 },
@@ -25334,7 +25332,6 @@
                 "nullable": true,
                 "values": [
                   "draft",
-                  "ready_for_review",
                   "published",
                   "stale",
                   "superseded",
@@ -25357,7 +25354,6 @@
                   "nullable": false,
                   "values": [
                     "draft",
-                    "ready_for_review",
                     "published",
                     "stale",
                     "superseded",
@@ -25772,160 +25768,6 @@
             "application/json"
           ],
           "summary": "Publish Passport"
-        },
-        {
-          "body": {
-            "content_type": "application/json",
-            "properties": [
-              {
-                "argument": "subject_level",
-                "description": null,
-                "name": "subject_level",
-                "option": "subject-level",
-                "required": true,
-                "schema": {
-                  "kind": "enum",
-                  "nullable": false,
-                  "values": [
-                    "product",
-                    "batch",
-                    "item"
-                  ]
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "product_id",
-                "description": null,
-                "name": "product_id",
-                "option": "product-id",
-                "required": false,
-                "schema": {
-                  "format": "uuid",
-                  "kind": "string",
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "item_id",
-                "description": null,
-                "name": "item_id",
-                "option": "item-id",
-                "required": false,
-                "schema": {
-                  "format": "uuid",
-                  "kind": "string",
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "batch_number",
-                "description": null,
-                "name": "batch_number",
-                "option": "batch-number",
-                "required": false,
-                "schema": {
-                  "format": null,
-                  "kind": "string",
-                  "maxLength": 255,
-                  "minLength": 1,
-                  "nullable": true
-                },
-                "sensitive": false
-              },
-              {
-                "argument": "record_id",
-                "description": null,
-                "name": "record_id",
-                "option": "record-id",
-                "required": false,
-                "schema": {
-                  "format": "uuid",
-                  "kind": "string",
-                  "nullable": true
-                },
-                "sensitive": false
-              }
-            ],
-            "required": true,
-            "schema": {
-              "additionalProperties": false,
-              "properties": {
-                "batch_number": {
-                  "anyOf": [
-                    {
-                      "maxLength": 255,
-                      "minLength": 1,
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "item_id": {
-                  "anyOf": [
-                    {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "product_id": {
-                  "anyOf": [
-                    {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "record_id": {
-                  "anyOf": [
-                    {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "subject_level": {
-                  "enum": [
-                    "product",
-                    "batch",
-                    "item"
-                  ],
-                  "type": "string"
-                }
-              },
-              "required": [
-                "subject_level"
-              ],
-              "type": "object"
-            },
-            "structured": true
-          },
-          "dangerous": true,
-          "description": "Mark a passport as ready for review before publishing.",
-          "method": "POST",
-          "name": "submit-passport-for-review",
-          "operation_id": "submit_passport_for_review",
-          "pagination": null,
-          "parameters": [],
-          "path": "/passport-publications/submit-for-review",
-          "response_content_types": [
-            "application/json"
-          ],
-          "summary": "Submit Passport For Review"
         },
         {
           "body": {
@@ -29303,7 +29145,6 @@
                   "nullable": false,
                   "values": [
                     "draft",
-                    "ready_for_review",
                     "published",
                     "stale",
                     "superseded",
@@ -30361,7 +30202,6 @@
                   "nullable": false,
                   "values": [
                     "draft",
-                    "ready_for_review",
                     "published",
                     "stale",
                     "superseded",
@@ -46119,8 +45959,8 @@
       ]
     }
   ],
-  "openapi_sha256": "34ad4348b9aef6be03101637ad0e283b6a2188225afabda6ebe5eefd8dee8b70",
-  "operation_count": 498,
+  "openapi_sha256": "6966ea7b52732f866ae0f1cc3371842529f6499006d1041065ed4352b8aad1fe",
+  "operation_count": 497,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
