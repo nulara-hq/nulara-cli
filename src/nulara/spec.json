@@ -12672,21 +12672,6 @@
               }
             },
             {
-              "argument": "search",
-              "description": null,
-              "location": "query",
-              "name": "search",
-              "option": "search",
-              "required": false,
-              "schema": {
-                "format": null,
-                "kind": "string",
-                "maxLength": 500,
-                "minLength": 1,
-                "nullable": true
-              }
-            },
-            {
               "argument": "kinds",
               "description": null,
               "location": "query",
@@ -45852,7 +45837,7 @@
       ]
     }
   ],
-  "openapi_sha256": "d4ef13a4a560ef1afdd9667deef21a786256df5013ed90e9fdf540bd4a88890c",
+  "openapi_sha256": "3fcb71e6b279834223d5c27eb191d611dc27e9da1d093a1e5a452faa5da4ea8a",
   "operation_count": 497,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
