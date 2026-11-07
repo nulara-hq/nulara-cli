@@ -558,3 +558,19 @@ def test_build_skips_malformed_path_and_parameter_entries() -> None:
     assert operation(manifest, "locations", "create")["operation_id"] == (
         "create_location"
     )
+
+
+def test_a_field_named_like_a_command_flag_is_renamed_after_its_location() -> None:
+    document = openapi_document()
+    create = document["paths"]["/locations/{location_id}"]["post"]
+    create["parameters"].append(
+        {"in": "query", "name": "output", "schema": {"type": "string"}}
+    )
+    manifest = build_command_manifest(document, product="nulara")
+    parameter = next(
+        item
+        for item in operation(manifest, "locations", "create")["parameters"]
+        if item["name"] == "output"
+    )
+    assert parameter["argument"] == "query_output"
+    assert parameter["option"] == "query-output"

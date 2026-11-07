@@ -12,6 +12,25 @@ from nulara.core.errors import ConfigurationError
 MANIFEST_VERSION = 2
 HTTP_METHODS = {"delete", "get", "head", "patch", "post", "put"}
 PREPOSITIONS = {"as", "by", "for", "from", "in", "into", "of", "on", "to", "with"}
+# The keyword arguments and flags every generated command carries itself
+# (`nulara.core.direct._command_signature`). An API field of the same name is
+# renamed after its location, so `?output=` becomes `--query-output`.
+COMMAND_ARGUMENTS = frozenset(
+    {
+        "all_pages",
+        "connection",
+        "dry_run",
+        "input_file",
+        "json_output",
+        "max_items",
+        "output",
+        "overwrite",
+        "yes",
+    }
+)
+COMMAND_OPTIONS = frozenset(
+    {"all", "dry-run", "input", "json", "max-items", "output", "overwrite", "yes"}
+)
 
 
 def build_command_manifest(document: dict[str, Any], *, product: str) -> dict[str, Any]:
@@ -176,7 +195,7 @@ def _parameters(
     raw_parameters: list[Any], schemas: dict[str, Any], module: str
 ) -> list[dict[str, Any]]:
     parameters: list[dict[str, Any]] = []
-    used_arguments: set[str] = set()
+    used_arguments: set[str] = set(COMMAND_ARGUMENTS)
     for raw in raw_parameters:
         parameter = _resolve(raw, schemas)
         if not isinstance(parameter, dict):
@@ -193,7 +212,7 @@ def _parameters(
             {
                 "argument": argument,
                 "name": name,
-                "option": _option_name(name, module),
+                "option": _option_name(name, module, location),
                 "location": location,
                 "required": bool(parameter.get("required")),
                 "description": parameter.get("description"),
@@ -240,7 +259,7 @@ def _request_body(
                 {
                     "argument": argument,
                     "name": name,
-                    "option": _option_name(name, module),
+                    "option": _option_name(name, module, "body"),
                     "required": name in required_fields,
                     "sensitive": bool(
                         isinstance(resolved, dict)
@@ -530,12 +549,15 @@ def _pagination(
     return {"items": arrays[0]}
 
 
-def _option_name(name: str, module: str) -> str:
+def _option_name(name: str, module: str, location: str) -> str:
     singular = _singular(module.replace("-", "_"))
     normalized = name.replace("-", "_")
     if normalized == f"{singular}_type":
         return "type"
-    return normalized.replace("_", "-")
+    option = normalized.replace("_", "-")
+    if option in COMMAND_OPTIONS:
+        return f"{location}-{option}"
+    return option
 
 
 def _unique_argument(name: str, location: str, used: set[str]) -> str:

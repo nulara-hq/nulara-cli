@@ -28677,7 +28677,7 @@
                 "argument": "output",
                 "description": null,
                 "name": "output",
-                "option": "output",
+                "option": "body-output",
                 "required": true,
                 "schema": {
                   "kind": "enum",
@@ -30778,7 +30778,7 @@
                 "argument": "output",
                 "description": null,
                 "name": "output",
-                "option": "output",
+                "option": "body-output",
                 "required": true,
                 "schema": {
                   "kind": "enum",
@@ -39070,11 +39070,11 @@
           "pagination": null,
           "parameters": [
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
@@ -39239,11 +39239,11 @@
               }
             },
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
@@ -40309,11 +40309,11 @@
           "pagination": null,
           "parameters": [
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
@@ -40478,11 +40478,11 @@
               }
             },
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
@@ -45238,11 +45238,11 @@
               }
             },
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
@@ -46142,11 +46142,11 @@
               }
             },
             {
-              "argument": "output",
+              "argument": "query_output",
               "description": null,
               "location": "query",
               "name": "output",
-              "option": "output",
+              "option": "query-output",
               "required": true,
               "schema": {
                 "kind": "enum",
