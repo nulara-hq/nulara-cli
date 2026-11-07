@@ -28670,6 +28670,256 @@
           "summary": "Dismiss Product Merge Candidate"
         },
         {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "output",
+                "description": null,
+                "name": "output",
+                "option": "output",
+                "required": true,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": false,
+                  "values": [
+                    "single",
+                    "a4-grid"
+                  ]
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "sheet_layout",
+                "description": null,
+                "name": "sheet_layout",
+                "option": "sheet-layout",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    8,
+                    10,
+                    12,
+                    15
+                  ]
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "width_mm",
+                "description": null,
+                "name": "width_mm",
+                "option": "width-mm",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "number",
+                  "maximum": 297.0,
+                  "minimum": 40.0,
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "height_mm",
+                "description": null,
+                "name": "height_mm",
+                "option": "height-mm",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "number",
+                  "maximum": 297.0,
+                  "minimum": 20.0,
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "items",
+                "description": null,
+                "name": "items",
+                "option": "items",
+                "required": true,
+                "schema": {
+                  "items": {
+                    "kind": "json",
+                    "nullable": false
+                  },
+                  "kind": "array",
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "nullable": false
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "logo",
+                "description": null,
+                "name": "logo",
+                "option": "logo",
+                "required": false,
+                "schema": {
+                  "kind": "json",
+                  "nullable": true
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "height_mm": {
+                  "anyOf": [
+                    {
+                      "maximum": 297.0,
+                      "minimum": 20.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "items": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "copies": {
+                        "maximum": 100.0,
+                        "minimum": 1.0,
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "maxLength": 3,
+                        "minLength": 3,
+                        "pattern": "^[A-Z]{3}$",
+                        "type": "string"
+                      },
+                      "price_minor_units": {
+                        "maximum": 1000000000000000.0,
+                        "minimum": -1000000000000000.0,
+                        "type": "integer"
+                      },
+                      "product_id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "text_lines": {
+                        "items": {
+                          "maxLength": 120,
+                          "type": "string"
+                        },
+                        "maxItems": 3,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "price_minor_units",
+                      "currency"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "logo": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "maxLength": 699052,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "output": {
+                  "enum": [
+                    "single",
+                    "a4-grid"
+                  ],
+                  "type": "string"
+                },
+                "sheet_layout": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        8,
+                        10,
+                        12,
+                        15
+                      ],
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "width_mm": {
+                  "anyOf": [
+                    {
+                      "maximum": 297.0,
+                      "minimum": 40.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "output",
+                "items"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Print price labels as a PDF.\n\nPer product the price, extra lines and number of copies the operator set,\nwith its name and retail barcode (EAN-8, UPC-A or EAN-13 from its GTIN);\none label per page or a grid on A4. At most 1,000 labels per document.",
+          "method": "POST",
+          "name": "export-price-labels",
+          "operation_id": "export_price_labels",
+          "pagination": null,
+          "parameters": [],
+          "path": "/price-labels/export",
+          "response_content_types": [
+            "application/json",
+            "application/pdf"
+          ],
+          "summary": "Export Price Labels"
+        },
+        {
           "body": null,
           "dangerous": false,
           "description": "Export filtered workspace products with per-location fungible stock as CSV/XLSX.",
@@ -30519,6 +30769,256 @@
             "application/json"
           ],
           "summary": "Merge Products"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "output",
+                "description": null,
+                "name": "output",
+                "option": "output",
+                "required": true,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": false,
+                  "values": [
+                    "single",
+                    "a4-grid"
+                  ]
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "sheet_layout",
+                "description": null,
+                "name": "sheet_layout",
+                "option": "sheet-layout",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    8,
+                    10,
+                    12,
+                    15
+                  ]
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "width_mm",
+                "description": null,
+                "name": "width_mm",
+                "option": "width-mm",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "number",
+                  "maximum": 297.0,
+                  "minimum": 40.0,
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "height_mm",
+                "description": null,
+                "name": "height_mm",
+                "option": "height-mm",
+                "required": false,
+                "schema": {
+                  "format": null,
+                  "kind": "number",
+                  "maximum": 297.0,
+                  "minimum": 20.0,
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "items",
+                "description": null,
+                "name": "items",
+                "option": "items",
+                "required": true,
+                "schema": {
+                  "items": {
+                    "kind": "json",
+                    "nullable": false
+                  },
+                  "kind": "array",
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "nullable": false
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "logo",
+                "description": null,
+                "name": "logo",
+                "option": "logo",
+                "required": false,
+                "schema": {
+                  "kind": "json",
+                  "nullable": true
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "additionalProperties": false,
+              "properties": {
+                "height_mm": {
+                  "anyOf": [
+                    {
+                      "maximum": 297.0,
+                      "minimum": 20.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "items": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "copies": {
+                        "maximum": 100.0,
+                        "minimum": 1.0,
+                        "type": "integer"
+                      },
+                      "currency": {
+                        "maxLength": 3,
+                        "minLength": 3,
+                        "pattern": "^[A-Z]{3}$",
+                        "type": "string"
+                      },
+                      "price_minor_units": {
+                        "maximum": 1000000000000000.0,
+                        "minimum": -1000000000000000.0,
+                        "type": "integer"
+                      },
+                      "product_id": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "text_lines": {
+                        "items": {
+                          "maxLength": 120,
+                          "type": "string"
+                        },
+                        "maxItems": 3,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "product_id",
+                      "price_minor_units",
+                      "currency"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 100,
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "logo": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "data": {
+                          "maxLength": 699052,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "output": {
+                  "enum": [
+                    "single",
+                    "a4-grid"
+                  ],
+                  "type": "string"
+                },
+                "sheet_layout": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        8,
+                        10,
+                        12,
+                        15
+                      ],
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "width_mm": {
+                  "anyOf": [
+                    {
+                      "maximum": 297.0,
+                      "minimum": 40.0,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "output",
+                "items"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "The first page of the price label PDF as a JPEG.\n\nThe same rendering as `export_price_labels`, so the preview is the print.",
+          "method": "POST",
+          "name": "preview-price-labels",
+          "operation_id": "preview_price_labels",
+          "pagination": null,
+          "parameters": [],
+          "path": "/price-labels/preview",
+          "response_content_types": [
+            "application/json",
+            "image/jpeg"
+          ],
+          "summary": "Preview Price Labels"
         },
         {
           "body": null,
@@ -38561,6 +39061,262 @@
           "summary": "Delete Storage Bin"
         },
         {
+          "body": null,
+          "dangerous": false,
+          "description": "Print storage bin labels as a PDF, in the order the bins are named.\n\nThe bin code to read, its Code 128 to scan, the warehouse, and for a bin\nwhose warehouse has a GLN, when asked, the GS1-128 `(414)GLN(254)code`.",
+          "method": "GET",
+          "name": "export-labels",
+          "operation_id": "export_storage_bin_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "storage_bin_ids",
+              "description": null,
+              "location": "query",
+              "name": "storage_bin_ids",
+              "option": "storage-bin-ids",
+              "required": true,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 100,
+                "minItems": 1,
+                "nullable": false
+              }
+            },
+            {
+              "argument": "include_gs1",
+              "description": null,
+              "location": "query",
+              "name": "include_gs1",
+              "option": "include-gs1",
+              "required": false,
+              "schema": {
+                "default": true,
+                "format": null,
+                "kind": "boolean",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/storage-bins/labels",
+          "response_content_types": [
+            "application/json",
+            "application/pdf"
+          ],
+          "summary": "Export Storage Bin Labels"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "Print a shelf's put-away labels as a PDF.\n\nWhat lies there, where, since when, and its barcode; the labels of\n`list_storage_bin_putaway_label_subjects`. Refused while one of them has\nno barcode. Dates follow the user's time zone.",
+          "method": "GET",
+          "name": "export-putaway-labels",
+          "operation_id": "export_storage_bin_putaway_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "storage_bin_id",
+              "description": null,
+              "location": "path",
+              "name": "storage_bin_id",
+              "option": "storage-bin-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "product_ids",
+              "description": null,
+              "location": "query",
+              "name": "product_ids",
+              "option": "product-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "item_ids",
+              "description": null,
+              "location": "query",
+              "name": "item_ids",
+              "option": "item-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/storage-bins/{storage_bin_id}/putaway-labels",
+          "response_content_types": [
+            "application/json",
+            "application/pdf"
+          ],
+          "summary": "Export Storage Bin Putaway Labels"
+        },
+        {
           "body": {
             "content_type": "application/json",
             "properties": [
@@ -39094,6 +39850,71 @@
         {
           "body": null,
           "dangerous": false,
+          "description": "List the put-away labels a shelf prints, and which cannot carry a barcode.\n\nOne per quantity placed on the shelf and one per serialized unit on it, or\nonly the marked products or units. A label's barcode encodes the unit's\nserial, else the product's retail GTIN, else its internal reference.",
+          "method": "GET",
+          "name": "list-putaway-label-subjects",
+          "operation_id": "list_storage_bin_putaway_label_subjects",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "storage_bin_id",
+              "description": null,
+              "location": "path",
+              "name": "storage_bin_id",
+              "option": "storage-bin-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "product_ids",
+              "description": null,
+              "location": "query",
+              "name": "product_ids",
+              "option": "product-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "item_ids",
+              "description": null,
+              "location": "query",
+              "name": "item_ids",
+              "option": "item-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/storage-bins/{storage_bin_id}/putaway-labels/subjects",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "List Storage Bin Putaway Label Subjects"
+        },
+        {
+          "body": null,
+          "dangerous": false,
           "description": "List the fungible product quantities placed on a storage bin.",
           "method": "GET",
           "name": "list-stock",
@@ -39477,6 +40298,262 @@
             "application/json"
           ],
           "summary": "List Storage Bins"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "The first page of the storage bin label PDF as a JPEG.\n\nThe same rendering as `export_storage_bin_labels`, so the preview is the\nprint.",
+          "method": "GET",
+          "name": "preview-labels",
+          "operation_id": "preview_storage_bin_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "storage_bin_ids",
+              "description": null,
+              "location": "query",
+              "name": "storage_bin_ids",
+              "option": "storage-bin-ids",
+              "required": true,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 100,
+                "minItems": 1,
+                "nullable": false
+              }
+            },
+            {
+              "argument": "include_gs1",
+              "description": null,
+              "location": "query",
+              "name": "include_gs1",
+              "option": "include-gs1",
+              "required": false,
+              "schema": {
+                "default": true,
+                "format": null,
+                "kind": "boolean",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/storage-bins/labels/preview",
+          "response_content_types": [
+            "application/json",
+            "image/jpeg"
+          ],
+          "summary": "Preview Storage Bin Labels"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "The first page of a shelf's put-away label PDF as a JPEG.\n\nThe same rendering as `export_storage_bin_putaway_labels`, so the preview\nis the print.",
+          "method": "GET",
+          "name": "preview-putaway-labels",
+          "operation_id": "preview_storage_bin_putaway_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "storage_bin_id",
+              "description": null,
+              "location": "path",
+              "name": "storage_bin_id",
+              "option": "storage-bin-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "product_ids",
+              "description": null,
+              "location": "query",
+              "name": "product_ids",
+              "option": "product-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "item_ids",
+              "description": null,
+              "location": "query",
+              "name": "item_ids",
+              "option": "item-ids",
+              "required": false,
+              "schema": {
+                "items": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": false
+                },
+                "kind": "array",
+                "maxItems": 1000,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/storage-bins/{storage_bin_id}/putaway-labels/preview",
+          "response_content_types": [
+            "application/json",
+            "image/jpeg"
+          ],
+          "summary": "Preview Storage Bin Putaway Labels"
         },
         {
           "body": null,
@@ -44141,6 +45218,106 @@
         {
           "body": null,
           "dangerous": false,
+          "description": "Print a goods receipt's put-away labels as a PDF.\n\nThe labels of `list_work_order_putaway_label_subjects`, all in one\ndocument; refused while one of them has no barcode. Dates follow the\nuser's time zone.",
+          "method": "GET",
+          "name": "export-putaway-labels",
+          "operation_id": "export_work_order_putaway_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "work_order_id",
+              "description": null,
+              "location": "path",
+              "name": "work_order_id",
+              "option": "work-order-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/work-orders/{work_order_id}/putaway-labels",
+          "response_content_types": [
+            "application/json",
+            "application/pdf"
+          ],
+          "summary": "Export Work Order Putaway Labels"
+        },
+        {
+          "body": null,
+          "dangerous": false,
           "description": "Get a single work order by ID with its lines.",
           "method": "GET",
           "name": "get",
@@ -44284,6 +45461,35 @@
             "application/json"
           ],
           "summary": "Get Work Order Overview"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "List the put-away labels a goods receipt prints, and which cannot carry a barcode.\n\nOne per bin and article the receipt put away, dated by the first movement\nonto that bin. A label's barcode encodes the product's retail GTIN, else\nits internal reference.",
+          "method": "GET",
+          "name": "list-putaway-label-subjects",
+          "operation_id": "list_work_order_putaway_label_subjects",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "work_order_id",
+              "description": null,
+              "location": "path",
+              "name": "work_order_id",
+              "option": "work-order-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            }
+          ],
+          "path": "/work-orders/{work_order_id}/putaway-labels/subjects",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "List Work Order Putaway Label Subjects"
         },
         {
           "body": null,
@@ -44912,6 +46118,106 @@
             "application/json"
           ],
           "summary": "Post Work Order Goods Receipt"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "The first page of a goods receipt's put-away label PDF as a JPEG.\n\nThe same rendering as `export_work_order_putaway_labels`, so the preview\nis the print.",
+          "method": "GET",
+          "name": "preview-putaway-labels",
+          "operation_id": "preview_work_order_putaway_labels",
+          "pagination": null,
+          "parameters": [
+            {
+              "argument": "work_order_id",
+              "description": null,
+              "location": "path",
+              "name": "work_order_id",
+              "option": "work-order-id",
+              "required": true,
+              "schema": {
+                "format": "uuid",
+                "kind": "string",
+                "nullable": false
+              }
+            },
+            {
+              "argument": "output",
+              "description": null,
+              "location": "query",
+              "name": "output",
+              "option": "output",
+              "required": true,
+              "schema": {
+                "kind": "enum",
+                "nullable": false,
+                "values": [
+                  "single",
+                  "a4-grid"
+                ]
+              }
+            },
+            {
+              "argument": "sheet_layout",
+              "description": null,
+              "location": "query",
+              "name": "sheet_layout",
+              "option": "sheet-layout",
+              "required": false,
+              "schema": {
+                "kind": "enum",
+                "nullable": true,
+                "values": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  8,
+                  10,
+                  12,
+                  15
+                ]
+              }
+            },
+            {
+              "argument": "width_mm",
+              "description": null,
+              "location": "query",
+              "name": "width_mm",
+              "option": "width-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 40,
+                "nullable": true
+              }
+            },
+            {
+              "argument": "height_mm",
+              "description": null,
+              "location": "query",
+              "name": "height_mm",
+              "option": "height-mm",
+              "required": false,
+              "schema": {
+                "format": null,
+                "kind": "number",
+                "maximum": 297,
+                "minimum": 20,
+                "nullable": true
+              }
+            }
+          ],
+          "path": "/work-orders/{work_order_id}/putaway-labels/preview",
+          "response_content_types": [
+            "application/json",
+            "image/jpeg"
+          ],
+          "summary": "Preview Work Order Putaway Labels"
         },
         {
           "body": {
@@ -45837,8 +47143,8 @@
       ]
     }
   ],
-  "openapi_sha256": "2e654811f3a9f0a7e7a7385bc8907b7c3f88856abbd0172b83f76000b8099d1b",
-  "operation_count": 497,
+  "openapi_sha256": "d15e1fb1296bf4118ce19b6ad8db8b2701b464880cbb0f97b6ccb92ae5c53b08",
+  "operation_count": 507,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
