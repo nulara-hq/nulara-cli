@@ -7026,12 +7026,30 @@
                   "nullable": false
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "is_write_target",
+                "description": null,
+                "name": "is_write_target",
+                "option": "is-write-target",
+                "required": false,
+                "schema": {
+                  "const": true,
+                  "format": null,
+                  "kind": "boolean",
+                  "nullable": false
+                },
+                "sensitive": false
               }
             ],
             "required": true,
             "schema": {
               "properties": {
                 "is_selected": {
+                  "type": "boolean"
+                },
+                "is_write_target": {
+                  "const": true,
                   "type": "boolean"
                 },
                 "shares_busy": {
@@ -7043,7 +7061,7 @@
             "structured": true
           },
           "dangerous": true,
-          "description": "Mirror a calendar or stop, and share it as busy with colleagues or not.",
+          "description": "Mirror a calendar or stop, share it as busy with colleagues or not, or\nmake it the calendar the caller's new events are written to.",
           "method": "PATCH",
           "name": "update-calendar-source",
           "operation_id": "update_calendar_source",
@@ -7273,6 +7291,20 @@
                   "nullable": false
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "create_video_conference",
+                "description": "Ask the creator's connected Google or Microsoft calendar for a Meet or Teams link; it lands in meeting_url once the provider made it. Ignored without a connected calendar to write to.",
+                "name": "create_video_conference",
+                "option": "create-video-conference",
+                "required": false,
+                "schema": {
+                  "default": false,
+                  "format": null,
+                  "kind": "boolean",
+                  "nullable": false
+                },
+                "sensitive": false
               }
             ],
             "required": true,
@@ -7356,6 +7388,9 @@
                       "type": "null"
                     }
                   ]
+                },
+                "create_video_conference": {
+                  "type": "boolean"
                 },
                 "description": {
                   "anyOf": [
@@ -7441,7 +7476,7 @@
             "structured": true
           },
           "dangerous": true,
-          "description": "Create a calendar event in the user's workspace.",
+          "description": "Create a calendar event in the user's workspace.\n\nWith a connected calendar to write to, the event is also written there.",
           "method": "POST",
           "name": "create",
           "operation_id": "create_calendar_event",
@@ -7456,7 +7491,7 @@
         {
           "body": null,
           "dangerous": true,
-          "description": "Delete a calendar event.",
+          "description": "Delete a calendar event, and its copy in a connected calendar.",
           "method": "DELETE",
           "name": "delete",
           "operation_id": "delete_calendar_event",
@@ -7910,6 +7945,20 @@
                   "nullable": false
                 },
                 "sensitive": false
+              },
+              {
+                "argument": "create_video_conference",
+                "description": "Ask the creator's connected calendar for a Meet or Teams link, as on create. A link once made stays.",
+                "name": "create_video_conference",
+                "option": "create-video-conference",
+                "required": false,
+                "schema": {
+                  "const": true,
+                  "format": null,
+                  "kind": "boolean",
+                  "nullable": false
+                },
+                "sensitive": false
               }
             ],
             "required": true,
@@ -7994,6 +8043,10 @@
                     }
                   ]
                 },
+                "create_video_conference": {
+                  "const": true,
+                  "type": "boolean"
+                },
                 "description": {
                   "anyOf": [
                     {
@@ -8073,7 +8126,7 @@
             "structured": true
           },
           "dangerous": true,
-          "description": "Update a calendar event.",
+          "description": "Update a calendar event, and its copy in a connected calendar.",
           "method": "PATCH",
           "name": "update",
           "operation_id": "update_calendar_event",
@@ -47143,7 +47196,7 @@
       ]
     }
   ],
-  "openapi_sha256": "d15e1fb1296bf4118ce19b6ad8db8b2701b464880cbb0f97b6ccb92ae5c53b08",
+  "openapi_sha256": "d2301f3c2a20ef7dab4bd8b79f4dc9a22a4024b5c33fe02331be5319178e50be",
   "operation_count": 507,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
