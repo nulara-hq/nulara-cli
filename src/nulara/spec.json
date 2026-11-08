@@ -7294,7 +7294,7 @@
               },
               {
                 "argument": "create_video_conference",
-                "description": "Ask the creator's connected Google or Microsoft calendar for a Meet or Teams link; it lands in meeting_url once the provider made it. Ignored without a connected calendar to write to.",
+                "description": "Ask the creator's connected Google or Microsoft calendar for a Meet or Teams link; it lands in meeting_url once the provider made it. Refused (CALENDAR_EVENT_VIDEO_CONFERENCE_UNAVAILABLE) without a connected calendar to write to; ignored when meeting_url is given.",
                 "name": "create_video_conference",
                 "option": "create-video-conference",
                 "required": false,
@@ -7948,7 +7948,7 @@
               },
               {
                 "argument": "create_video_conference",
-                "description": "Ask the creator's connected calendar for a Meet or Teams link, as on create. A link once made stays.",
+                "description": "Ask the connected calendar holding the event's copy for a Meet or Teams link, as on create; refused without a copy (copy_provider null). A link once made stays.",
                 "name": "create_video_conference",
                 "option": "create-video-conference",
                 "required": false,
@@ -47196,7 +47196,7 @@
       ]
     }
   ],
-  "openapi_sha256": "25ed8916b535543fba2e5f0370f98d490833c30449227d581631049966e7ccb5",
+  "openapi_sha256": "173115d3b860f0ab996d1403e0c234036fb90bd2476dffe031bfebdc270b4c12",
   "operation_count": 507,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
