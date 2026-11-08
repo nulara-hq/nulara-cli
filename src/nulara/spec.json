@@ -43953,16 +43953,16 @@
             "properties": [
               {
                 "argument": "algorithm",
-                "description": "Scheme that wraps a container or file key for one member's public key.",
+                "description": "Scheme that wraps a container or file key for one member's public key.\n\nThe browser seals and opens every wrap; the server only stores the label.\n`hpke-base-x25519-sha256-aes256gcm` is HPKE Base mode (RFC 9180) with\nDHKEM(X25519, HKDF-SHA256), HKDF-SHA256 and AES-256-GCM.",
                 "name": "algorithm",
                 "option": "algorithm",
                 "required": false,
                 "schema": {
-                  "default": "x25519-hkdf-aesgcm",
+                  "default": "hpke-base-x25519-sha256-aes256gcm",
                   "kind": "enum",
                   "nullable": false,
                   "values": [
-                    "x25519-hkdf-aesgcm"
+                    "hpke-base-x25519-sha256-aes256gcm"
                   ]
                 },
                 "sensitive": false
@@ -43988,7 +43988,7 @@
               "properties": {
                 "algorithm": {
                   "enum": [
-                    "x25519-hkdf-aesgcm"
+                    "hpke-base-x25519-sha256-aes256gcm"
                   ],
                   "type": "string"
                 },
@@ -44038,16 +44038,16 @@
             "properties": [
               {
                 "argument": "algorithm",
-                "description": "Scheme that wraps a container or file key for one member's public key.",
+                "description": "Scheme that wraps a container or file key for one member's public key.\n\nThe browser seals and opens every wrap; the server only stores the label.\n`hpke-base-x25519-sha256-aes256gcm` is HPKE Base mode (RFC 9180) with\nDHKEM(X25519, HKDF-SHA256), HKDF-SHA256 and AES-256-GCM.",
                 "name": "algorithm",
                 "option": "algorithm",
                 "required": false,
                 "schema": {
-                  "default": "x25519-hkdf-aesgcm",
+                  "default": "hpke-base-x25519-sha256-aes256gcm",
                   "kind": "enum",
                   "nullable": false,
                   "values": [
-                    "x25519-hkdf-aesgcm"
+                    "hpke-base-x25519-sha256-aes256gcm"
                   ]
                 },
                 "sensitive": false
@@ -44073,7 +44073,7 @@
               "properties": {
                 "algorithm": {
                   "enum": [
-                    "x25519-hkdf-aesgcm"
+                    "hpke-base-x25519-sha256-aes256gcm"
                   ],
                   "type": "string"
                 },
@@ -47196,7 +47196,7 @@
       ]
     }
   ],
-  "openapi_sha256": "173115d3b860f0ab996d1403e0c234036fb90bd2476dffe031bfebdc270b4c12",
+  "openapi_sha256": "bddfdda37fee78d500dd84e0478374e97bc30f61137ede3db3d988c38770164e",
   "operation_count": 507,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
