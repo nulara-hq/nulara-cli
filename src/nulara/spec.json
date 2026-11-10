@@ -20885,7 +20885,7 @@
         {
           "body": null,
           "dangerous": false,
-          "description": "Stream a profile image referenced by a user response.",
+          "description": "Stream a profile image referenced by a user response.\n\nThe stored URL points here from both surfaces, so the admin console's\nsession reads it too when it is the only one the browser holds.",
           "method": "GET",
           "name": "get-user-profile-image",
           "operation_id": "get_user_profile_image",
@@ -47196,7 +47196,7 @@
       ]
     }
   ],
-  "openapi_sha256": "bddfdda37fee78d500dd84e0478374e97bc30f61137ede3db3d988c38770164e",
+  "openapi_sha256": "318ec2de95c126cf02dfd4725243e12ef026f0bcee1dedcade2b49783174b8ea",
   "operation_count": 507,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
