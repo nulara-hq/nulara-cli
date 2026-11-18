@@ -28,7 +28,7 @@
     }
   ],
   "manifest_version": 2,
-  "module_count": 51,
+  "module_count": 52,
   "modules": [
     {
       "name": "agent-config",
@@ -10061,6 +10061,90 @@
             "application/json"
           ],
           "summary": "List Countries"
+        }
+      ]
+    },
+    {
+      "name": "dpp-registry-connection",
+      "operations": [
+        {
+          "body": null,
+          "dangerous": true,
+          "description": "Remove the workspace's EU DPP Registry org-identifier; the Registry then reads only public views. Requires permission to manage the workspace.",
+          "method": "DELETE",
+          "name": "delete",
+          "operation_id": "delete_dpp_registry_connection",
+          "pagination": null,
+          "parameters": [],
+          "path": "/dpp-registry-connection",
+          "response_content_types": [],
+          "summary": "Delete Dpp Registry Connection"
+        },
+        {
+          "body": null,
+          "dangerous": false,
+          "description": "Get the workspace's organisation in the EU DPP Registry and the Registry environment this deployment trusts.",
+          "method": "GET",
+          "name": "get",
+          "operation_id": "get_dpp_registry_connection",
+          "pagination": null,
+          "parameters": [],
+          "path": "/dpp-registry-connection",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Get Dpp Registry Connection"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "organisation_identifier",
+                "description": null,
+                "name": "organisation_identifier",
+                "option": "organisation-identifier",
+                "required": true,
+                "schema": {
+                  "format": null,
+                  "kind": "string",
+                  "maxLength": 255,
+                  "minLength": 1,
+                  "nullable": false,
+                  "pattern": "^\\S(?:.*\\S)?$"
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "properties": {
+                "organisation_identifier": {
+                  "maxLength": 255,
+                  "minLength": 1,
+                  "pattern": "^\\S(?:.*\\S)?$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "organisation_identifier"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Set the workspace's EU DPP Registry org-identifier.\n\nThe Registry reads a passport's protected views only with a token naming\nexactly this organisation. Copy it unchanged from the Registry UI\n(Organisation > Verification). Requires permission to manage the workspace.",
+          "method": "PUT",
+          "name": "set",
+          "operation_id": "set_dpp_registry_connection",
+          "pagination": null,
+          "parameters": [],
+          "path": "/dpp-registry-connection",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Set Dpp Registry Connection"
         }
       ]
     },
@@ -41204,8 +41288,8 @@
       ]
     }
   ],
-  "openapi_sha256": "3d21b667c8378f20c199342710d3c072951dcf94a3bfe24b1105a1815ac42760",
-  "operation_count": 436,
+  "openapi_sha256": "128b1b9e4491b19ce3d5e859ceb220462216b3848ae842b83ff2a73ab9cffaec",
+  "operation_count": 439,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
