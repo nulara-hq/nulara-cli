@@ -3250,11 +3250,17 @@
                             }
                           ]
                         },
-                        "self_discharge_rate_evolution": {
+                        "self_discharge_rates_percent": {
                           "anyOf": [
                             {
-                              "maxLength": 1000,
-                              "type": "string"
+                              "items": {
+                                "maximum": 100.0,
+                                "minimum": 0.0,
+                                "type": "number"
+                              },
+                              "maxItems": 1000,
+                              "minItems": 1,
+                              "type": "array"
                             },
                             {
                               "type": "null"
@@ -3546,7 +3552,7 @@
                         },
                         "expected_lifetime_calendar_years": {
                           "minimum": 0.0,
-                          "type": "number"
+                          "type": "integer"
                         },
                         "expected_lifetime_cycles": {
                           "anyOf": [
@@ -3888,11 +3894,17 @@
                                 }
                               ]
                             },
-                            "self_discharge_rate_evolution": {
+                            "self_discharge_rates_percent": {
                               "anyOf": [
                                 {
-                                  "maxLength": 1000,
-                                  "type": "string"
+                                  "items": {
+                                    "maximum": 100.0,
+                                    "minimum": 0.0,
+                                    "type": "number"
+                                  },
+                                  "maxItems": 1000,
+                                  "minItems": 1,
+                                  "type": "array"
                                 },
                                 {
                                   "type": "null"
@@ -4184,7 +4196,7 @@
                             },
                             "expected_lifetime_calendar_years": {
                               "minimum": 0.0,
-                              "type": "number"
+                              "type": "integer"
                             },
                             "expected_lifetime_cycles": {
                               "anyOf": [
@@ -18580,6 +18592,54 @@
                 "sensitive": false
               },
               {
+                "argument": "critical_raw_material",
+                "description": null,
+                "name": "critical_raw_material",
+                "option": "critical-raw-material",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    "antimony",
+                    "arsenic",
+                    "baryte",
+                    "bauxiteAluminaAluminium",
+                    "beryllium",
+                    "bismuth",
+                    "boron",
+                    "cobalt",
+                    "cokingCoal",
+                    "copper",
+                    "feldspar",
+                    "fluorspar",
+                    "gallium",
+                    "germanium",
+                    "graphite",
+                    "hafnium",
+                    "heavyRareEarthElements",
+                    "helium",
+                    "lightRareEarthElements",
+                    "lithium",
+                    "magnesium",
+                    "manganese",
+                    "nickelBatteryGrade",
+                    "niobium",
+                    "phosphateRock",
+                    "phosphorus",
+                    "platinumGroupMetals",
+                    "scandium",
+                    "siliconMetal",
+                    "strontium",
+                    "tantalum",
+                    "titaniumMetal",
+                    "tungsten",
+                    "vanadium"
+                  ]
+                },
+                "sensitive": false
+              },
+              {
                 "argument": "hazardous",
                 "description": null,
                 "name": "hazardous",
@@ -18660,6 +18720,52 @@
                       "maxLength": 2,
                       "minLength": 2,
                       "pattern": "^[A-Z]{2}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "critical_raw_material": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "antimony",
+                        "arsenic",
+                        "baryte",
+                        "bauxiteAluminaAluminium",
+                        "beryllium",
+                        "bismuth",
+                        "boron",
+                        "cobalt",
+                        "cokingCoal",
+                        "copper",
+                        "feldspar",
+                        "fluorspar",
+                        "gallium",
+                        "germanium",
+                        "graphite",
+                        "hafnium",
+                        "heavyRareEarthElements",
+                        "helium",
+                        "lightRareEarthElements",
+                        "lithium",
+                        "magnesium",
+                        "manganese",
+                        "nickelBatteryGrade",
+                        "niobium",
+                        "phosphateRock",
+                        "phosphorus",
+                        "platinumGroupMetals",
+                        "scandium",
+                        "siliconMetal",
+                        "strontium",
+                        "tantalum",
+                        "titaniumMetal",
+                        "tungsten",
+                        "vanadium"
+                      ],
                       "type": "string"
                     },
                     {
@@ -19428,6 +19534,54 @@
                 "sensitive": false
               },
               {
+                "argument": "critical_raw_material",
+                "description": null,
+                "name": "critical_raw_material",
+                "option": "critical-raw-material",
+                "required": false,
+                "schema": {
+                  "kind": "enum",
+                  "nullable": true,
+                  "values": [
+                    "antimony",
+                    "arsenic",
+                    "baryte",
+                    "bauxiteAluminaAluminium",
+                    "beryllium",
+                    "bismuth",
+                    "boron",
+                    "cobalt",
+                    "cokingCoal",
+                    "copper",
+                    "feldspar",
+                    "fluorspar",
+                    "gallium",
+                    "germanium",
+                    "graphite",
+                    "hafnium",
+                    "heavyRareEarthElements",
+                    "helium",
+                    "lightRareEarthElements",
+                    "lithium",
+                    "magnesium",
+                    "manganese",
+                    "nickelBatteryGrade",
+                    "niobium",
+                    "phosphateRock",
+                    "phosphorus",
+                    "platinumGroupMetals",
+                    "scandium",
+                    "siliconMetal",
+                    "strontium",
+                    "tantalum",
+                    "titaniumMetal",
+                    "tungsten",
+                    "vanadium"
+                  ]
+                },
+                "sensitive": false
+              },
+              {
                 "argument": "hazardous",
                 "description": null,
                 "name": "hazardous",
@@ -19508,6 +19662,52 @@
                       "maxLength": 2,
                       "minLength": 2,
                       "pattern": "^[A-Z]{2}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "critical_raw_material": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "antimony",
+                        "arsenic",
+                        "baryte",
+                        "bauxiteAluminaAluminium",
+                        "beryllium",
+                        "bismuth",
+                        "boron",
+                        "cobalt",
+                        "cokingCoal",
+                        "copper",
+                        "feldspar",
+                        "fluorspar",
+                        "gallium",
+                        "germanium",
+                        "graphite",
+                        "hafnium",
+                        "heavyRareEarthElements",
+                        "helium",
+                        "lightRareEarthElements",
+                        "lithium",
+                        "magnesium",
+                        "manganese",
+                        "nickelBatteryGrade",
+                        "niobium",
+                        "phosphateRock",
+                        "phosphorus",
+                        "platinumGroupMetals",
+                        "scandium",
+                        "siliconMetal",
+                        "strontium",
+                        "tantalum",
+                        "titaniumMetal",
+                        "tungsten",
+                        "vanadium"
+                      ],
                       "type": "string"
                     },
                     {
@@ -26091,6 +26291,19 @@
                 "sensitive": false
               },
               {
+                "argument": "responsible_operator_party_id",
+                "description": null,
+                "name": "responsible_operator_party_id",
+                "option": "responsible-operator-party-id",
+                "required": false,
+                "schema": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
                 "argument": "due_diligence_declaration_id",
                 "description": null,
                 "name": "due_diligence_declaration_id",
@@ -26311,6 +26524,17 @@
                   "minLength": 1,
                   "type": "string"
                 },
+                "responsible_operator_party_id": {
+                  "anyOf": [
+                    {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
                 "taric_code": {
                   "anyOf": [
                     {
@@ -26486,6 +26710,19 @@
                 "description": null,
                 "name": "manufacturer_party_id",
                 "option": "manufacturer-party-id",
+                "required": false,
+                "schema": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
+                "argument": "responsible_operator_party_id",
+                "description": null,
+                "name": "responsible_operator_party_id",
+                "option": "responsible-operator-party-id",
                 "required": false,
                 "schema": {
                   "format": "uuid",
@@ -26790,6 +27027,17 @@
                   "maxLength": 255,
                   "minLength": 1,
                   "type": "string"
+                },
+                "responsible_operator_party_id": {
+                  "anyOf": [
+                    {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
                 "taric_code": {
                   "anyOf": [
@@ -28407,6 +28655,19 @@
                 "sensitive": false
               },
               {
+                "argument": "responsible_operator_party_id",
+                "description": null,
+                "name": "responsible_operator_party_id",
+                "option": "responsible-operator-party-id",
+                "required": false,
+                "schema": {
+                  "format": "uuid",
+                  "kind": "string",
+                  "nullable": true
+                },
+                "sensitive": false
+              },
+              {
                 "argument": "due_diligence_declaration_id",
                 "description": null,
                 "name": "due_diligence_declaration_id",
@@ -28559,6 +28820,17 @@
                     {
                       "maxLength": 255,
                       "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "responsible_operator_party_id": {
+                  "anyOf": [
+                    {
+                      "format": "uuid",
                       "type": "string"
                     },
                     {
@@ -28752,6 +29024,9 @@
                     "SafetyDataSheet",
                     "EnergyLabel",
                     "UserManual",
+                    "DismantlingInformation",
+                    "SparePartReplacement",
+                    "SafetyMeasures",
                     "Other"
                   ]
                 },
@@ -28793,6 +29068,9 @@
                     "SafetyDataSheet",
                     "EnergyLabel",
                     "UserManual",
+                    "DismantlingInformation",
+                    "SparePartReplacement",
+                    "SafetyMeasures",
                     "Other"
                   ],
                   "type": "string"
@@ -40926,7 +41204,7 @@
       ]
     }
   ],
-  "openapi_sha256": "99768dc9d3cf1ae281697e33e0b42d9113558e14c80b3e35f7133eaa84b9e60b",
+  "openapi_sha256": "c292c2db4f00a689861ccfdbf72f0b500f94b9cba659a23136a43c7f46f32a29",
   "operation_count": 436,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
