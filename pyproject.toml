@@ -1,6 +1,6 @@
 [project]
 name = "nulara"
-version = "0.2.0"
+version = "0.3.0"
 description = "Nulara command-line access"
 readme = "README.md"
 license = "Apache-2.0"
@@ -14,11 +14,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "cyclopts>=4.11,<5",
-    "httpx>=0.28,<1",
-    "keyring>=25.7,<26",
-    "rich>=15,<16",
-    "tldextract>=5.3,<6",
+    "xiii-cli-core>=0.1.0,<0.2",
 ]
 
 [project.urls]

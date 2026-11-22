@@ -104,11 +104,12 @@ with the CLI and without signing in; `nulara describe` lists the modules and
 
 ## Layout
 
-`nulara.core` holds everything that does not depend on the product: an
-entrypoint builds a `nulara.core.config.Product` (name, API, OAuth client,
-command manifest) and hands it to `nulara.core.main.build_app`. `nulara`
-itself is that entrypoint, and `src/nulara/spec.json` is its command manifest,
-generated from the app API's OpenAPI document; it is never edited by hand.
+The product-neutral core is the package
+[`xiii-cli-core`](https://github.com/xiii-hq/xiii-cli-core): `nulara`
+builds a `xiii_cli_core.config.Product` (name, API, OAuth client, command
+manifest) and hands it to `xiii_cli_core.main.build_app`. `src/nulara/spec.json` is the command
+manifest, generated from the app API's OpenAPI document; it is never edited by
+hand.
 
 ## Development
 

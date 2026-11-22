@@ -1,8 +1,8 @@
 from importlib.metadata import version
 from importlib.resources import files
 
-from nulara.core.config import Product, Surface
-from nulara.core.main import build_app, run
+from xiii_cli_core.config import Product, Surface
+from xiii_cli_core.main import build_app, run
 
 PRODUCT = Product(
     name="nulara",
