@@ -41070,6 +41070,55 @@
         {
           "body": {
             "content_type": "application/json",
+            "properties": [
+              {
+                "argument": "name",
+                "description": null,
+                "name": "name",
+                "option": "name",
+                "required": true,
+                "schema": {
+                  "format": null,
+                  "kind": "string",
+                  "maxLength": 255,
+                  "minLength": 1,
+                  "nullable": false
+                },
+                "sensitive": false
+              }
+            ],
+            "required": true,
+            "schema": {
+              "properties": {
+                "name": {
+                  "maxLength": 255,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "type": "object"
+            },
+            "structured": true
+          },
+          "dangerous": true,
+          "description": "Name a workspace for an account that belongs to none.\n\nFor an account that lost its last workspace (removed, or the workspace\nwas deleted). Refused while it still belongs to one: further\nworkspaces are provisioned by an operator.",
+          "method": "POST",
+          "name": "create-own",
+          "operation_id": "create_own_workspace",
+          "pagination": null,
+          "parameters": [],
+          "path": "/workspace",
+          "response_content_types": [
+            "application/json"
+          ],
+          "summary": "Create Own Workspace"
+        },
+        {
+          "body": {
+            "content_type": "application/json",
             "properties": [],
             "required": false,
             "schema": {
@@ -41390,8 +41439,8 @@
       ]
     }
   ],
-  "openapi_sha256": "d0ef30b30c7a32225f1f29ef9e53cef25a6f23713b9023a044c57114dffc6649",
-  "operation_count": 442,
+  "openapi_sha256": "499c7bd9e10f228d28fe9a07bd83b72e05971b1c1f337ad606436fc8a1188d2b",
+  "operation_count": 443,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
 }
