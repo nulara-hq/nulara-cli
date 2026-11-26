@@ -25020,7 +25020,8 @@
                 "values": [
                   "NONE",
                   "ESPR_DPP",
-                  "BATTERY_PASSPORT"
+                  "BATTERY_PASSPORT",
+                  "CPR_PREVIEW"
                 ]
               }
             },
@@ -25038,7 +25039,8 @@
                   "values": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ]
                 },
                 "kind": "array",
@@ -30354,7 +30356,8 @@
                   "values": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ]
                 },
                 "sensitive": false
@@ -30388,7 +30391,8 @@
                   "enum": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ],
                   "type": "string"
                 }
@@ -30624,7 +30628,8 @@
                 "values": [
                   "NONE",
                   "ESPR_DPP",
-                  "BATTERY_PASSPORT"
+                  "BATTERY_PASSPORT",
+                  "CPR_PREVIEW"
                 ]
               }
             },
@@ -30642,7 +30647,8 @@
                   "values": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ]
                 },
                 "kind": "array",
@@ -30751,7 +30757,8 @@
                   "values": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ]
                 },
                 "sensitive": false
@@ -30785,7 +30792,8 @@
                   "enum": [
                     "NONE",
                     "ESPR_DPP",
-                    "BATTERY_PASSPORT"
+                    "BATTERY_PASSPORT",
+                    "CPR_PREVIEW"
                   ],
                   "type": "string"
                 }
@@ -41468,7 +41476,7 @@
       ]
     }
   ],
-  "openapi_sha256": "ad7fcd5b61cc5f7491d8684bb148e1e844f2be9b2cf15f6d82f60675701ae51c",
+  "openapi_sha256": "c39379c4d970e2fafe3e5d477d602fc63f9029d654bd730cd438fa043d3a8f6a",
   "operation_count": 444,
   "product": "nulara",
   "security_scheme": "NularaPersonalAccessToken"
